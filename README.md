@@ -5,8 +5,10 @@
 * [ ] HTML 
   * [ ] homepage into /index.html
   * [ ] cook into /cook.html
-  * [ ] eat into /eat.html
-  * [ ] attend into /attend.html
+  * [ ] eat search page into /eat.html
+  * [ ] eat options into /eat-list.html
+  * [ ] attend search page into /attend.html
+  * [ ] attend options into /attend-list.html
   * [ ] host into /host.html
 * [ ] CSS into /static-files/global.css
   * [ ] homepage
