@@ -1,6 +1,8 @@
-# 1520
+# 1520 - Project
 
 ## To do
+
+### High priority
 * [x] set up github, invite people 
 * [ ] HTML 
   * [ ] homepage into /index.html
@@ -22,3 +24,10 @@
   * [ ] Location tracking: https://docs.google.com/presentation/d/1PqtkPX0WpzH8rFvGO3K5_62FMsdd3ZddKOEs6jNTrew/edit#slide=id.g55dc63046b_2_16
   * [ ] Maps
   * [ ] ...
+  
+### Low priority
+* [ ] Create team name?
+* [ ] Create name
+* [ ] Create logo 
+
+
