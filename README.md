@@ -31,3 +31,5 @@
 * [ ] Create logo 
 
 
+## Proposal
+* https://docs.google.com/presentation/d/1M7u5HtYC5hsmr09UfqeGXXkwklw4zus43RtJ9VeUGnY/edit#slide=id.g7dce42e085_0_7
