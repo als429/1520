@@ -7,16 +7,121 @@
 body {
   margin: 25px;
   background-color: #4c8bf5;
-  font-family: arial, sans-serif;
-  font-size: 14px;
+  font-family: 'Comfortaa', cursive;
+  font-size: 18px;
+  color: white;
 }
 
 /* Applies to all <h1>...</h1> elements. */
-
+.main {
+	padding: 5em 3em 5em 3em;
+	text-align: center;
+}
+ 
 h1 {
-  font-size: 35px;
+  font-size: 60px;
   font-weight: normal;
   margin-top: 5px;
+  text-align: center;
+
+}
+
+/* main navigation */
+.globalnav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.globalnav li {
+  float: left;
+}
+
+.globalnav li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+.globalnav li a:hover {
+  background-color: #333;
+}
+
+/* input bars */
+input {
+  width: 90%;
+  background-color: #4c8bf5;
+  border: 2px solid white;
+  background-image: url('../static/icons/pin.png');
+  background-repeat: no-repeat;
+  background-position: 10px 10px;
+  border-radius: 25px;
+
+}
+
+input[type=location] {
+  width: 90%;
+  padding: 20px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  color: white;
+  padding-left: 50px;
+  font-family: 'Comfortaa', cursive;
+  font-weight: bold;
+}
+
+::placeholder {
+  color: white;
+  font-family: 'Comfortaa', cursive;
+  font-weight: bold;
+}
+
+/* buttons */
+.btn {
+  border: 2px solid black;
+  background-color: #888;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  font-family: 'Comfortaa', cursive;
+  font-weight: bold;
+}
+
+/* eat button */
+.eat {
+  border-color: white;
+  color: white;
+  background-color: #4c8bf5;
+  width: 45%;
+}
+
+.eat:hover {
+  background: white;
+  color: #4c8bf5;
+}
+
+/* attend button */
+.attend {
+  border-color: #333;
+  color: #333;
+  width: 45%;
+}
+
+.attend:hover {
+  background: #999;
+  color: #333;
+}
+
+/* login */
+#login {
+  position: fixed;
+  top: 30;
+  right: 30;
 }
 
 /* Applies to all elements with <... class="someclass"> specified. */
