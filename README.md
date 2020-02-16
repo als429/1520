@@ -5,15 +5,14 @@
 ### High priority
 * [x] set up github, invite people 
 * [ ] HTML 
-  * [ ] homepage into /index.html
+  * [x] homepage into /index.html
   * [ ] cook into /cook.html
-  * [ ] eat search page into /eat.html
   * [ ] eat options into /eat-list.html
   * [ ] attend search page into /attend.html
   * [ ] attend options into /attend-list.html
   * [ ] host into /host.html
 * [ ] CSS into /static-files/global.css
-  * [ ] homepage
+  * [x] homepage
   * [ ] cook
   * [ ] eat
   * [ ] attend
