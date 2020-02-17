@@ -8,6 +8,7 @@ body {
   color: white;
 }
 
+/** for centering main body content **/
 .main {
 	padding: 5em 3em 5em 3em;
 	text-align: center;
@@ -42,7 +43,7 @@ h1 {
 }
 
 /* Change the link color to #111 (black) on hover */
-.globalnav li a:hover {
+.globalnav li:hover {
   background-color: #333;
   color: white;
 }
@@ -53,7 +54,7 @@ h1 {
 }
 
 .hamburger {
-	display:none;
+	display: none;
 }
 
 /************ location input bar ************/
@@ -79,6 +80,7 @@ input[type=location] {
   font-weight: bold;
 }
 
+/** this is for the placeholder text in the input box **/
 ::placeholder {
   color: white;
   font-family: 'Comfortaa', cursive;
@@ -134,13 +136,17 @@ input[type=location] {
 
 @media screen and (max-width: 600px) {
   body {
+	/** for testing **/
     background-color: olive;
   }
   
-  #menu {
-	visibility:hidden;
+  /** making buttons full  width + adding a bit of margin **/
+  .btn {
+	width: 100%;
+	margin-top: 20;
   }
   
+  /***** hamburger menu ********/
   .hamburger{
 	display: inline;
 	width: 40;
@@ -148,7 +154,20 @@ input[type=location] {
   
   .hamburger:hover {
 	background-color: limegreen;
-	
   }
   
-}
+  .icon {
+	display: inline;
+	width: 40;
+	margin-top: 10;
+  }
+  
+  #menu li {
+	width: 100%;
+	text-align: center;
+  }
+ 
+
+  
+}	
+	
