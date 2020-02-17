@@ -11,8 +11,8 @@
   * [ ] attend search page into /attend.html
   * [ ] attend options into /attend-list.html
   * [ ] host into /host.html
-* [ ] CSS into /static-files/global.css
-  * [x] homepage
+* [ ] CSS into /static/style.css
+  * [x] homepage - added
   * [ ] cook
   * [ ] eat
   * [ ] attend
