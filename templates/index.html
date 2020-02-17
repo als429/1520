@@ -3,19 +3,26 @@
 	<title>Food with Friends: Eat up!</title>
 	<link rel="stylesheet" href="../static/style.css">
 	<link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
   </head>
   
 
   <body>
 	<!-- main navigation -->
-	<ul class="globalnav">
-	  <li><a href="/eat">Eat</a></li>
-	  <li><a href="/attend">Attend</a></li>
-	  <li><a href="/cook">Cook</a></li>
-	  <li><a href="/host">Host</a></li>
-	  <li><a href="/sign-in"  id="login">Sign In</a></li>
-	</ul>
+	<img src="../static/icons/hamburger.png" class="hamburger" id="hamburger">
+	<nav>
+		<ul class="globalnav" id="menu">
+			<div class="mainlinks">
+			  <li><img src="../static/icons/eat.png" class="icon"><a href="/eat">Eat</a></li>
+			  <li><img src="../static/icons/attend.png" class="icon"><a href="/attend">Attend</a></li>
+			  <li><img src="../static/icons/cook.png" class="icon"><a href="/cook">Cook</a></li>
+			  <li><img src="../static/icons/host.png" class="icon"><a href="/host">Host</a></li>
+			</div>
+		</ul>
+		<ul class="globalnav"><li id="login"><a href="/sign-in">Sign In</a></li></ul>
+	</nav>
+	
 	<!--content-->
 	<div class="main">
 		<h1>Eat Leftovers</h1>
@@ -23,5 +30,166 @@
 		<button class="btn eat">Get Leftovers</button>
 		<button class="btn attend">Attend Family Dinner</button>
 	</div>
+	
+	<script>
+	
+	</script>
+	<style>
+/************ main content ************/
+
+body {
+  margin: 25px;
+  background-color: #4c8bf5;
+  font-family: 'Comfortaa', cursive;
+  font-size: 18px;
+  color: white;
+}
+
+.main {
+	padding: 5em 3em 5em 3em;
+	text-align: center;
+}
+ 
+h1 {
+  font-size: 60px;
+  font-weight: normal;
+  margin-top: 5px;
+  text-align: center;
+
+}
+
+/************ main navigation ************/
+.globalnav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.globalnav li {
+  float: left;
+}
+
+.globalnav li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+.globalnav li a:hover {
+  background-color: #333;
+  color: white;
+}
+
+/********** hide icons **********/
+.icon {
+	display: none;
+}
+
+.hamburger {
+	display:none;
+}
+
+/************ location input bar ************/
+input {
+  width: 90%;
+  background-color: #4c8bf5;
+  border: 2px solid white;
+  background-image: url('../static/icons/pin.png');
+  background-repeat: no-repeat;
+  background-position: 10px 10px;
+  border-radius: 25px;
+
+}
+
+input[type=location] {
+  width: 90%;
+  padding: 20px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  color: white;
+  padding-left: 50px;
+  font-family: 'Comfortaa', cursive;
+  font-weight: bold;
+}
+
+::placeholder {
+  color: white;
+  font-family: 'Comfortaa', cursive;
+  font-weight: bold;
+}
+
+/************ buttons ************/
+.btn {
+  border: 2px solid black;
+  background-color: #888;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  font-family: 'Comfortaa', cursive;
+  font-weight: bold;
+}
+
+/***** eat button *****/
+.eat {
+  border-color: white;
+  color: white;
+  background-color: #4c8bf5;
+  width: 45%;
+}
+
+.eat:hover {
+  background: white;
+  color: #4c8bf5;
+}
+
+/***** attend button ******/
+.attend {
+  border-color: #333;
+  color: #333;
+  width: 45%;
+}
+
+.attend:hover {
+  background: #999;
+  color: #333;
+}
+
+/* login */
+#login {
+  position: fixed;
+  top: 30;
+  right: 30;
+}
+
+
+/************ mobile responsive ************/
+
+@media screen and (max-width: 600px) {
+  body {
+    background-color: olive;
+  }
+  
+  #menu {
+	visibility:hidden;
+  }
+  
+  .hamburger{
+	display: inline;
+	width: 40;
+  }
+  
+  .hamburger:hover {
+	background-color: limegreen;
+	
+  }
+  
+}
+
+	</style>
   </body>
 <html>
