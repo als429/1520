@@ -17,7 +17,8 @@
   * [ ] eat
   * [ ] attend
   * [ ] host
-  * [ ] responsive / mobile
+  * [x] responsive / mobile - breakpoint example in style.css
+  * [x] mobile hamburger menu (could be better..)
 * [ ] Python
   * [ ] routing for URLs
   * [ ] Location tracking: https://docs.google.com/presentation/d/1PqtkPX0WpzH8rFvGO3K5_62FMsdd3ZddKOEs6jNTrew/edit#slide=id.g55dc63046b_2_16
