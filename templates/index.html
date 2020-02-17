@@ -3,7 +3,7 @@
 	<title>Food with Friends: Eat up!</title>
 	
 	<!-- where CSS will ultimately live -->
-	<!--<link rel="stylesheet" href="../static/style.css">-->
+	<link rel="stylesheet" href="../static/style.css">
 	
 	<!-- importing font -->
 	<link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
@@ -20,201 +20,27 @@
 	<!-- main navigation -->
 	<img src="../static/icons/hamburger.png" class="hamburger" id="hamburger">
 	<nav>
-		<ul class="globalnav" id="menu">
-			<div class="mainlinks">
-			  <li><img src="../static/icons/eat.png" class="icon"><a href="/eat">Eat</a></li>
-			  <li><img src="../static/icons/attend.png" class="icon"><a href="/attend">Attend</a></li>
-			  <li><img src="../static/icons/cook.png" class="icon"><a href="/cook">Cook</a></li>
-			  <li><img src="../static/icons/host.png" class="icon"><a href="/host">Host</a></li>
-			</div>
-		</ul>
+		<div id="menuToggle">
+			<!-- using the invisible checkbox hack for the mobile hamburger menu -->
+			<input type="checkbox" />
+			
+			<ul class="globalnav" id="menu">
+				  <li><img src="../static/icons/eat-dark.png" class="icon"><a href="/eat">Eat</a></li>
+				  <li><img src="../static/icons/attend-dark.png" class="icon"><a href="/attend">Attend</a></li>
+				  <li><img src="../static/icons/cook-dark.png" class="icon"><a href="/cook">Cook</a></li>
+				  <li><img src="../static/icons/host-dark.png" class="icon"><a href="/host">Host</a></li>
+			</ul>
+		</div>
 		<ul class="globalnav"><li id="login"><a href="/sign-in">Sign In</a></li></ul>
 	</nav>
 	
-	<!--content-->
+	<!--content seen on page-->
 	<div class="main">
 		<h1>Eat Leftovers</h1>
 		<form><input type="location" class="input location" placeholder="Enter street address"></form>
 		<button class="btn eat">Get Leftovers</button>
 		<button class="btn attend">Attend Family Dinner</button>
 	</div>
-	
-	
-	<style>
-/************ main content ************/
-
-body {
-  margin: 25px;
-  background-color: #4c8bf5;
-  font-family: 'Comfortaa', cursive;
-  font-size: 18px;
-  color: white;
-}
-
-/** for centering main body content **/
-.main {
-	padding: 5em 3em 5em 3em;
-	text-align: center;
-}
- 
-h1 {
-  font-size: 60px;
-  font-weight: normal;
-  margin-top: 5px;
-  text-align: center;
-
-}
-
-/************ main navigation ************/
-.globalnav {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-
-.globalnav li {
-  float: left;
-}
-
-.globalnav li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-/* Change the link color to #111 (black) on hover */
-.globalnav li:hover {
-  background-color: #333;
-  color: white;
-}
-
-/********** hide icons **********/
-.icon {
-	display: none;
-}
-
-.hamburger {
-	display: none;
-}
-
-/************ location input bar ************/
-input {
-  width: 90%;
-  background-color: #4c8bf5;
-  border: 2px solid white;
-  background-image: url('../static/icons/pin.png');
-  background-repeat: no-repeat;
-  background-position: 10px 10px;
-  border-radius: 25px;
-
-}
-
-input[type=location] {
-  width: 90%;
-  padding: 20px 20px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  color: white;
-  padding-left: 50px;
-  font-family: 'Comfortaa', cursive;
-  font-weight: bold;
-}
-
-/** this is for the placeholder text in the input box **/
-::placeholder {
-  color: white;
-  font-family: 'Comfortaa', cursive;
-  font-weight: bold;
-}
-
-/************ buttons ************/
-.btn {
-  border: 2px solid black;
-  background-color: #888;
-  color: black;
-  padding: 14px 28px;
-  font-size: 16px;
-  cursor: pointer;
-  font-family: 'Comfortaa', cursive;
-  font-weight: bold;
-}
-
-/***** eat button *****/
-.eat {
-  border-color: white;
-  color: white;
-  background-color: #4c8bf5;
-  width: 45%;
-}
-
-.eat:hover {
-  background: white;
-  color: #4c8bf5;
-}
-
-/***** attend button ******/
-.attend {
-  border-color: #333;
-  color: #333;
-  width: 45%;
-}
-
-.attend:hover {
-  background: #999;
-  color: #333;
-}
-
-/* login */
-#login {
-  position: fixed;
-  top: 30;
-  right: 30;
-}
-
-
-/************ mobile responsive ************/
-
-@media screen and (max-width: 600px) {
-  body {
-	/** for testing **/
-    background-color: olive;
-  }
-  
-  /** making buttons full  width + adding a bit of margin **/
-  .btn {
-	width: 100%;
-	margin-top: 20;
-  }
-  
-  /***** hamburger menu ********/
-  .hamburger{
-	display: inline;
-	width: 40;
-  }
-  
-  .hamburger:hover {
-	background-color: limegreen;
-  }
-  
-  .icon {
-	display: inline;
-	width: 40;
-	margin-top: 10;
-  }
-  
-  #menu li {
-	width: 100%;
-	text-align: center;
-  }
- 
-
-  
-}	
-	
-	</style>
 	
   </body>
 <html>

@@ -9,4 +9,4 @@ def root():
     return render_template('/index.html')
 
 if __name__ == '__main__':
-        app.run(host='127.0.0.1', port=8040, debug=True) # updated port, so that when it runs locally, it runs on 8040
+        app.run(host='127.0.0.1', port=8020, debug=True) # updated port, so that when it runs locally, it runs on 8020
