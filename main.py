@@ -9,8 +9,12 @@ def root():
     return render_template('/index.html')
 
 @app.route('/eat')
-def eat_list():
+def eat():
     return render_template('/index.html')
+
+@app.route('/eat-list')
+def eat_list():
+    return render_template('/eat-list.html')
 	
 @app.route('/cook')
 def cook():
@@ -25,4 +29,4 @@ def attend():
     return render_template('/attend.html')
 
 if __name__ == '__main__':
-        app.run(host='127.0.0.1', port=8030, debug=True) # updated port, so that when it runs locally, it runs on 8030
+        app.run(host='127.0.0.1', port=8080, debug=True) # updated port, so that when it runs locally, it runs on 8030
