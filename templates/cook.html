@@ -22,18 +22,39 @@
 			<!-- using the invisible checkbox hack for the mobile hamburger menu -->
 			<input type="checkbox" />
 			<ul class="globalnav" id="menu">
-				  <li><img src="../static/icons/eat-dark.png" class="icon"><a href="/eat">Eat</a></li>
+				  <li><img src="../static/icons/eat-dark.png" class="icon"><a href="index.html">Eat</a></li>
 				  <li><img src="../static/icons/attend-dark.png" class="icon"><a href="/attend">Attend</a></li>
-				  <li><img src="../static/icons/cook-dark.png" class="icon"><a href="/cook">Cook</a></li>
-				  <li><img src="../static/icons/host-dark.png" class="icon"><a href="/host">Host</a></li>
+				  <li><img src="../static/icons/cook-dark.png" class="icon"><a href="cook.html">Cook</a></li>
+				  <li><img src="../static/icons/host-dark.png" class="icon"><a href="host.html">Host</a></li>
+
 			</ul>
 		</div>
 		<ul class="globalnav"><li id="login"><a href="/sign-in">Sign In</a></li></ul>
 	</nav>
 	
 	<!--content seen on page-->
-	<div class="main">
-		<h1>Cook</h1>
+	<div class="main"> 
+    <h1>Cook</h1>
+    <div class="row">
+      <div class="column left">
+        <form><input type="text" class="input dinner title" placeholder="Dinner title"></form>
+        <form><input type="text" class="input cost" placeholder="Cost"></form>
+        <form><input type="text" class="input location" placeholder="Address"></form>
+        <form><input type="text" class="input image" placeholder="Add image"> 
+          <input type="file" name="file" id="file" class="inputfile" />
+          <label for="file">Upload</label> </form>
+        <form><input type="text" class="input categories" placeholder="Type categories"></form>
+        <form><input type="text" class="input ingredients" placeholder="Type ingredients"></form>
+      </div>
+      <div class="column right">
+        <label class="container">check if available now
+          <input type="checkbox">
+          <span class="checkmark"></span>
+        </label>
+        <button class="btn sell">Sell Leftovers!</button>
+      </div>
+    </div>
+
 	</div>
   </body>
 <html>
