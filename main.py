@@ -8,5 +8,21 @@ app = Flask(__name__)
 def root():
     return render_template('/index.html')
 
+@app.route('/eat')
+def eat_list():
+    return render_template('/index.html')
+	
+@app.route('/cook')
+def cook():
+    return render_template('/cook.html')
+	
+@app.route('/host')
+def host():
+    return render_template('/host.html')
+	
+@app.route('/attend')
+def attend():
+    return render_template('/attend.html')
+
 if __name__ == '__main__':
         app.run(host='127.0.0.1', port=8020, debug=True) # updated port, so that when it runs locally, it runs on 8020
