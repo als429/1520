@@ -62,7 +62,7 @@
 			console.log("ID Token: " + id_token);
 			
 			// Mods from: https://github.com/timothyrjames/cs1520/blob/master/week06/gae/project8/templates/index.html
-							let params = {
+					let params = {
 						'token': id_token
 					};
 					sendJsonRequest(params, '/authtoken', function(responseObject, targetUrl, parameters) {
@@ -112,7 +112,7 @@
             function sendJsonRequest(parameterObject, targetUrl, callbackFunction) {
                 var xmlHttp = createXmlHttp();
                 xmlHttp.onreadystatechange = function() {
-                    if (xmlHttp.readyState == 4) {
+                    if (xmlHttp.readyState == 4) { // server has completed processing and has sent a response
                         console.log(xmlHttp.responseText);
                         var myObject = JSON.parse(xmlHttp.responseText);
                         callbackFunction(myObject, targetUrl, parameterObject);
