@@ -5,6 +5,14 @@ import json # for backend sign in functionality
 
 app = Flask(__name__)
 
+# logging to console
+def log(msg):
+    """Log a simple message."""
+    # Look at: https://console.cloud.google.com/logs to see your logs.
+    # Make sure you have "stdout" selected.
+    print('main: %s' % msg)
+	
+# app routing
 @app.route('/')
 @app.route('/index.html')
 def root():
@@ -30,14 +38,11 @@ def attend():
 def eatlist():
 	return render_template('/eat-list.html')
 
+@app.route('/test')
+def test():
+    return render_template('test.html', page_title='test Page')
 
-# backend sign in functionality
-def log(msg):
-    """Log a simple message."""
-    # Look at: https://console.cloud.google.com/logs to see your logs.
-    # Make sure you have "stdout" selected.
-    print('main: %s' % msg)
-	
+# backend sign in functionality	
 @app.route('/authtoken', methods=['POST'])
 def authtoken():
     log('Token: ' + request.form.get('token'))
