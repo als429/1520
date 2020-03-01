@@ -138,7 +138,8 @@ input[type=text] {
 
 .inputfile:focus + label,
 .inputfile + label:hover {
-    background-color: rgb(96, 149, 202);
+    background-color: #333;
+    color: white;
 }
 
 .inputfile + label {
@@ -154,7 +155,7 @@ input[type=text] {
     font-weight: bold;
 }
 
-/************ check box ************/
+/************ checkbox ************/
 
 
 /* The container */
@@ -250,6 +251,7 @@ input[type=text] {
     clear: both;
 }
 
+
 /************ buttons ************/
 
 .btn {
@@ -268,9 +270,10 @@ input[type=text] {
     border-color: white;
     color: white;
     background-color: #4c8bf5;
-    width: 80%;
-    font-size: 27px;
-    border-width: 3px;
+    width: 100%;
+    font-size: 2em;
+    border-width: 2px;
+	padding: 10%;
 }
 
 .sell:hover {
@@ -310,7 +313,7 @@ input[type=text] {
 }
 
 
-/* login */
+/******** login *********/
 
 #login {
     position: fixed;
@@ -318,14 +321,37 @@ input[type=text] {
     right: 30;
 }
 
+/************ responsive - mid-size ************/
+@media screen and (max-width: 1000px) {	
+	.column.left {
+		width: 100%;
+		margin: 0;
+	}
+	
+	.column.right {
+		width: 100%;
+	}
+	
+	.check {
+		width: 100%;
+	}
+	
+	.checkmark { 
+		/***problem....***/
+	}
+	
+	.container {
+		width: 100%;
+	}
 
-/************ mobile responsive ************/
+}
+
+/************ responsive - mobile ************/
 
 #menuToggle input {
     /**makes the checkbox invisible**/
     opacity: 0;
 }
-
 
 /** this is triggered when the user's screen is less than 600 px **/
 
@@ -414,4 +440,5 @@ input[type=text] {
     #menuToggle input:checked ~ ul {
         transform: none;
     }
-}
+
+}	

@@ -43,24 +43,25 @@
     <h1>Host</h1>
     <div class="row">
       <div class="column left">
-        <form><input type="text" class="input dinner title" placeholder="Dinner title"></form>
-        <form><input type="text" class="input cost" placeholder="Cost"></form>
-        <form><input type="text" class="input location" placeholder="Address"></form>
-  <!--     <form action="/action_page.php">
-          <label for="myfile"></label>add image
-          <input type="file" id="myfile" name="myfile" multiple accept="image/*"><br><br>
-        </form>  -->
-        <form><input type="text" class="input image" placeholder="Add image"> 
-          <input type="file" name="file" id="file" class="inputfile" />
-          <label for="file">Upload</label> </form>
+        <form><input type="text" placeholder="Dinner title"></form>
+        <form><input type="text" placeholder="Cost"></form>
+        <form><input type="text" class="location" placeholder="Address"></form>
+        <form>
+			<input type="text" class="input image" placeholder="Add image"> 
+			<input type="file" name="file" id="file" class="inputfile" />
+			<label for="file">Upload</label> </form>
         <form><input type="text" class="input categories" placeholder="Type categories"></form>
       </div>
       <div class="column right">
-        <form><input type="text" class="input time" placeholder="enter time"></form>
-        <label class="container">check if available now
-          <input type="checkbox">
-          <span class="checkmark"></span>
-        </label>
+			<form>
+				<input type="text" class="input time" placeholder="enter time">
+			</form>
+			<div class="check">
+				<label class="container">check if available now
+				  <input type="checkbox">
+				  <span class="checkmark"></span>
+				</label>
+			</div>
         <button class="btn sell">Host a dinner!</button>
       </div>
     </div>
