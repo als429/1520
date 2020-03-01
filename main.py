@@ -2,12 +2,11 @@
 
 from flask import Flask, redirect, render_template
 import json # for backend sign in functionality
-from google.oauth2 import id_token
-from google.auth.transport import requests
 
 app = Flask(__name__)
 
 @app.route('/')
+@app.route('/index.html')
 def root():
     return render_template('/index.html')
 
@@ -29,13 +28,19 @@ def attend():
 
 @app.route('/eat-list')
 def eatlist():
-    return render_template('/eat-list.html')
+	return render_template('/eat-list.html')
 
 
 # backend sign in functionality
+def log(msg):
+    """Log a simple message."""
+    # Look at: https://console.cloud.google.com/logs to see your logs.
+    # Make sure you have "stdout" selected.
+    print('main: %s' % msg)
+	
 @app.route('/authtoken', methods=['POST'])
 def authtoken():
-	log('Token: ' + request.form.get('token'))
+    log('Token: ' + request.form.get('token'))
     d = {
         'message': 'Auth Token received at server.',
     }
