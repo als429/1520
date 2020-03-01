@@ -11,6 +11,8 @@
   * [ ] attend search page into /attend.html
   * [ ] attend options into /attend-list.html
   * [x] host into /host.html
+  * [ ] create a _base.html template (example: https://github.com/timothyrjames/cs1520/blob/master/week06/gae/project8/templates/_base.html) - low priority
+
 * [ ] CSS into /static/style.css
   * [x] homepage - added
   * [ ] cook
@@ -24,7 +26,8 @@
   * [x] routing for URLs
   * [ ] Location tracking: https://docs.google.com/presentation/d/1PqtkPX0WpzH8rFvGO3K5_62FMsdd3ZddKOEs6jNTrew/edit#slide=id.g55dc63046b_2_16
   * [ ] Maps
-  * [ ] ...
+  * [x] User authentication front-end
+  * [ ] User authentication backend: https://developers.google.com/identity/sign-in/web/backend-auth
   
 ### Low priority
 * [ ] Create team name?
