@@ -28,6 +28,7 @@
   * [ ] Maps
   * [x] User authentication front-end
   * [ ] User authentication backend: https://developers.google.com/identity/sign-in/web/backend-auth
+  * [ ] Greate example from prof: https://github.com/timothyrjames/cs1520/tree/master/week06/gae/project9
   
 ### Low priority
 * [ ] Create team name?
