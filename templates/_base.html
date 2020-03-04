@@ -1,0 +1,68 @@
+<html>
+    <head>
+        <title>{{page_title}}</title>
+		
+		<!-- where CSS will ultimately live -->
+		<link rel="stylesheet" href="../static/style.css">
+		
+		<!-- importing font -->
+		<link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
+		
+		<!-- for responsive mobile design -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<!-- the favicon -->
+		<link rel="icon" type="image/png" href="../static/icons/eat-dark.png">
+		
+		<!-- sign in functionality -->
+		<meta name="google-signin-scope" content="profile email">
+		<meta name="google-signin-client_id" content="1024466557558-n9enoanq8vua09fpmsu28ie7tkgeqlvp.apps.googleusercontent.com">
+		<script src="https://apis.google.com/js/platform.js" async defer></script>
+    </head>
+    <body>
+			<!-- main navigation -->
+			<img src="../static/icons/hamburger.png" class="hamburger" id="hamburger">
+			<nav>
+				<div id="menuToggle">
+					<!-- using the invisible checkbox hack for the mobile hamburger menu -->
+					<input type="checkbox" />
+					<ul class="globalnav" id="menu">
+						  <li><img src="../static/icons/eat-dark.png" class="icon"><a href="/eat">Eat</a></li>
+						  <li><img src="../static/icons/attend-dark.png" class="icon"><a href="/attend">Attend</a></li>
+						  <li><img src="../static/icons/cook-dark.png" class="icon"><a href="/cook">Cook</a></li>
+						  <li><img src="../static/icons/host-dark.png" class="icon"><a href="/host">Host</a></li>
+					</ul>
+				</div>
+				<ul class="globalnav"><li id="login"><a href="/sign-in">Sign In</a></li></ul>
+			</nav>
+
+			<!-- sign in functionality -->
+			<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark" id="login"></div>
+			<script>
+			  function onSignIn(googleUser) {
+				// Useful data for your client-side scripts:
+				var profile = googleUser.getBasicProfile();
+				console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+				console.log('Full Name: ' + profile.getName());
+				console.log('Given Name: ' + profile.getGivenName());
+				console.log('Family Name: ' + profile.getFamilyName());
+				console.log("Image URL: " + profile.getImageUrl());
+				console.log("Email: " + profile.getEmail());
+
+				// The ID token you need to pass to your backend:
+				var id_token = googleUser.getAuthResponse().id_token;
+				console.log("ID Token: " + id_token);
+			  }
+			</script>
+		
+		<!-- on-page content-->		
+		<header>{% if errors %}{% for error in errors %}
+            <div class="Error">{{error}}</div>
+            {% endfor %}{% endif %}
+        </header>
+		
+        <section>
+            {% block content %}{% endblock %}
+        </section>
+    </body>
+</html>

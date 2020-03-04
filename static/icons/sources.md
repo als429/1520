@@ -5,3 +5,4 @@
 * Eat, Pie: https://www.flaticon.com/free-icon/bakery_1929765
 * Attend, Cheering glasses: https://www.flaticon.com/free-icon/wine_1386951
 * Pin, Local pin: https://www.flaticon.com/free-icon/maps-and-flags_447031
+* Upload: https://www.flaticon.com/free-icon/upload_1383551

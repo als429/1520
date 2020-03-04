@@ -1,64 +1,34 @@
-<html>
-  <head>
-	<title>Host a Dinner & Make Friends</title>
-	
-	<!-- where CSS will ultimately live -->
-	<link rel="stylesheet" href="../static/style.css">
-	
-	<!-- importing font -->
-	<link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
-	
-	<!-- for responsive mobile design -->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-	<!-- the favicon -->
-	<link rel="icon" type="image/png" href="../static/icons/eat-dark.png">
-  </head>
-  <body>
-	<!-- main navigation -->
-	<img src="../static/icons/hamburger.png" class="hamburger" id="hamburger">
-	<nav>
-		<div id="menuToggle">
-			<!-- using the invisible checkbox hack for the mobile hamburger menu -->
-			<input type="checkbox" />
-			
-			<ul class="globalnav" id="menu">
-				  <li><img src="../static/icons/eat-dark.png" class="icon"><a href="/eat">Eat</a></li>
-				  <li><img src="../static/icons/attend-dark.png" class="icon"><a href="/attend">Attend</a></li>
-				  <li><img src="../static/icons/cook-dark.png" class="icon"><a href="/cook">Cook</a></li>
-				  <li><img src="../static/icons/host-dark.png" class="icon"><a href="/host">Host</a></li>
-
-			</ul>
-		</div>
-		<ul class="globalnav"><li id="login"><a href="/sign-in">Sign In</a></li></ul>
-	</nav>
-	
+{% extends '_base.html' %}
+{% block header %}
+{% endblock %}
+{% block content %}
 	<!--content seen on page-->
 	<div class="main"> 
     <h1>Host</h1>
     <div class="row">
       <div class="column left">
-        <form><input type="text" class="input dinner title" placeholder="Dinner title"></form>
-        <form><input type="text" class="input cost" placeholder="Cost"></form>
-        <form><input type="text" class="input location" placeholder="Address"></form>
-  <!--     <form action="/action_page.php">
-          <label for="myfile"></label>add image
-          <input type="file" id="myfile" name="myfile" multiple accept="image/*"><br><br>
-        </form>  -->
-        <form><input type="text" class="input image" placeholder="Add image"> 
-          <input type="file" name="file" id="file" class="inputfile" />
-          <label for="file">Upload</label> </form>
+        <form><input type="text" placeholder="Dinner title"></form>
+        <form><input type="text" placeholder="Cost"></form>
+        <form><input type="text" class="location" placeholder="Address"></form>
+        <form>
+			<input type="text" class="input image" placeholder="Add image"> 
+			<input type="file" name="file" id="file" class="inputfile" />
+			<label for="file">Upload</label> </form>
         <form><input type="text" class="input categories" placeholder="Type categories"></form>
       </div>
       <div class="column right">
-        <form><input type="text" class="input time" placeholder="enter time"></form>
-        <label class="container">check if available now
-          <input type="checkbox">
-          <span class="checkmark"></span>
-        </label>
+			<form>
+				<input type="text" class="input time" placeholder="enter time">
+			</form>
+			<div class="check">
+				<label class="container">check if available now
+				  <input type="checkbox">
+				  <span class="checkmark"></span>
+				</label>
+			</div>
         <button class="btn sell">Host a dinner!</button>
       </div>
     </div>
   </div>
-  </body>
-<html>
+
+{% endblock %}
