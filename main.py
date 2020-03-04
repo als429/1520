@@ -17,19 +17,19 @@ def log(msg):
 @app.route('/eat')
 @app.route('/index.html')
 def root():
-    return render_template('/index.html',page_title='Food with Friends: Eat up!')
+    return render_template('/index.html',page_title='Food with Friends: Eat up!',h1='Eat Leftovers')
 	
 @app.route('/cook')
 def cook():
-    return render_template('/cook.html',page_title='Cook for Friends')
+    return render_template('/cook.html',page_title='Cook for Friends',h1='Cook')
 	
 @app.route('/host')
 def host():
-    return render_template('/host.html',page_title='Host a Dinner & Make Friends')
+    return render_template('/host.html',page_title='Host a Dinner & Make Friends',h1="Host")
 	
 @app.route('/attend')
 def attend():
-    return render_template('/attend.html',page_title='Attend a Dinner & Make Friends')
+    return render_template('/attend.html',page_title='Attend a Dinner & Make Friends',h1="Attend")
 
 @app.route('/eat-list')
 def eatlist():
@@ -37,7 +37,7 @@ def eatlist():
 
 @app.route('/test')
 def test():
-    return render_template('test.html', page_title='Testing Templates!!!-uyfuar')
+    return render_template('test.html', page_title='Testing Templates!!!-uyfuar',h1="blah")
 
 # backend sign in functionality	
 @app.route('/authtoken', methods=['POST'])

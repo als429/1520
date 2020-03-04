@@ -3,15 +3,13 @@
 {% endblock %}
 {% block content %}
 	<!--content seen on page-->
-	<div class="main"> 
-    <h1>Cook</h1>
     <div class="row">
       <div class="column left">
         <form><input type="text" placeholder="Dinner title"></form>
         <form><input type="text" placeholder="Cost"></form>
         <form><input type="text" class="location" placeholder="Address"></form>
         <form>
-			<input type="text" placeholder="Add image"> <!--removed image class-->
+			<input type="text" placeholder="Add image"> <!--AS: removed class="input image"-->
 			<input type="file" name="file" class="inputfile" />
 			<label for="file">Upload&#x25b2;</label> 
 		 </form>
@@ -28,7 +26,4 @@
         <button class="btn sell">Sell Leftovers!</button>
       </div>
     </div>
-
-	</div>
-	
 {% endblock %}
