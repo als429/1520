@@ -1,7 +1,7 @@
-# starting example from https://github.com/timothyrjames/cs1520/blob/master/week04/gae/project2/main.py
-
 from flask import Flask, redirect, render_template, Response
 import json # for backend sign in functionality
+
+import f_data # includes our data classes: User, Dinner, Food, Location
 
 app = Flask(__name__)
 
