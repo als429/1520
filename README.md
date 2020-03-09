@@ -3,7 +3,7 @@
 ## To do
 
 ### Notes for team members:
-* Alexis - next mini-goal: review the datastore.py file and see if I can get anything to work
+* Alexis - next mini-goal: starting datastore.py file 
 * Lydia - N/A
 * Vicky - N/A
 * Naina - N/A
