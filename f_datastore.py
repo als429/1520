@@ -56,28 +56,26 @@ def _load_entity(client, entity_type, entity_id, parent_key=None):
 
 """
 def _food_from_entity(food_entity): # input: Entity
-    """Translate the Food entity to a regular old Python object."""
+    # Translate the Food entity to a regular old Python object.
     code = food_entity.key.name # this is a string version of the key
     
-	# food(name='', cost=0.00, available=False, 
+    # food(name='', cost=0.00, available=False, 
     #      image='../icons/hamburger.png', food_type='', 
     #      ingredients=None, address=None)
-	
-	# parameters for Food object
-	name = food_entity['name'] # acessing Entity as a dictionary element to pull out name value (for us to use within our object)
+    
+    # parameters for Food object
+    name = food_entity['name'] # acessing Entity as a dictionary element to pull out name value (for us to use within our object)
     cost = food_entity['cost']
-	available = food_entity['available']
+    available = food_entity['available']
     image = food_entity['image']
     food_type = food_entity['food_type']
     ingredients = food_entity['ingredients']
     address = food_entity['address']
 
-	# creating Python object
-    food = f_data.Food(code, name, cost,
-					   available, image, fodd_type, ingredients, 
-					   address) # creating our object
+    # creating Python object
+    food = f_data.Food(code, name, cost, available, image, fodd_type, ingredients, address) # creating our object
 	
-	# logging to https://console.cloud.google.com/logs/viewer
+    # logging to https://console.cloud.google.com/logs/viewer
     log('built object from food entity: ' + str(code))
 	
     return food # returning our python Food object
@@ -93,7 +91,7 @@ def _food_from_entity(food_entity): # input: Entity
 
 '''
 def load_food(food_code): # inputing the food code to get information from datastore
-    """Load a Food entity from the datastore, based on the course code."""
+    # Load a Food entity from the datastore, based on the course code.
     log('loading food: ' + str(food_code))
     client = _get_client() # gets you a datastore client
     food_entity = _load_entity(client, _FOOD_ENTITY, food_code) # loads the Entity from the datastore
@@ -152,22 +150,23 @@ def create_data():
     client = _get_client() # get a datastore client
     
 	'''
-    User 
+    	User 
 	'''
     # create a test user 
-    entity = datastore.Entity(client.key(_USER_ENTITY, 'testuser'),
-                              exclude_from_indexes=[])
+    entity = datastore.Entity(client.key(_USER_ENTITY, 'testuser'), exclude_from_indexes=[])
+    
     # update information
     entity.update({
         'username': 'testuser',
         'passwordhash': '',
         'email': 'test@blah.com',
-        'testing_random': []
+        'testing_random': [],
     })
+
     client.put(entity) # save information to datastore
 	
 	'''
-    Food 
+    	Food 
 	'''
 	'''
     # create a fake food as an entity, Food01
@@ -177,13 +176,13 @@ def create_data():
     entity.update({
         'code': 'Food01',
         'name': 'Pizza',
-		'cost': 10.99,
+	'cost': 10.99,
         'available': True,
         'image': '../static/icons/hamburger.png',
         'food_type': 'Italian',
         'ingredients': ['cheese','pineapple'],
         'available_seats': None,
-        'time': '10:00PM'
+        'time': '10:00PM',
     })
     client.put(entity) # save information to datastore 
 	''' 
