@@ -67,6 +67,7 @@ def show_page(page, title, h1,errors=None):
 
 @app.route('/user/<username>')
 def user_page(username):
+    f_datastore.create_data()
     return show_page('test.html', username, username)
 
 #@app.route('/test') # currently testing templates
