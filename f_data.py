@@ -50,7 +50,7 @@ class Dinner(object):
     def __init__(self, code, name='', cost=0.00, available=False, 
                 image='../icons/hamburger.png', food_type='', 
                 ingredients=None, address=None, available_seats=0,time=''):
-	    self.code = code
+        self.code = code
         self.name = name
         self.cost = cost
         self.available = available
@@ -62,7 +62,7 @@ class Dinner(object):
 
     def to_dict(self):
         return {
-			'code': self.code,
+            'code': self.code,
             'name': self.name,
             'cost': self.cost,
             'available': self.available,
@@ -77,7 +77,7 @@ class Food(Dinner):
     def __init__(self, code, name='', cost=0.00, available=False, 
                 image='../icons/hamburger.png', food_type='', 
                 ingredients=None, address=None):
-		self.code = code
+        self.code = code
         self.name = name
         self.cost = cost
         self.available = available
@@ -88,7 +88,7 @@ class Food(Dinner):
 
     def to_dict(self):
         return {
-			'code': self.code,
+	    'code': self.code,
             'name': self.name,
             'cost': self.cost,
             'available': self.available,
