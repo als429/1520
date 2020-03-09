@@ -89,7 +89,7 @@ def _food_from_entity(food_entity): # input: Entity
 ############# Load Python objects from Datastore #############
 ##############################################################
 
-'''
+"""
 def load_food(food_code): # inputing the food code to get information from datastore
     # Load a Food entity from the datastore, based on the course code.
     log('loading food: ' + str(food_code))
@@ -98,7 +98,7 @@ def load_food(food_code): # inputing the food code to get information from datas
     log('loaded food: ' + food_code)
     food = _food_from_entity(food_entity) # translated the Entity to a Course python object
     return food # returns python Food object
-'''
+"""
 	
 def load_user(username, passwordhash): # note: our User object does not contain passwordhash (it's only in datastore)
     """Load a user based on the passwordhash; if the passwordhash doesn't match
@@ -149,9 +149,7 @@ def create_data():
     data."""
     client = _get_client() # get a datastore client
     
-	'''
-    	User 
-	'''
+    """USER"""
     # create a test user 
     entity = datastore.Entity(client.key(_USER_ENTITY, 'testuser'), exclude_from_indexes=[])
     
@@ -165,10 +163,8 @@ def create_data():
 
     client.put(entity) # save information to datastore
 	
-	'''
-    	Food 
-	'''
-	'''
+    """FOOD"""
+    """
     # create a fake food as an entity, Food01
     entity = datastore.Entity(client.key(_COURSE_ENTITY, 'Food01'),
                               exclude_from_indexes=['code'])
@@ -185,7 +181,7 @@ def create_data():
         'time': '10:00PM',
     })
     client.put(entity) # save information to datastore 
-	''' 
+    """
 	
 # TODO: create fake dinner entity
 # TODO: create fake location entity
