@@ -65,10 +65,11 @@ def show_page(page, title, h1,errors=None):
 			       h1=h1,
 			       errors=errors)
 
-@app.route('/user/<username>')
-def user_page(username):
+# We should only use this to populate our data for the first time.
+@app.route('/createdata')
+def createdata():
     f_datastore.create_data()
-    return show_page('test.html', username, username)
+    return 'OK'
 
 #@app.route('/test') # currently testing templates
 #def test():
