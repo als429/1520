@@ -2,6 +2,7 @@ from flask import Flask, redirect, render_template, Response
 import json # for backend sign in functionality
 
 import f_data # includes our data classes: User, Dinner, Food, Location
+import f_datastore
 
 app = Flask(__name__)
 
@@ -47,10 +48,6 @@ def attend():
 def eatlist():
     return render_template('/eat-list.html') 
 
-@app.route('/test') # currently testing templates
-def test():
-    return render_template('test.html', page_title='Testing Templates!!!-uyfuar',h1="blah")
-
 # backend sign in functionality	
 @app.route('/authtoken', methods=['POST'])
 def authtoken():
@@ -63,10 +60,18 @@ def authtoken():
 # will allow us to expand on parameters, as week04/gae/project2/main
 # start to get user, location, food, and dinner data
 def show_page(page, title, h1,errors=None):
-	return render_template(page,
-						   page_title=title, #on-page = parameter
-						   h1=h1,
-						   errors=errors)
+	return render_template(page, 
+			       page_title=title, #on-page = parameter
+			       h1=h1,
+			       errors=errors)
+
+@app.route('/user/<username>')
+def user_page(username):
+    return show_page('test.html', username, username)
+
+#@app.route('/test') # currently testing templates
+#def test():
+#    return render_template('test.html', page_title='Testing Templates!!!-uyfuar',h1="blah")
 
 if __name__ == '__main__':
         app.run(host='127.0.0.1', port=8082, debug=True) # updated port, so that when it runs locally, it runs on 8030
