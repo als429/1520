@@ -161,13 +161,13 @@ def create_data():
 	
     """FOOD"""
     # create a fake food as an entity, Food01
-    entity = datastore.Entity(client.key(_COURSE_ENTITY, 'Food01'),
+    entity = datastore.Entity(client.key(_FOOD_ENTITY, 'Food01'),
                               exclude_from_indexes=['code'])
     # add information about Food01
     entity.update({
         'code': 'Food01',
         'name': 'Pizza',
-	'cost': 10.99,
+	    'cost': 10.99,
         'available': True,
         'image': '../static/icons/hamburger.png',
         'food_type': 'Italian',
