@@ -8,13 +8,13 @@
 	* main.py `show_page()` needs to pass in python object
 	* the `load_...()` function in the datastore.py loads object into main.py for the `show_page()` function
 * Lydia - N/A
-* Vicky - N/A
+* Vicky - mini-goal: create a functioning login
 * Naina - N/A
 
 ### Highest Priority
   * [ ] Review this example: https://github.com/timothyrjames/cs1520/tree/master/week06/gae/project9
 	* [ ] Lydia
-	* [ ] Vicky
+	* [x] Vicky
 	* [ ] Naina
 	* [x] Alexis
 
