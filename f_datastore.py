@@ -54,7 +54,6 @@ def _load_entity(client, entity_type, entity_id, parent_key=None):
 ############ translate entities to python objects ############
 ##############################################################
 
-"""
 def _food_from_entity(food_entity): # input: Entity
     # Translate the Food entity to a regular old Python object.
     code = food_entity.key.name # this is a string version of the key
@@ -79,7 +78,6 @@ def _food_from_entity(food_entity): # input: Entity
     log('built object from food entity: ' + str(code))
 	
     return food # returning our python Food object
-"""
 
 # TODO: add _dinner_from_entity
 # TODO: add _location_from_entity
@@ -89,7 +87,6 @@ def _food_from_entity(food_entity): # input: Entity
 ############# Load Python objects from Datastore #############
 ##############################################################
 
-"""
 def load_food(food_code): # inputing the food code to get information from datastore
     # Load a Food entity from the datastore, based on the course code.
     log('loading food: ' + str(food_code))
@@ -98,7 +95,6 @@ def load_food(food_code): # inputing the food code to get information from datas
     log('loaded food: ' + food_code)
     food = _food_from_entity(food_entity) # translated the Entity to a Course python object
     return food # returns python Food object
-"""
 	
 def load_user(username, passwordhash): # note: our User object does not contain passwordhash (it's only in datastore)
     """Load a user based on the passwordhash; if the passwordhash doesn't match
@@ -164,7 +160,6 @@ def create_data():
     client.put(entity) # save information to datastore
 	
     """FOOD"""
-    """
     # create a fake food as an entity, Food01
     entity = datastore.Entity(client.key(_COURSE_ENTITY, 'Food01'),
                               exclude_from_indexes=['code'])
@@ -181,7 +176,6 @@ def create_data():
         'time': '10:00PM',
     })
     client.put(entity) # save information to datastore 
-    """
 	
 # TODO: create fake dinner entity
 # TODO: create fake location entity
