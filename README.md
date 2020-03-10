@@ -3,7 +3,7 @@
 ## To do
 
 ### Notes for team members:
-* Alexis - next mini-goal: starting datastore.py file 
+* Alexis - next mini-goal: figuring out how to connect HTML/main.py with the f_datastore
 * Lydia - N/A
 * Vicky - N/A
 * Naina - N/A
@@ -29,10 +29,9 @@
   * [x] create a _base.html template (example: https://github.com/timothyrjames/cs1520/blob/master/week06/gae/project8/templates/_base.html) - low priority
   * [x] homepage into /index.html
   * [x] cook into /cook.html
-
   
 * [ ] CSS into /static/style.css
-  * [ ] CSS for the templated eat and attend list pages
+  * [ ] CSS for the templated eat and attend **list** pages
   * [x] homepage/eat - added
   * [x] cook
   * [x] attend
@@ -46,11 +45,12 @@
   * [ ] Maps
   * [ ] User authentication backend: https://developers.google.com/identity/sign-in/web/backend-auth
   * [ ] type checking for f_data.py classes (note: holding off until we know for sure what data types we have...)
-  * [ ] f_datastore.py (check out lmsdatastore.py -> https://github.com/timothyrjames/cs1520/tree/master/week06/gae/project9)
+  * [x] f_datastore.py (check out lmsdatastore.py -> https://github.com/timothyrjames/cs1520/tree/master/week06/gae/project9)
   * [x] Round 1- Routing for URLs
   * [x] User authentication front-end
   * [x] Utility function (show_page()),  for data to appear on pages
   * [x] data classes (rnd 1) - calling this f_data.py (tests: http://bit.ly/1520-classes)... we can rename later
+
 ### Low priority
 * [ ] Create team name? (we sticking with A?)
 * [ ] Create name
