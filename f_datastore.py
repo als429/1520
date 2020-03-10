@@ -2,7 +2,6 @@ from google.cloud import datastore
 
 import f_data # the classes we defined
 
-# these entity name values are defined within our index.yaml file as "kind"
 # kind is they type of entity that for the query 
 # definition here: https://cloud.google.com/appengine/docs/flexible/go/configuring-datastore-indexes-with-index-yaml
 _USER_ENTITY = 'User' 
@@ -79,23 +78,59 @@ def _food_from_entity(food_entity): # input: Entity
 	
     return food # returning our python Food object
 
-# TODO: add _dinner_from_entity
-# TODO: add _location_from_entity
-# TODO: add _user_from_entity (example does not include...)
+def _dinner_from_entity(dinner_entity): # input: Entity
+    # Translate the Dinner entity to a regular old Python object.
+    code = dinner_entity.key.name # this is a string version of the key
+    
+    # dinner(code, name='', cost=0.00, available=False, 
+    #         image='../icons/hamburger.png', food_type='', 
+    #         ingredients=None, address=None, available_seats=0,time='')
+    
+    # parameters for Dinner object
+    name = dinner_entity['name'] # acessing Entity as a dictionary element to pull out name value (for us to use within our object)
+    cost = dinner_entity['cost']
+    available = dinner_entity['available']
+    image = dinner_entity['image']
+    food_type = dinner_entity['food_type']
+    ingredients = dinner_entity['ingredients']
+    address = dinner_entity['address']
+    available_seats = dinner_entity['available_seats']
+    time = dinner_entity['time']
+
+    # creating Python object
+    dinner = f_data.Dinner(code, name, cost, available, 
+					   image, fodd_type, ingredients, 
+					   address, available_seats, time) # creating our object
+	
+    # logging to https://console.cloud.google.com/logs/viewer
+    log('built object from dinner entity: ' + str(code))
+	
+    return dinner # returning our python Dinner object
+	
+def _location_from_entity(location_entity): # input: Entity
+    # Translate the Dinner entity to a regular old Python object.
+    code = location_entity.key.name # this is a string version of the key
+    
+    # location(address, lat, long, accuracy)
+    
+    # parameters for Dinner object
+    address = location_entity['address'] # acessing Entity as a dictionary element to pull out name value (for us to use within our object)
+    lat = location_entity['lat']
+    long = location_entity['long']
+    accuracy = location_entity['accuracy']
+
+    # creating Python object
+    location = f_data.Location(address, lat, long, accuracy) # creating our object
+	
+    # logging to https://console.cloud.google.com/logs/viewer
+    log('built object from location entity: ' + str(code))
+	
+    return location # returning our python location object
 
 ##############################################################
 ############# Load Python objects from Datastore #############
 ##############################################################
 
-def load_food(food_code): # inputing the food code to get information from datastore
-    # Load a Food entity from the datastore, based on the course code.
-    log('loading food: ' + str(food_code))
-    client = _get_client() # gets you a datastore client
-    food_entity = _load_entity(client, _FOOD_ENTITY, food_code) # loads the Entity from the datastore
-    log('loaded food: ' + food_code)
-    food = _food_from_entity(food_entity) # translated the Entity to a Course python object
-    return food # returns python Food object
-	
 def load_user(username, passwordhash): # note: our User object does not contain passwordhash (it's only in datastore)
     """Load a user based on the passwordhash; if the passwordhash doesn't match
     the username, then this should return None."""
@@ -116,8 +151,32 @@ def load_user(username, passwordhash): # note: our User object does not contain 
         return f_data.User(user['username'], user['email']) 
     return None # if info doesn't exist return None
 
-# TODO: add load_dinner
-# TODO: add load_location
+def load_food(food_code): # inputing the food code to get information from datastore
+    # Load a food entity from the datastore, based on the food code.
+    log('loading food: ' + str(food_code))
+    client = _get_client() # gets you a datastore client
+    food_entity = _load_entity(client, _FOOD_ENTITY, food_code) # loads the Entity from the datastore
+    log('loaded food: ' + food_code)
+    food = _food_from_entity(food_entity) # translated the Entity to a Course python object
+    return food # returns python Food object
+	
+def load_dinner(dinner_code): # inputing the dinner code to get information from datastore
+    # Load a dinner entity from the datastore, based on the dinner code.
+    log('loading dinner: ' + str(dinner_code))
+    client = _get_client() # gets you a datastore client
+    dinner_entity = _load_entity(client, _DINNER_ENTITY, dinner_code) # loads the Entity from the datastore
+    log('loaded dinner: ' + dinner_code)
+    dinner = _dinner_from_entity(dinner_entity) # translated the Entity to a Course python object
+    return dinner # returns python Dinner object
+	
+def load_location(location_code): 
+    # Load a location entity from the datastore, based on the location code.
+    log('loading location: ' + str(location_code))
+    client = _get_client()
+    location_entity = _load_entity(client, _Location_ENTITY, location_code) # loads the Entity from the datastore
+    log('loaded location: ' + location_code)
+    location = _location_from_entity(location_entity) # translated the Entity to a Course python object
+    return location # returns python Location object
 
 ##############################################################
 ################ Saving entities to datastore ################
@@ -172,10 +231,36 @@ def create_data():
         'image': '../static/icons/hamburger.png',
         'food_type': 'Italian',
         'ingredients': ['cheese','pineapple'],
-        'available_seats': None,
+    })
+    client.put(entity) # save information to datastore 
+
+    """Dinner"""	
+    # create a fake dinner as an entity, Dinner01
+    entity = datastore.Entity(client.key(_DINNER_ENTITY, 'Dinner01'),
+                              exclude_from_indexes=['code'])
+    # add information about Dinner01
+    entity.update({
+        'code': 'Dinner01',
+        'name': 'Yums yums at Sarah\'s',
+	    'cost': 12.99,
+        'available': True,
+        'image': '../static/icons/hamburger.png',
+        'food_type': 'Italian',
+        'ingredients': ['vegetables','cumin'],
+        'available_seats': 5,
         'time': '10:00PM',
     })
     client.put(entity) # save information to datastore 
-	
-# TODO: create fake dinner entity
-# TODO: create fake location entity
+
+    """Location"""	
+    # create a fake location as an entity, Pittsburgh
+    entity = datastore.Entity(client.key(_LOCATION_ENTITY, 'Pittsburgh'),
+                              exclude_from_indexes=[])
+    # add information about Dinner01
+    entity.update({
+            'address': '4428397 main street, pittsburgh, pa 15221',
+            'latitude': '-79.0000',
+            'longitude': '10.01321',
+            'accuracy': 10,
+       })
+    client.put(entity) # save information to datastore 	
