@@ -4,6 +4,9 @@
 
 ### Notes for team members:
 * Alexis - next mini-goal: figuring out how to connect HTML/main.py with the f_datastore
+	* HTML uses python object in {{object.property}} with dot operator
+	* main.py `show_page()` needs to pass in python object
+	* the `load_...()` function in the datastore.py loads object into main.py for the `show_page()` function
 * Lydia - N/A
 * Vicky - N/A
 * Naina - N/A
