@@ -44,11 +44,15 @@ def attend():
     h1 ="Attend"
     return show_page(file,title,h1)
 
-passwordhash = ''
-
-@app.route('/eat-list/<username>') # currently has location code from James
-def eatlist(username):
+# currently has location code from James
+# testing if user is pulling in from datastore
+# and populating in the HTML
+@app.route('/eat-list') 
+def eatlist():
+	username='testuser'
+	passwordhash = 'aa'
     user = f_datastore.load_user(username, passwordhash)
+	log('user information: ' + user.to_dict())
     return show_page('/eat-list.html',user=user) 
 
 # backend sign in functionality	
