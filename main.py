@@ -44,9 +44,12 @@ def attend():
     h1 ="Attend"
     return show_page(file,title,h1)
 
-@app.route('/eat-list') # currently has location code from James
-def eatlist():
-    return render_template('/eat-list.html') 
+passwordhash = ''
+
+@app.route('/eat-list/<username>') # currently has location code from James
+def eatlist(username):
+    user = f_datastore.load_user(username, passwordhash)
+    return show_page('/eat-list.html',user=user) 
 
 # backend sign in functionality	
 @app.route('/authtoken', methods=['POST'])
@@ -59,10 +62,15 @@ def authtoken():
 # consolidate on the render_template function
 # will allow us to expand on parameters, as week04/gae/project2/main
 # start to get user, location, food, and dinner data
-def show_page(page, title, h1,errors=None):
+def show_page(page, title, h1, user=None, location=None, 
+			  food=None, dinner=None, errors=None):
 	return render_template(page, 
 			       page_title=title, #on-page = parameter
 			       h1=h1,
+				   user=user, # may need to replace with like a flask.session.get('user', None) or something
+				   location=location,
+				   food=food,
+				   dinner=dinner,
 			       errors=errors)
 
 # We should only use this to populate our data for the first time.
