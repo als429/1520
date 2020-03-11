@@ -44,17 +44,14 @@ def attend():
     h1 ="Attend"
     return show_page(file,title,h1)
 
-# currently has location code from James
-# testing if user is pulling in from datastore
-# and populating in the HTML
-# Not workkkking.....
+
 @app.route('/eat-list') 
 def eatlist():
     food_code = 'Food01'
     log('before loading from ds')
     food = f_datastore.load_food(food_code)
     log('after loading from ds')
-    return show_page('/eat-list.html',food=food) 
+    return show_page('/eat-list.html','title, required','h1,required',food=food) 
 
 # backend sign in functionality	
 @app.route('/authtoken', methods=['POST'])
