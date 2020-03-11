@@ -49,10 +49,10 @@ def attend():
 # and populating in the HTML
 @app.route('/eat-list') 
 def eatlist():
-	username='testuser'
-	passwordhash = 'aa'
+    username='testuser'
+    passwordhash = 'aa'
     user = f_datastore.load_user(username, passwordhash)
-	log('user information: ' + user.to_dict())
+    log('user information: ' + user)
     return show_page('/eat-list.html',user=user) 
 
 # backend sign in functionality	
