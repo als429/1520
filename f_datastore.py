@@ -211,7 +211,7 @@ def create_data():
     # update information
     entity.update({
         'username': 'testuser',
-        'passwordhash': '',
+        'passwordhash': 'aa',
         'email': 'test@blah.com',
         'testing_random': [],
     })
