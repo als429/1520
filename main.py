@@ -51,6 +51,8 @@ def attend():
 def eatlist():
     username='testuser'
     passwordhash = 'aa'
+    log('before loading information on: ' + username)
+
     user = f_datastore.load_user(username, passwordhash)
     log('user information: ' + user)
     return show_page('/eat-list.html',user=user) 
