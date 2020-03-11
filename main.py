@@ -47,6 +47,7 @@ def attend():
 # currently has location code from James
 # testing if user is pulling in from datastore
 # and populating in the HTML
+# Not workkkking.....
 @app.route('/eat-list') 
 def eatlist():
     food_code = 'Food01'
