@@ -242,6 +242,7 @@ def create_data():
         'image': '../static/icons/hamburger.png',
         'food_type': 'Italian',
         'ingredients': ['cheese','pineapple'],
+	'address': 'main street, pa',
     })
     client.put(entity) # save information to datastore 
 
@@ -260,6 +261,7 @@ def create_data():
         'ingredients': ['vegetables','cumin'],
         'available_seats': 5,
         'time': '10:00PM',
+	'address': 'dinner main street, pa',
     })
     client.put(entity) # save information to datastore 
 
