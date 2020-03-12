@@ -93,9 +93,9 @@ def test():
     dinner = f_datastore.load_dinner(dinner_code)
     log('dinner object in main.py')
     user = f_datastore.load_user(username, pwh)
-    location = f_datastore.load_location(location_code)
+   #location = f_datastore.load_location(location_code)
     
-    return show_page('/test.html','title here','h1 here', user=user, location=location, food=food, dinner=dinner)
+    return show_page('/test.html','title here','h1 here', user=user, food=food, dinner=dinner) # location=location, 
 
 if __name__ == '__main__':
         app.run(host='127.0.0.1', port=8082, debug=True) # updated port, so that when it runs locally, it runs on 8030
