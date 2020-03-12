@@ -2,4 +2,50 @@
 {% block header %}
 {% endblock %}
 {% block content %}
+  <h2>Food Test</h2>
+  <ul>
+    <li>Name: {{food.name}}</li>
+    <li>Code: {{food.code}}</li>
+    <li>Availability: {{food.available}}</li>
+    <li>Image: {{food.image}}</li>
+    <li>Cost: {{food.cost}}</li>
+    <li>Ingredients: {{food.ingredients}}</li>
+    <li>Food Type: {{food.food_type}}</li>
+    <li>Address: {{food.address}}</li>
+    <li>: {{food.}}</li>
+    <li>: {{food.}}</li>
+</ul>
+    <p>Testing image:</p>
+    <img src="{{food.image}}">
+  <h2>Dinner Test</h2>
+  <ul>
+    <li>Name: {{dinner.name}}</li>
+    <li>Code: {{dinner.code}}</li>
+    <li>Availability: {{dinner.available}}</li>
+    <li>Image: {{dinner.image}}</li>
+    <li>Cost: {{dinner.cost}}</li>
+    <li>Ingredients: {{dinner.ingredients}}</li>
+    <li>Food Type: {{dinner.food_type}}</li>
+    <li>Address: {{dinner.address}}</li>
+    <li>Available Seats: {{dinner.available_seats}}</li>
+    <li>Time: {{dinner.time}}</li>
+</ul>
+    <p>Testing image:</p>
+    <img src="{{dinner.image}}">
+  
+<h2>User Test</h2>
+  <ul>
+    <li>Name: {{user.name}}</li>
+    <li>Email: {{user.email}}</li>
+    <li>Pwhash: {{user.passwordhash}}</li>
+</ul>
+
+<h2>Location Test</h2>
+  <ul>
+    <li>Address: {{location.address}}</li>
+    <li>Lat: {{location.lat}}</li>
+    <li>Long: {{location.long}}</li>
+    <li>Accuracy: {{location.accuracy}}</li>
+
+</ul>
 {% endblock %}
