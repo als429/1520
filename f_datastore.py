@@ -121,7 +121,7 @@ def _location_from_entity(location_entity): # input: Entity
     accuracy = location_entity['accuracy']
 
     # creating Python object
-    location = f_data.Location(code, address, lat, long, accuracy) # creating our object
+    location = f_data.Location(address, lat, long, accuracy) # creating our object
 	
     # logging to https://console.cloud.google.com/logs/viewer
     log('built object from location entity: ' + str(code))
@@ -262,10 +262,9 @@ def create_data():
                               exclude_from_indexes=[])
     # add information about Dinner01
     entity.update({
-	    'code': 'Pittsburgh',
             'address': '4428397 main street, pittsburgh, pa 15221',
             'latitude': '-79.0000',
             'longitude': '10.01321',
             'accuracy': 10,
        })
-    client.put(entity) # save information to datastore 	
+    client.put(entity) # save information to datastore 
