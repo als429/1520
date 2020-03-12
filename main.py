@@ -93,7 +93,11 @@ def test():
     dinner = f_datastore.load_dinner(dinner_code)
     log('dinner object in main.py')
     user = f_datastore.load_user(username, pwh)
+<<<<<<< HEAD
    #location = f_datastore.load_location(location_code)
+=======
+   location = f_datastore.load_location(location_code)
+>>>>>>> parent of 1ef0fcd... fixing space... ughkfsgfsgf
     
     return show_page('/test.html','title here','h1 here', user=user, food=food, dinner=dinner) # location=location, 
 
