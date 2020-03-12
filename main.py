@@ -93,7 +93,7 @@ def test():
     dinner = f_datastore.load_dinner(dinner_code)
     log('dinner object in main.py')
     user = f_datastore.load_user(username, pwh)
-   location = f_datastore.load_location(location_code)
+    location = f_datastore.load_location(location_code)
     
     return show_page('/test.html','title here','h1 here', user=user, location=location, food=food, dinner=dinner)
 
