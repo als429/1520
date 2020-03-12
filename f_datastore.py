@@ -262,6 +262,7 @@ def create_data():
                               exclude_from_indexes=[])
     # add information about Dinner01
     entity.update({
+	    'code': 'Pittsburgh',
             'address': '4428397 main street, pittsburgh, pa 15221',
             'latitude': '-79.0000',
             'longitude': '10.01321',
