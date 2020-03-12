@@ -111,7 +111,7 @@ def _dinner_from_entity(dinner_entity): # input: Entity
 def _location_from_entity(location_entity): # input: Entity
     # Translate the Dinner entity to a regular old Python object.
     code = location_entity.key.name # this is a string version of the key
-    
+    log('code: ' + code)
     # location(address, lat, long, accuracy)
     
     # parameters for Dinner object
