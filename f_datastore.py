@@ -121,7 +121,7 @@ def _location_from_entity(location_entity): # input: Entity
     accuracy = location_entity['accuracy']
 
     # creating Python object
-    location = f_data.Location(address, lat, long, accuracy) # creating our object
+    location = f_data.Location(code, address, lat, long, accuracy) # creating our object
 	
     # logging to https://console.cloud.google.com/logs/viewer
     log('built object from location entity: ' + str(code))
