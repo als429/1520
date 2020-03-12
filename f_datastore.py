@@ -55,9 +55,7 @@ def _load_entity(client, entity_type, entity_id, parent_key=None):
 
 def _food_from_entity(food_entity): # input: Entity
     # Translate the Food entity to a regular old Python object.
-    log('in _food_from_entity')
     code = food_entity.key.name # this is a string version of the key
-    log('got code')
 	
     # food(name='', cost=0.00, available=False, 
     #      image='../icons/hamburger.png', food_type='', 
@@ -65,19 +63,12 @@ def _food_from_entity(food_entity): # input: Entity
     
     # parameters for Food object
     name = food_entity['name'] # acessing Entity as a dictionary element to pull out name value (for us to use within our object)
-    log('got name')
     cost = food_entity['cost']
-    log('got cost')
     available = food_entity['available']
-    log('got availability')
     image = food_entity['image']
-    log('got image')
     food_type = food_entity['food_type']
-    log('got type of food')
     ingredients = food_entity['ingredients']
-    log('got ingredients')
     address = food_entity['address']
-    log('got type of address')
 
     log('parameters for object set')
     # creating Python object
@@ -109,7 +100,7 @@ def _dinner_from_entity(dinner_entity): # input: Entity
 
     # creating Python object
     dinner = f_data.Dinner(code, name, cost, available, 
-					   image, fodd_type, ingredients, 
+					   image, food_type, ingredients, 
 					   address, available_seats, time) # creating our object
 	
     # logging to https://console.cloud.google.com/logs/viewer
