@@ -158,6 +158,7 @@ def load_food(food_code): # inputing the food code to get information from datas
     food_entity = _load_entity(client, _FOOD_ENTITY, food_code) # loads the Entity from the datastore
     log('loaded food: ' + food_code)
     food = _food_from_entity(food_entity) # translated the Entity to a Course python object
+    log('we have translated food entity to Python object')
     return food # returns python Food object
 	
 def load_dinner(dinner_code): # inputing the dinner code to get information from datastore
