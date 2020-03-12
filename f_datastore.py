@@ -267,4 +267,4 @@ def create_data():
             'longitude': '10.01321',
             'accuracy': 10,
        })
-    client.put(entity) # save information to datastore 	
+    client.put(entity) # save information to datastore 
