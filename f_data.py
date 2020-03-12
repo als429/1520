@@ -99,8 +99,7 @@ class Food(Dinner):
        }
 
 class Location(object):
-    def __init__(self, code, address, lat, long, accuracy):
-	self.code = code
+    def __init__(self, address, lat, long, accuracy):
         self.address = address
         self.lat = lat
         self.long = long
@@ -108,7 +107,6 @@ class Location(object):
 
     def to_dict(self):
         return {
-	    'code': self.code,
             'address': self.address,
             'latitude': self.lat,
             'longitude': self.long,
