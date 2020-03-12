@@ -55,8 +55,10 @@ def _load_entity(client, entity_type, entity_id, parent_key=None):
 
 def _food_from_entity(food_entity): # input: Entity
     # Translate the Food entity to a regular old Python object.
+    log('in _food_from_entity')
     code = food_entity.key.name # this is a string version of the key
-    
+    log('got code')
+	
     # food(name='', cost=0.00, available=False, 
     #      image='../icons/hamburger.png', food_type='', 
     #      ingredients=None, address=None)
@@ -69,7 +71,7 @@ def _food_from_entity(food_entity): # input: Entity
     food_type = food_entity['food_type']
     ingredients = food_entity['ingredients']
     address = food_entity['address']
-
+    log('parameters for object set')
     # creating Python object
     food = f_data.Food(code, name, cost, available, image, fodd_type, ingredients, address) # creating our object
 	
