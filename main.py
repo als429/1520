@@ -81,9 +81,19 @@ def createdata():
     f_datastore.create_data()
     return 'OK'
 
-#@app.route('/test') # currently testing templates
-#def test():
-#    return render_template('test.html', page_title='Testing Templates!!!-uyfuar',h1="blah")
+
+@app.route('/test') 
+def test():
+    food_code = 'Food01'
+    dinner_code = 'Dinner01'
+    location_code = 'Pittsburgh'
+    username = 'testuser'
+    pwh = 'aa'
+    food = f_datastore.load_food(food_code)
+    dinner = f_datastore.load_dinner(dinner_code)
+    location = f_datastore.load_location(location_code)
+    user = f_datastore.load_user(username, pwh)
+    return show_page('/test.html','title here','h1 here', user=user, location=location, food=food, dinner=dinner) 
 
 if __name__ == '__main__':
         app.run(host='127.0.0.1', port=8082, debug=True) # updated port, so that when it runs locally, it runs on 8030
