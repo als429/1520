@@ -65,15 +65,23 @@ def _food_from_entity(food_entity): # input: Entity
     
     # parameters for Food object
     name = food_entity['name'] # acessing Entity as a dictionary element to pull out name value (for us to use within our object)
+    log('got name')
     cost = food_entity['cost']
+    log('got cost')
     available = food_entity['available']
+    log('got availability')
     image = food_entity['image']
+    log('got image')
     food_type = food_entity['food_type']
+    log('got type of food')
     ingredients = food_entity['ingredients']
+    log('got ingredients')
     address = food_entity['address']
+    log('got type of address')
+
     log('parameters for object set')
     # creating Python object
-    food = f_data.Food(code, name, cost, available, image, fodd_type, ingredients, address) # creating our object
+    food = f_data.Food(code, name, cost, available, image, food_type, ingredients, address) # creating our object
 	
     # logging to https://console.cloud.google.com/logs/viewer
     log('built object from food entity: ' + str(code))
