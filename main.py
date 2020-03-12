@@ -91,6 +91,7 @@ def test():
     pwh = 'aa'
     food = f_datastore.load_food(food_code)
     dinner = f_datastore.load_dinner(dinner_code)
+    log('dinner object in main.py')
    # location = f_datastore.load_location(location_code)
     #user = f_datastore.load_user(username, pwh)
     return show_page('/test.html','title here','h1 here', food=food, dinner=dinner) # location=location, user=user, 
