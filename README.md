@@ -3,10 +3,11 @@
 ## To do
 
 ### Notes for team members:
-* Alexis - next mini-goal: figuring out how to connect HTML/main.py with the f_datastore
-	* HTML uses python object in {{object.property}} with dot operator
-	* main.py `show_page()` needs to pass in python object
-	* the `load_...()` function in the datastore.py loads object into main.py for the `show_page()` function
+* Alexis - next mini-goal: figuring out how to
+	* [ ] load_foods() - i.e., adding a bunch of foods (using a location filter)
+  	* [ ] load_dinners()
+ 	* [ ] save_food() - updating the database with foods
+  	* [ ] save_dinner()
 * Lydia - N/A
 * Vicky - mini-goal: create a functioning login
 * Naina - N/A
@@ -53,6 +54,10 @@
   * [x] User authentication front-end
   * [x] Utility function (show_page()),  for data to appear on pages
   * [x] data classes (rnd 1) - calling this f_data.py (tests: http://bit.ly/1520-classes)... we can rename later
+  * [ ] load_foods()
+  * [ ] load_dinners()
+  * [ ] save_food()
+  * [ ] save_dinner()
 
 ### Low priority
 * [ ] Create team name? (we sticking with A?)
