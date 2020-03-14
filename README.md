@@ -58,6 +58,11 @@
   * [ ] load_dinners()
   * [ ] save_food()
   * [ ] save_dinner()
+* [ ] Setting up user -> food code association 
+    * [ ] Add association within f_data.py (maybe foodcodes stored in array within user)
+    * [ ] Creating method in main.py with app route
+          * [ ] Get user, and all of their food info from DS
+    * [ ] add a load_user_food() method in f_datastore.py
 
 ### Low priority
 * [ ] Create team name? (we sticking with A?)
