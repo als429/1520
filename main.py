@@ -86,6 +86,8 @@ def createdata():
 
 @app.route('/test') 
 def test():
+    f_datastore.save_food('Blue Slurpie', 1213.99) # adding to db
+    
     food_code = 'Food01'
     dinner_code = 'Dinner01'
     location_code = 'Pittsburgh'
@@ -97,7 +99,8 @@ def test():
     user = f_datastore.load_user(username, pwh)
    #location = f_datastore.load_location(location_code) # note working rn
     food_list = f_datastore.load_foods()
-    
+	
+	
     return show_page('/test.html','title here','h1 here', user=user, food=food, foods=food_list, dinner=dinner) # location=location, 
 
 if __name__ == '__main__':

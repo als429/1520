@@ -180,7 +180,7 @@ def load_location(location_code):
     location = _location_from_entity(location_entity) # translated the Entity to a Course python object
     return location # returns python Location object
 
-def load_foods(): # NOTE: we will want to add [city] or [zip] to add query filters (q.add_filter('zip', '=', zip))
+def load_foods(): # TODO: we will want to add [city] or [zip] to add query filters (q.add_filter('zip', '=', zip))
     client = _get_client()
     q = client.query(kind=_FOOD_ENTITY)
     q.order = ['-name'] # sort queries in a descending order
@@ -188,6 +188,8 @@ def load_foods(): # NOTE: we will want to add [city] or [zip] to add query filte
     for food in q.fetch(): # q.fetch() returns the iterator for the query
 	    result.append(food)
     return result # returns an array of Entities
+
+# TODO: add load_dinners()
 
 ##############################################################
 ################ Saving entities to datastore ################
@@ -203,8 +205,16 @@ def save_user(user, passwordhash):
     entity['testing_random'] = [] # these are only accessible within the datastore
     client.put(entity) # update entity within datastore
 
-# TODO: add save_sold_food
-# TODO: add save_sold_dinner
+def save_food(name, cost):  # TODO: testing with only a few values, will need to expand
+    code = 'Food03' # TODO: will need to make a mechanism here to get a new code, can just be a # 
+    client = _get_client()
+    food_entity = datastore.Entity(client.key(_FOOD_ENTITY, code),
+                              exclude_from_indexes=['code'])
+    food['name'] = name
+    food['cost'] = cost
+    client.put(food)
+	
+# TODO: add save_dinner()
 
 ##############################################################
 ####################### Testing objects ######################
