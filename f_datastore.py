@@ -180,6 +180,15 @@ def load_location(location_code):
     location = _location_from_entity(location_entity) # translated the Entity to a Course python object
     return location # returns python Location object
 
+def load_foods(): # NOTE: we will want to add [city] or [zip] to add query filters (q.add_filter('zip', '=', zip))
+    client = _get_client()
+    q = client.query(kind=_FOOD_ENTITY)
+    q.order = ['-name'] # sort queries in a descending order
+    result = []
+    for food in q.fetch(): # q.fetch() returns the iterator for the query
+	    result.append(food)
+    return result # returns an array of Entities
+
 ##############################################################
 ################ Saving entities to datastore ################
 ##############################################################
@@ -236,7 +245,24 @@ def create_data():
 	'address': 'main street, pa',
     })
     client.put(entity) # save information to datastore 
-
+	
+    """FOOD #2 (to test pulling multiple datastore entities)"""
+    # create a fake food as an entity, Food01
+    entity = datastore.Entity(client.key(_FOOD_ENTITY, 'Food02'),
+                              exclude_from_indexes=['code'])
+    # add information about Food01
+    entity.update({
+        'code': 'Food02',
+        'name': 'Hamburgers',
+	    'cost': 19.99,
+        'available': False,
+        'image': '../static/icons/hamburger.png',
+        'food_type': 'American',
+        'ingredients': ['hamburger','lettue'],
+	'address': 'biddles ave, pa',
+    })
+    client.put(entity) # save information to datastore 
+    
     """Dinner"""	
     # create a fake dinner as an entity, Dinner01
     entity = datastore.Entity(client.key(_DINNER_ENTITY, 'Dinner01'),

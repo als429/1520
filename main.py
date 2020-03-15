@@ -65,14 +65,16 @@ def authtoken():
 # will allow us to expand on parameters, as week04/gae/project2/main
 # start to get user, location, food, and dinner data
 def show_page(page, title, h1, user=None, location=None, 
-			  food=None, dinner=None, errors=None):
+			  food=None, foods=None, dinner=None, dinners=None, errors=None):
 	return render_template(page, 
 			       page_title=title, #on-page = parameter
 			       h1=h1,
 				   user=user, # may need to replace with like a flask.session.get('user', None) or something
 				   location=location,
 				   food=food,
+				   foods=foods,
 				   dinner=dinner,
+				   dinners=dinners,
 			       errors=errors)
 
 # We should only use this to populate our data for the first time.
@@ -93,9 +95,10 @@ def test():
     dinner = f_datastore.load_dinner(dinner_code)
     log('dinner object in main.py')
     user = f_datastore.load_user(username, pwh)
-   #location = f_datastore.load_location(location_code)
+   #location = f_datastore.load_location(location_code) # note working rn
+    food_list = f_datastore.load_foods()
     
-    return show_page('/test.html','title here','h1 here', user=user, food=food, dinner=dinner) # location=location, 
+    return show_page('/test.html','title here','h1 here', user=user, food=food, foods=food_list, dinner=dinner) # location=location, 
 
 if __name__ == '__main__':
         app.run(host='127.0.0.1', port=8082, debug=True) # updated port, so that when it runs locally, it runs on 8030
