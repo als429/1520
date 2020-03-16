@@ -53,13 +53,6 @@ def eatlist():
     log('after loading from ds')
     return show_page('/eat-list.html','title, required','h1,required',food=food) 
 
-# backend sign in functionality	
-@app.route('/authtoken', methods=['POST'])
-def authtoken():
-    log('Token: ' + request.form.get('token'))
-    d = { 'message': 'Auth Token received at server.' }
-    return Response(json.dumps(d), mimetype='application/json')
-
 # utility function that allows us to 
 # consolidate on the render_template function
 # will allow us to expand on parameters, as week04/gae/project2/main
@@ -82,6 +75,24 @@ def show_page(page, title, h1, user=None, location=None,
 def createdata():
     f_datastore.create_data()
     return 'OK'
+
+##############################Test goes below this line vvvvvvvvvv
+
+@app.route('/cookvalues', methods=['POST'])
+def food_to_datastore():
+    # testing with 3 properties of food
+    food_name = flask.request.form.get('fname')
+    food_cost = flask.request.form.get('fcost')
+    f_datastore.save_food(food_name, food_cost) # adding to db
+    return 'OK'
+
+
+# backend sign in functionality	
+@app.route('/authtoken', methods=['POST'])
+def authtoken():
+    log('Token: ' + request.form.get('token'))
+    d = { 'message': 'Auth Token received at server.' }
+    return Response(json.dumps(d), mimetype='application/json')
 
 
 @app.route('/test') 
