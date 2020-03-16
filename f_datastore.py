@@ -211,8 +211,8 @@ def save_user(user, passwordhash):
     entity['passwordhash'] = passwordhash # this is only accessible within the datastore
     entity['testing_random'] = [] # these are only accessible within the datastore
     client.put(entity) # update entity within datastore
-
-def save_food(name, cost):  # TODO: testing with only a few values, will need to expand
+		
+def save_food(name, cost, available, image, food_type, ingredients, address): 
     code = get_food_code()
     log('in save_food() have code')
     client = _get_client()
@@ -220,6 +220,12 @@ def save_food(name, cost):  # TODO: testing with only a few values, will need to
                               exclude_from_indexes=['code'])
     food['name'] = name
     food['cost'] = cost
+    food['available'] = available
+    food['image'] = image
+    food['food_type'] = food_type
+    food['ingredients'] = ingredients	
+    food['address'] = address
+	
     client.put(food)
 	
 # TODO: add save_dinner()
@@ -272,11 +278,11 @@ def create_data():
     entity.update({
         'code': 'Food02',
         'name': 'Hamburgers',
-	    'cost': 19.99,
+	'cost': 19.99,
         'available': False,
         'image': '../static/icons/hamburger.png',
         'food_type': 'American',
-        'ingredients': ['hamburger','lettue'],
+        'ingredients': ['hamburger','lettuce'],
 	'address': 'biddles ave, pa',
     })
     client.put(entity) # save information to datastore 
