@@ -94,7 +94,7 @@ def food_to_datastore():
     log('food type: ' + food_type)
     ingredients = request.form.get('fingredients')
     log('food ingredients: ' + ingredients)
-    address = request.form.get('faddress')
+    address = request.form.get('flocation')
     log('food address: ' + address)
     f_datastore.save_food(name, cost, available, image, food_type, ingredients, address) # adding to db
     log('loaded food_to_datastore() data')
