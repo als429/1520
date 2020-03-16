@@ -2,28 +2,29 @@
 {% block header %}
 {% endblock %}
 {% block content %}
-	<!--content seen on page-->
-    <div class="row">
-      <div class="column left">
-        <form><input type="text" placeholder="Dinner title"></form>
-        <form><input type="text" placeholder="Cost"></form>
-        <form><input type="text" class="location" placeholder="Address"></form>
-        <form>
-			<input type="text" placeholder="Add image"> <!--AS: removed class="input image"-->
-			<input type="file" name="file" class="inputfile" />
-			<label for="file">Upload&#x25b2;</label> 
-		 </form>
-        <form><input type="text" placeholder="Type categories"></form>
-        <form><input type="text" placeholder="Type ingredients"></form>
-      </div>
-      <div class="column right">
-		<div class="check">
-			<label class="container">check if available now
-			  <input type="checkbox">
-			  <span class="checkmark"></span>
-			</label>
-		</div>
-        <button class="btn sell">Sell Leftovers!</button>
-      </div>
+<!--content seen on page-->
+<div class="row">
+    <div class="column left">
+        <form method="post" action="/cookvalues">
+            <input type="text" name="fname" placeholder="Meal title">
+            <input type="text" name="fcost" placeholder="Cost">
+            <input type="text" class="location" placeholder="Address">
+            <input type="text" placeholder="Add image">
+            <!--AS: removed class="input image"-->
+            <input type="file" name="file" class="inputfile" />
+            <label for="file">Upload&#x25b2;</label>
+            <input type="text" placeholder="Type categories">
+            <input type="text" placeholder="Type ingredients">
     </div>
+    <div class="column right">
+        <div class="check">
+            <label class="container">check if available now
+                <input type="checkbox">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+            <button input type="submit" class="btn sell">Sell Leftovers!</button>
+	</form>
+    </div>
+</div>
 {% endblock %}
