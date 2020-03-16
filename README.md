@@ -4,7 +4,6 @@
 
 ### Notes for team members:
 * Alexis - next mini-goal: figuring out how to
-	* [ ] adding all in values into to cook form (view + controller updates)
 	* [ ] load_foods_by_zip(zip) - i.e., adding a bunch of foods (using a location filter)
 * Lydia - N/A
 * Vicky - mini-goal: create a functioning login
@@ -59,6 +58,7 @@
   * [x] save_food()
   * [ ] save_dinner()
   * [x] food_to_datastore() (view -> controller -> datastore)
+  	* [x] adding all in values into to cook form (view + controller updates)
   * [ ] dinner_to_datastore()
   * [ ] get_food_code() (i.e., the unique key for food)
   * [ ] get_dinner_code()
