@@ -49,6 +49,13 @@ def _load_entity(client, entity_type, entity_id, parent_key=None):
     # You can the set values on the entity just like you would on any other dictionary. (e.g., lesson_entity['title'] = 'blah')
     # Note: Lesson object's title is defined in lmsdata.py (but not our index.yaml)
 
+# TODO: build this function
+# Creates a new Food key for the datastore food item
+def get_food_code():
+    return 'Food05' # using this value for testing
+
+# TODO: build get_dinner_code()
+
 ##############################################################
 ############ translate entities to python objects ############
 ##############################################################
@@ -206,7 +213,7 @@ def save_user(user, passwordhash):
     client.put(entity) # update entity within datastore
 
 def save_food(name, cost):  # TODO: testing with only a few values, will need to expand
-    code = 'Food03' # TODO: will need to make a mechanism here to get a new code, can just be a # 
+    code = get_food_code()
     client = _get_client()
     food = datastore.Entity(client.key(_FOOD_ENTITY, code),
                               exclude_from_indexes=['code'])
