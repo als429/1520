@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, Response
+from flask import Flask, redirect, render_template, Response, request
 import json # for backend sign in functionality
 
 import f_data # includes our data classes: User, Dinner, Food, Location
