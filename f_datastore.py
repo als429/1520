@@ -214,6 +214,7 @@ def save_user(user, passwordhash):
 
 def save_food(name, cost):  # TODO: testing with only a few values, will need to expand
     code = get_food_code()
+    log('in save_food() have code')
     client = _get_client()
     food = datastore.Entity(client.key(_FOOD_ENTITY, code),
                               exclude_from_indexes=['code'])
