@@ -78,14 +78,25 @@ def createdata():
 
 ##############################Test goes below this line vvvvvvvvvv
 
+
 @app.route('/cookvalues', methods=['POST'])
 def food_to_datastore():
     # testing with 3 properties of food
-    food_name = request.form.get('fname')
-    food_cost = request.form.get('fcost')
-    log('food name: ' + food_name)
-    log('food cost: ' + food_cost)
-    f_datastore.save_food(food_name, food_cost) # adding to db
+    name = request.form.get('fname')
+    log('food name: ' + name)
+    cost = request.form.get('fcost')
+    log('food cost: ' + cost)
+    available = request.form.get('favailable')
+    log('food available: ' + available)
+    image = request.form.get('fimage')
+    log('food image: ' + image)
+    food_type = request.form.get('ftype')
+    log('food type: ' + food_type)
+    ingredients = request.form.get('fingredients')
+    log('food ingredients: ' + ingredients)
+    address = request.form.get('fingredients')
+    log('food address: ' + address)
+    f_datastore.save_food(name, cost, available, image, food_type, ingredients, address) # adding to db
     log('loaded food_to_datastore() data')
     return 'OK'
 
