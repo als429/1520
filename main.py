@@ -83,7 +83,10 @@ def food_to_datastore():
     # testing with 3 properties of food
     food_name = flask.request.form.get('fname')
     food_cost = flask.request.form.get('fcost')
+    log('food name: ' + food_name)
+    log('food cost: ' + food_cost)
     f_datastore.save_food(food_name, food_cost) # adding to db
+    log('loaded food_to_datastore() data')
     return 'OK'
 
 
