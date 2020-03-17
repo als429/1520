@@ -2,27 +2,16 @@
 {% block header %}
 {% endblock %}
 {% block content %}
-		
-	<p>{{food.name}}, {{food.cost}}</p>
-  
- <!-- <h1>Testing Location capture:</h1>
-	<p id="demo"></p>
-	<script>
-		var x = document.getElementById("demo");
-
-		function getLocation() {
-		  if (navigator.geolocation) {
-			navigator.geolocation.getCurrentPosition(showPosition);
-		  } else {
-			x.innerHTML = "Geolocation is not supported by this browser.";
-		  }
-		}
-
-		function showPosition(position) {
-		  x.innerHTML = "Lat: " + position.coords.latitude + 
-		  "<br>Long: " + position.coords.longitude; 
-		}
-
-		getLocation();
-	</script>-->
+	<form>
+		<input type="location" class="input location" placeholder="{{food.address}}">
+	</form>
+	
+	<!--TODO: this needs to be developed-->
+	<ul>
+		{% for food in foods %}
+			<li>Name: {{food.name}}</li>
+			<li>Cost: {{food.cost}}</li>
+		{% endfor %} <!--end for loop to add in multiple foods-->
+	</ul>
+	
 {% endblock %}

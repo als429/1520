@@ -47,11 +47,8 @@ def attend():
 
 @app.route('/eat-list') 
 def eatlist():
-    food_code = 'Food01'
-    log('before loading from ds')
-    food = f_datastore.load_food(food_code)
-    log('after loading from ds')
-    return show_page('/eat-list.html','title, required','h1,required',food=food) 
+    food_list = f_datastore.load_foods() # TODO: filter by availability and location
+    return show_page('/eat-list.html','Testing','Testing',foods=food_list) 
 
 # backend sign in functionality	
 @app.route('/authtoken', methods=['POST'])

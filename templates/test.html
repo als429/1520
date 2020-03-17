@@ -49,4 +49,25 @@
     <li>Long: {{location.long}}</li>
     <li>Accuracy: {{location.accuracy}}</li>
 </ul>-->
+
+ <!-- <h1>Testing Location capture:</h1>
+	<p id="demo"></p>
+	<script>
+		var x = document.getElementById("demo");
+
+		function getLocation() {
+		  if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(showPosition);
+		  } else {
+			x.innerHTML = "Geolocation is not supported by this browser.";
+		  }
+		}
+
+		function showPosition(position) {
+		  x.innerHTML = "Lat: " + position.coords.latitude + 
+		  "<br>Long: " + position.coords.longitude; 
+		}
+
+		getLocation();
+	</script>-->
 {% endblock %}
