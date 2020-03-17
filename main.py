@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, Response
+from flask import Flask, redirect, render_template, Response, request
 import json # for backend sign in functionality
 
 import f_data # includes our data classes: User, Dinner, Food, Location
@@ -50,13 +50,6 @@ def eatlist():
     food_list = f_datastore.load_foods() # TODO: filter by availability and location
     return show_page('/eat-list.html','Testing','Testing',foods=food_list) 
 
-# backend sign in functionality	
-@app.route('/authtoken', methods=['POST'])
-def authtoken():
-    log('Token: ' + request.form.get('token'))
-    d = { 'message': 'Auth Token received at server.' }
-    return Response(json.dumps(d), mimetype='application/json')
-
 # utility function that allows us to 
 # consolidate on the render_template function
 # will allow us to expand on parameters, as week04/gae/project2/main
@@ -74,11 +67,34 @@ def show_page(page, title, h1, user=None, location=None,
 				   dinners=dinners,
 			       errors=errors)
 
+@app.route('/cookvalues', methods=['POST'])
+def food_to_datastore():
+    # testing with 3 properties of food
+    name = request.form.get('fname')
+    cost = request.form.get('fcost')
+    available = request.form.get('favailable')
+    image = request.form.get('fimage')
+    food_type = request.form.get('fcategory')
+    ingredients = request.form.get('fingredients')
+    address = request.form.get('flocation')
+    f_datastore.save_food(name, cost, available, image, food_type, ingredients, address) # adding to db
+    log('loaded food_to_datastore() data')
+    return 'OK' # TODO: update function to send to page where user's current food items
+
 # We should only use this to populate our data for the first time.
 @app.route('/createdata')
 def createdata():
     f_datastore.create_data()
     return 'OK'
+
+##############################Test goes below this line vvvvvvvvvv
+
+# backend sign in functionality	
+@app.route('/authtoken', methods=['POST'])
+def authtoken():
+    log('Token: ' + request.form.get('token'))
+    d = { 'message': 'Auth Token received at server.' }
+    return Response(json.dumps(d), mimetype='application/json')
 
 
 @app.route('/test') 

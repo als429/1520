@@ -2,6 +2,7 @@
 {% block header %}
 {% endblock %}
 {% block content %}
+<<<<<<< HEAD
 <div class="row">
     <div class="column left">
         <form method="post" action="/cookvalues">
@@ -14,11 +15,30 @@
             <label for="file">Upload&#x25b2;</label>
             <input type="text" placeholder="Type categories">
             <input type="text" placeholder="Type ingredients">
+=======
+<!--content seen on page-->
+<div class="row">
+    <div class="column left">
+        <form method="POST" action="/cookvalues">
+            <input type="text" name="fname" placeholder="Meal title">
+            <input type="text" name="fcost" placeholder="Cost">
+            <input type="text" class="location" name="flocation" placeholder="Address">
+            <input type="text" name="fimage" placeholder="Add image">
+            <!--AS: removed class="input image"-->
+            <input type="file" name="file" class="inputfile" />
+            <label for="file">Upload&#x25b2;</label>
+            <input type="text" name="fcategory" placeholder="Type categories">
+            <input type="text" name="fingredients" placeholder="Type ingredients">
+>>>>>>> 99fbaadd159c32d2bd3600872ce71897c9e49553
     </div>
     <div class="column right">
         <div class="check">
             <label class="container">check if available now
+<<<<<<< HEAD
                 <input type="checkbox">
+=======
+                <input type="checkbox" name="favailable">
+>>>>>>> 99fbaadd159c32d2bd3600872ce71897c9e49553
                 <span class="checkmark"></span>
             </label>
         </div>
@@ -26,4 +46,8 @@
 	</form>
     </div>
 </div>
+<<<<<<< HEAD
 {% endblock %}
+=======
+{% endblock %}
+>>>>>>> 99fbaadd159c32d2bd3600872ce71897c9e49553

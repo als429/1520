@@ -4,10 +4,7 @@
 
 ### Notes for team members:
 * Alexis - next mini-goal: figuring out how to
-	* [ ] load_foods() - i.e., adding a bunch of foods (using a location filter)
-  	* [ ] load_dinners()
- 	* [ ] save_food() - updating the database with foods
-  	* [ ] save_dinner()
+	* [ ] load_foods_by_zip(zip) - i.e., adding a bunch of foods (using a location filter)
 * Lydia - N/A
 * Vicky - mini-goal: create a functioning login
 * Naina - N/A
@@ -54,10 +51,17 @@
   * [x] User authentication front-end
   * [x] Utility function (show_page()),  for data to appear on pages
   * [x] data classes (rnd 1) - calling this f_data.py (tests: http://bit.ly/1520-classes)... we can rename later
-  * [ ] load_foods()
+  * [x] load_foods()
   * [ ] load_dinners()
-  * [ ] save_food()
+  * [ ] load_foods_by_zip() // maybe we could do by city here too...
+  * [ ] load_dinner_by_zip()
+  * [x] save_food()
   * [ ] save_dinner()
+  * [x] food_to_datastore() (view -> controller -> datastore)
+  	* [x] adding all in values into to cook form (view + controller updates)
+  * [ ] dinner_to_datastore()
+  * [ ] get_food_code() (i.e., the unique key for food)
+  * [ ] get_dinner_code()
 * [ ] Setting up user -> food code association 
     * [ ] Add association within f_data.py (maybe foodcodes stored in array within user)
     * [ ] Creating method in main.py with app route
