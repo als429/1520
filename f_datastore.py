@@ -191,7 +191,7 @@ def load_foods(): # TODO: we will want to add [city] or [zip] to add query filte
     client = _get_client()
     q = client.query(kind=_FOOD_ENTITY)
     q.order = ['-name'] # sort queries in a descending order
-    # q.add_filter('available', '=', 'True') # TEST: filtering by availability # Needs to be one equal...  https://googleapis.dev/python/datastore/latest/queries.html#google.cloud.datastore.query.Query.add_filter
+    q.add_filter('available', '=', 'true') # TEST: filtering by availability # Needs to be one equal...  https://googleapis.dev/python/datastore/latest/queries.html#google.cloud.datastore.query.Query.add_filter
     result = []
     for food in q.fetch(): # q.fetch() returns the iterator for the query
 	    result.append(food)
