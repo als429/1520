@@ -4,11 +4,16 @@
 {% block content %}
 
     <style>
+     .mapandtoggle {
+         text-align: center;
+         position: absolute;
+         right: 0px;
+     }
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
         height: 100%;
-        width: 30%
+        width: 30%;
       }
 .switch {
   position: relative;
@@ -71,6 +76,7 @@ input:checked + .slider:before {
 }
     </style>
 
+<div class="mapandtoggle">
 <!-- Toggle on/off visual-->
 <label onclick="toggle()" class="switch">
   <input id="toggle" type="checkbox" checked>
@@ -83,14 +89,14 @@ input:checked + .slider:before {
       var map;
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.397, lng: 150.644},
+          center: {lat: 40.4328462, lng: -79.9291791},
           zoom: 17 // 1: World, 5: Landmass/continent, 10: City, 15: Streets, 20: Buildings
         });
       }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSAOP8_BWGwtwrdnsqVkqEz-wE_7Rwv0Q&callback=initMap"
     async defer></script>
-
+</div>
 <!-- Toggle on/off functionality-->
 <script>
 function toggle() {
