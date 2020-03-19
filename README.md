@@ -3,7 +3,7 @@
 ## To do
 
 ### Notes for team members:
-* Alexis - next mini-goal: figuring out how to
+* Alexis - next mini-goal: figuring out how to work with the Google Maps API, so we can develop Location data object further
 * Lydia - N/A
 * Vicky - mini-goal: create a functioning login
 * Naina - N/A
@@ -34,6 +34,8 @@
   
 * [ ] CSS into /static/style.css
   * [ ] CSS for the templated /eat-list and /attend-list **list** pages
+  * [ ] Maps / Toggle alignment CSS
+  * [x] Toggle on/ off CSS of maps
   * [x] homepage/eat - added
   * [x] cook
   * [x] attend
@@ -44,31 +46,35 @@
   
 * [ ] Python
   * [ ] Location tracking: https://docs.google.com/presentation/d/1PqtkPX0WpzH8rFvGO3K5_62FMsdd3ZddKOEs6jNTrew/edit#slide=id.g55dc63046b_2_16
-  * [ ] Maps
+  * [ ] Setting up Location logic... feel like we have a lot to do here...
   * [ ] User authentication backend: https://developers.google.com/identity/sign-in/web/backend-auth
+  * [ ] load_foods_by_zip() // maybe we could do by city here too...; up for convo
+  * [ ] get_food_code() (i.e., the unique key for food)
+  * [ ] Setting up user -> food code association 
+    	* [ ] Add association within f_data.py (maybe foodcodes stored in array within user)
+    	* [ ] Creating method in main.py with app route
+   	* [ ] Get user, and all of their food info from DS
+    	* [ ] add a load_user_food() method in f_datastore.py
   * [ ] type checking for f_data.py classes (note: holding off until we know for sure what data types we have...)
   * [ ] type checkig for data that goes into datastore
+  * [x] Maps - get API (key is currently in /test2.html)
+  * [x] Maps - identify needed values for Location (lat, long, zoom (default we should set some between 15-18, which is like road level)
   * [x] f_datastore.py (check out lmsdatastore.py -> https://github.com/timothyrjames/cs1520/tree/master/week06/gae/project9)
   * [x] Round 1- Routing for URLs
   * [x] User authentication front-end
   * [x] Utility function (show_page()),  for data to appear on pages
   * [x] data classes (rnd 1) - calling this f_data.py (tests: http://bit.ly/1520-classes)... we can rename later
   * [x] load_foods() // filters by available food
-  * [ ] load_dinners()
-  * [ ] load_foods_by_zip() // maybe we could do by city here too...; up for convo
-  * [ ] load_dinner_by_zip()
   * [x] save_food()
-  * [ ] save_dinner()
   * [x] food_to_datastore() (view -> controller -> datastore)
   	* [x] adding all in values into to cook form (view + controller updates)
-  * [ ] dinner_to_datastore()
-  * [ ] get_food_code() (i.e., the unique key for food)
-  * [ ] get_dinner_code()
-* [ ] Setting up user -> food code association 
-    * [ ] Add association within f_data.py (maybe foodcodes stored in array within user)
-    * [ ] Creating method in main.py with app route
-    * [ ] Get user, and all of their food info from DS
-    * [ ] add a load_user_food() method in f_datastore.py
+  * Dinner methods to mirror food: // holding off, to keep things in f_datastore.py clean
+ 	 * [ ] save_dinner() // will mirror save_food()
+ 	 * [ ] load_dinners() // will mirror load_foods(), no need to write unless we need
+ 	 * [ ] load_dinner_by_zip() // will mirror load_foods_by_zip()
+ 	 * [ ] dinner_to_datastore() // should mirror food_to_datastore()
+ 	 * [ ] get_dinner_code() // should mirror get_food_code()
+
 
 ### Low priority
 * [ ] Create team name? (we sticking with A?)
@@ -77,3 +83,6 @@
 
 ## Proposal
 * https://docs.google.com/presentation/d/1M7u5HtYC5hsmr09UfqeGXXkwklw4zus43RtJ9VeUGnY/edit#slide=id.g7dce42e085_0_7
+
+## Current Appspot
+* https://bit.ly/food--friends
