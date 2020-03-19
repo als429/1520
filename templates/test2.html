@@ -72,7 +72,7 @@ input:checked + .slider:before {
 
 <!-- Toggle on/off visual-->
 <label onclick="toggle()" class="switch">
-  <input type="checkbox">
+  <input id="toggle" type="checkbox">
   <span class="slider round"></span>
 </label>
 
@@ -93,11 +93,14 @@ input:checked + .slider:before {
 <!-- Toggle on/off functionality-->
 <script>
 function toggle() {
-  var x = document.getElementById("map");
-  if (x.style.display === "none") {
-    x.style.display = "block";
+  // Get the checkbox
+  var checkBox = document.getElementById("toggle");    
+  var map = document.getElementById("map");
+    
+  if (checkBox.checked == true){
+    map.style.display = "normal";
   } else {
-    x.style.display = "none";
+    map.style.display = "none"; // not checked
   }
 }
 </script>
