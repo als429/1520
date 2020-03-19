@@ -59,12 +59,12 @@ def show_page(page, title, h1, user=None, location=None,
 	return render_template(page, 
 			       page_title=title, #on-page = parameter
 			       h1=h1,
-				   user=user, # may need to replace with like a flask.session.get('user', None) or something
-				   location=location,
-				   food=food,
-				   foods=foods,
-				   dinner=dinner,
-				   dinners=dinners,
+			       user=user, # may need to replace with like a flask.session.get('user', None) or something
+			       location=location,
+			       food=food,
+			       foods=foods,
+			       dinner=dinner,
+			       dinners=dinners,
 			       errors=errors)
 
 @app.route('/cookvalues', methods=['POST'])
@@ -115,6 +115,10 @@ def test():
 	
 	
     return show_page('/test.html','title here','h1 here', user=user, food=food, foods=food_list, dinner=dinner) # location=location, 
+
+@app.route('/test2')
+def test_two():
+    return show_page(/'test2.html','Testing Maps API', 'Maps API Testing')
 
 if __name__ == '__main__':
         app.run(host='127.0.0.1', port=8082, debug=True) # updated port, so that when it runs locally, it runs on 8030
