@@ -4,7 +4,6 @@
 
 ### Notes for team members:
 * Alexis - next mini-goal: figuring out how to
-	* [ ] load_foods_by_zip(zip) - i.e., adding a bunch of foods (using a location filter)
 * Lydia - N/A
 * Vicky - mini-goal: create a functioning login
 * Naina - N/A
@@ -20,10 +19,12 @@
 * [x] set up github, invite people 
 * [ ] HTML 
   * [ ] create a template for an eating list
-	* **Idea:** 
+	* **Random Idea (up for discussion):** 
 		* We should use the example from https://github.com/timothyrjames/cs1520/tree/master/week06/gae/project9
 		* The URL could look like /eat/<zip_code> or /eat/<city>/<zip_code>
 		* The templates are basically populated with data by main.py from the db
+	* [x] get available foods from datastore to be added in
+	* [ ] get available foods BEAR to address to be loaded from datastore to be added in
   * [ ] create a template for attend list
   * [ ] attend search page into /attend.html
   * [x] host into /host.html
@@ -32,7 +33,7 @@
   * [x] cook into /cook.html
   
 * [ ] CSS into /static/style.css
-  * [ ] CSS for the templated eat and attend **list** pages
+  * [ ] CSS for the templated /eat-list and /attend-list **list** pages
   * [x] homepage/eat - added
   * [x] cook
   * [x] attend
@@ -46,14 +47,15 @@
   * [ ] Maps
   * [ ] User authentication backend: https://developers.google.com/identity/sign-in/web/backend-auth
   * [ ] type checking for f_data.py classes (note: holding off until we know for sure what data types we have...)
+  * [ ] type checkig for data that goes into datastore
   * [x] f_datastore.py (check out lmsdatastore.py -> https://github.com/timothyrjames/cs1520/tree/master/week06/gae/project9)
   * [x] Round 1- Routing for URLs
   * [x] User authentication front-end
   * [x] Utility function (show_page()),  for data to appear on pages
   * [x] data classes (rnd 1) - calling this f_data.py (tests: http://bit.ly/1520-classes)... we can rename later
-  * [x] load_foods()
+  * [x] load_foods() // filters by available food
   * [ ] load_dinners()
-  * [ ] load_foods_by_zip() // maybe we could do by city here too...
+  * [ ] load_foods_by_zip() // maybe we could do by city here too...; up for convo
   * [ ] load_dinner_by_zip()
   * [x] save_food()
   * [ ] save_dinner()
@@ -65,7 +67,7 @@
 * [ ] Setting up user -> food code association 
     * [ ] Add association within f_data.py (maybe foodcodes stored in array within user)
     * [ ] Creating method in main.py with app route
-          * [ ] Get user, and all of their food info from DS
+    * [ ] Get user, and all of their food info from DS
     * [ ] add a load_user_food() method in f_datastore.py
 
 ### Low priority
