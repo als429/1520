@@ -80,7 +80,7 @@ input:checked + .slider:before {
   <input id="toggle" type="checkbox" checked>
   <span class="slider round"></span>
 </label>
-
+<div id="map"></div>
 <!-- Map
     <div id="map"></div>
     <script>
@@ -118,7 +118,7 @@ var platform = new H.service.Platform({
   'apikey': 'AIzaSyCSAOP8_BWGwtwrdnsqVkqEz-wE_7Rwv0Q'
 });
 // Retrieve the target element for the map:
-var targetElement = document.getElementById('mapContainer');
+var targetElement = document.getElementById('map');
 
 // Get default map types from the platform object:
 var defaultLayers = platform.createDefaultLayers();
