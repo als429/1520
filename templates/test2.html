@@ -78,7 +78,7 @@ input:checked + .slider:before {
 </label>
  
   <form method="POST" action="/test-post">
-	<input type="hidden" name="lat" placeholder="lat" id="lat">
+	<input name="lat" placeholder="lat" id="lat">
 	<input type="hidden" name="long" placeholder="long" id="long">
 	<input type="submit">
   </form>
@@ -104,8 +104,8 @@ input:checked + .slider:before {
                   //alert("Latitude: " + lat);
                   //alert("Longitude: " + lng);
 				  //hacky idea... 
-				  document.getElementById("lat").placeholder = lat;
-				  document.getElementById("long").placeholder = lng;
+				  document.getElementById("lat").value = lat;
+				  document.getElementById("long").value = lng;
               }
           }
           );
