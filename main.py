@@ -120,5 +120,13 @@ def test():
 def test_two():
     return show_page('/test2.html','Testing Maps API', 'Maps API Testing')
 
+@app.route('/test-post', methods=['POST'])
+def latlongtest():
+    lat = request.form.get('lat')
+    long = request.form.get('long')
+    log('lat=' + lat)
+    log('long=' + long)
+    return 'Lat/long recieved'
+
 if __name__ == '__main__':
         app.run(host='127.0.0.1', port=8082, debug=True) # updated port, so that when it runs locally, it runs on 8030

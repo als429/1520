@@ -4,9 +4,6 @@
 {% block content %}
 
     <style>
-     .mapandtoggle {
-         text-align: center;
-     }
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
@@ -74,13 +71,17 @@ input:checked + .slider:before {
 }
     </style>
 
-<div class="mapandtoggle">
 <!-- Toggle on/off visual-->
 <label onclick="toggle()" class="switch">
   <input id="toggle" type="checkbox" checked>
   <span class="slider round"></span>
 </label>
-    
+ 
+  <form method="POST" action="/test-post">
+	<input type="hidden" name="lat" placeholder="lat" id="lat">
+	<input type="hidden" name="long" placeholder="long" id="long">
+	<input type="submit">
+  </form>
 <!-- Map -->
     <div id="map"></div>
     <script>
@@ -100,8 +101,11 @@ input:checked + .slider:before {
           , function(results, status) {
               if (status==google.maps.GeocoderStatus.OK && results.length > 0) {
                   var location=results[0].geometry.location, lat=location.lat(), lng=location.lng();
-                  alert("Latitude: " + lat);
-                  alert("Longitude: " + lng);
+                  //alert("Latitude: " + lat);
+                  //alert("Longitude: " + lng);
+				  //hacky idea... 
+				  document.getElementById("lat").placeholder = lat;
+				  document.getElementById("long").placeholder = lng;
               }
           }
           );
@@ -109,7 +113,6 @@ input:checked + .slider:before {
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSAOP8_BWGwtwrdnsqVkqEz-wE_7Rwv0Q&callback=initMap"
     async defer></script>
-</div>
 
 <!-- Toggle on/off functionality-->
 <script>
