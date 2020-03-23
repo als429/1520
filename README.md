@@ -12,7 +12,7 @@
   * [ ] Review this example: https://github.com/timothyrjames/cs1520/tree/master/week06/gae/project9
 	* [ ] Lydia
 	* [x] Vicky
-	* [ ] Naina
+	* [x] Naina
 	* [x] Alexis
 
 ### High priority
