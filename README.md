@@ -6,7 +6,7 @@
 * Alexis - next mini-goal: figuring out how to work with the Google Maps API, so we can develop Location data object further
 * Lydia - type checking for data that goes into datastore
 * Vicky - mini-goal: create a functioning login
-* Naina - N/A
+* Naina - mini-goal: attend page, broad goal: location logic
 
 ### Highest Priority
   * [ ] Review this example: https://github.com/timothyrjames/cs1520/tree/master/week06/gae/project9
