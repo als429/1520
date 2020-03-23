@@ -4,6 +4,7 @@
 
 ### Notes for team members:
 * Alexis - next mini-goal: figuring out how to work with the Google Maps API, so we can develop Location data object further
+	https://www.youtube.com/watch?v=Zxf1mnP5zcw
 * Lydia - type checking for data that goes into datastore
 * Vicky - mini-goal: create a functioning login
 * Naina - mini-goal: attend page, broad goal: location logic
