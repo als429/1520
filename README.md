@@ -4,7 +4,8 @@
 
 ### Notes for team members:
 * Alexis - next mini-goal: figuring out how to work with the Google Maps API, so we can develop Location data object further
-	https://www.youtube.com/watch?v=Zxf1mnP5zcw
+	* https://www.youtube.com/watch?v=Zxf1mnP5zcw
+	* https://www.geeksforgeeks.org/get-post-requests-using-python/ < - basically what we need to do in example
 * Lydia - type checking for data that goes into datastore
 * Vicky - mini-goal: create a functioning login
 * Naina - mini-goal: attend page, broad goal: location logic
