@@ -3,7 +3,7 @@
 ## To do
 
 ### Notes for team members:
-* Alexis - next mini-goal: user-backend
+* Alexis - next mini-goal: TBD
 * Lydia - type checking for data that goes into datastore (main.py)
 * Vicky - mini-goal: phone #, lat, long (f_datastore, f_data.py, main.py)
 * Naina - mini-goal: attend page, eat-list broad goal: location logic
@@ -39,10 +39,12 @@
   * [ ] Adding phone # parameter to Dinner and Food in f_data (and adjusting f_datastore.py) - Vicky
   * [ ] Adding lat and long parameter to Dinner and Food in f_data (and adjusting f_datastore.py) - Vicky
   * [ ] Adding phone #, lat, long into datastore in f_datastore and /cook HTML- Vicky
-  * [ ] User authentication backend: https://developers.google.com/identity/sign-in/web/backend-auth - Alexis
   * [ ] get_food_code() (i.e., the unique key for food) // phone # _ .... - Vicky
   * [ ] type checking for main.py classes (note: holding off until we know for sure what data types we have...) - Lydia
   * [ ] load_foods_by_distance() // NOT IN MVP
+  * [ ] storing user data in datastore
+  * [ ] checking user against datastore (adding if not there)
+  * [x] User authentication backend: https://developers.google.com/identity/sign-in/web/backend-auth - Alexis
   * [x] Maps - get API (key is currently in /test2.html)
   * [x] Maps - identify needed values for Location (lat, long, zoom (default we should set some between 15-18, which is like road level)
   * [x] f_datastore.py (check out lmsdatastore.py -> https://github.com/timothyrjames/cs1520/tree/master/week06/gae/project9)
