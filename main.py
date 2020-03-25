@@ -94,7 +94,8 @@ def createdata():
 # backend sign in functionality	
 @app.route('/tokensignin', methods=['POST'])
 def authtoken():
-    log('Receive token by HTTPS POST')
+    token = request.form['id_token']
+    log('Received token by HTTPS POST: ' + token)
     try:
         idinfo = id_token.verify_oauth2_token(token, requests.Request(), CLIENT_ID)
         if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
