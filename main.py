@@ -97,7 +97,7 @@ def authtoken():
     log('in contoller')
     token = request.form.get('idtoken')
     log('Received token by HTTPS POST: ' + token)
-	CLIENT_ID = '1024466557558-monvg7ism1u12feg47r8296nh44bq500.apps.googleusercontent.com'
+    CLIENT_ID = '1024466557558-monvg7ism1u12feg47r8296nh44bq500.apps.googleusercontent.com'
     try:
         idinfo = id_token.verify_oauth2_token(token, requests.Request(), CLIENT_ID)
         if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
