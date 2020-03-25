@@ -95,7 +95,7 @@ def createdata():
 @app.route('/tokensignin', methods=['POST'])
 def authtoken():
     log('in contoller')
-    token = request.form.get('id_token')
+    token = request.form.get('idtoken')
     log('Received token by HTTPS POST: ' + token)
     try:
         idinfo = id_token.verify_oauth2_token(token, requests.Request(), CLIENT_ID)
