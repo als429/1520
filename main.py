@@ -89,8 +89,6 @@ def createdata():
     f_datastore.create_data()
     return 'OK'
 
-##############################Test goes below this line vvvvvvvvvv
-
 # backend sign in functionality	
 @app.route('/tokensignin', methods=['POST'])
 def authtoken():
@@ -109,7 +107,8 @@ def authtoken():
         log('ID is not valid, in Error')
         pass
     return 'OK - test success'
-
+	
+##############################Test goes below this line vvvvvvvvvv
 
 @app.route('/test') 
 def test():
