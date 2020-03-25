@@ -1,5 +1,7 @@
 from flask import Flask, redirect, render_template, Response, request
 import json # for backend sign in functionality
+from google.oauth2 import id_token # for backend sign in functionality
+from google.auth.transport import requests # for backend sign in functionality
 
 import f_data # includes our data classes: User, Dinner, Food, Location
 import f_datastore
@@ -90,11 +92,20 @@ def createdata():
 ##############################Test goes below this line vvvvvvvvvv
 
 # backend sign in functionality	
-@app.route('/authtoken', methods=['POST'])
+@app.route('/tokensignin', methods=['POST'])
 def authtoken():
-    log('Token: ' + request.form.get('token'))
-    d = { 'message': 'Auth Token received at server.' }
-    return Response(json.dumps(d), mimetype='application/json')
+    log('Receive token by HTTPS POST')
+    try:
+        idinfo = id_token.verify_oauth2_token(token, requests.Request(), CLIENT_ID)
+        if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
+            raise ValueError('Wrong issuer.')
+        log('ID token is valid.')
+        userid = idinfo['sub']
+        log('Got the user\'s Google Account ID from the decoded token')
+    except ValueError:
+        log('ID is not valid, in Error')
+        pass
+    return 'OK - test success'
 
 
 @app.route('/test') 
