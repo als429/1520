@@ -173,7 +173,7 @@ def load_foods(): # TODO: we will want to add [city] or [zip] to add query filte
 def save_user(username, sub):
     """Save the user details to the datastore."""
     client = _get_client() # get datastore client
-    entity = datastore.Entity(_load_key(client, _USER_ENTITY, user.sub)) # load information relating to the entity
+    entity = datastore.Entity(_load_key(client, _USER_ENTITY, sub)) # load information relating to the entity
     entity['username'] = user.username
     entity['sub'] = user.sub
     client.put(entity) # update entity within datastore
