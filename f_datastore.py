@@ -174,8 +174,8 @@ def save_user(username, sub):
     """Save the user details to the datastore."""
     client = _get_client() # get datastore client
     entity = datastore.Entity(_load_key(client, _USER_ENTITY, sub)) # load information relating to the entity
-    entity['username'] = user.username
-    entity['sub'] = user.sub
+    entity['username'] = username
+    entity['sub'] = sub
     client.put(entity) # update entity within datastore
 		
 def save_food(name, cost, available="on", image="", food_type="", ingredients="", address=""): #Note may need to update later
