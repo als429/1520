@@ -75,10 +75,11 @@ def _food_from_entity(food_entity): # input: Entity
     food_type = food_entity['food_type']
     ingredients = food_entity['ingredients']
     address = food_entity['address']
+    phone_number = food_entity['phone_number']
 
     log('parameters for object set')
     # creating Python object
-    food = f_data.Food(code, name, cost, available, image, food_type, ingredients, address) # creating our object
+    food = f_data.Food(code, name, cost, available, image, food_type, ingredients, address, phone_number) # creating our object
 	
     # logging to https://console.cloud.google.com/logs/viewer
     log('built object from food entity: ' + str(code))
@@ -101,13 +102,14 @@ def _dinner_from_entity(dinner_entity): # input: Entity
     food_type = dinner_entity['food_type']
     ingredients = dinner_entity['ingredients']
     address = dinner_entity['address']
+    phone_number = dinner_entity['phone-number']
     available_seats = dinner_entity['available_seats']
     time = dinner_entity['time']
 
     # creating Python object
     dinner = f_data.Dinner(code, name, cost, available, 
 					   image, food_type, ingredients, 
-					   address, available_seats, time) # creating our object
+					   address, phone_number, available_seats, time) # creating our object
 	
     # logging to https://console.cloud.google.com/logs/viewer
     log('built object from dinner entity: ' + str(code))
@@ -231,6 +233,7 @@ def create_data():
         'food_type': 'Italian',
         'ingredients': ['cheese','pineapple'],
 	'address': 'main street, pa',
+    	'phone-number': '1234567890',
     })
     client.put(entity) # save information to datastore 
 	
@@ -247,7 +250,8 @@ def create_data():
         'image': '../static/icons/hamburger.png',
         'food_type': 'American',
         'ingredients': ['hamburger','lettuce'],
-	'address': 'biddles ave, pa',
+	'address': 'biddles ave, pa',	    
+    	'phone-number': '1234567890',
     })
     client.put(entity) # save information to datastore 
     
@@ -267,5 +271,6 @@ def create_data():
         'available_seats': 5,
         'time': '10:00PM',
 	'address': 'dinner main street, pa',
+    	'phone-number': '1234567890',
     })
     client.put(entity) # save information to datastore
