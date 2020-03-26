@@ -49,20 +49,19 @@ def attend():
 
 @app.route('/eat-list') 
 def eatlist():
-    food_list = f_datastore.load_foods() # TODO: filter by availability and location
+    food_list = f_datastore.load_foods() # TODO: filter by distance
     return show_page('/eat-list.html','Testing','Testing',foods=food_list) 
 
 # utility function that allows us to 
 # consolidate on the render_template function
 # will allow us to expand on parameters, as week04/gae/project2/main
 # start to get user, location, food, and dinner data
-def show_page(page, title, h1, user=None, location=None, 
+def show_page(page, title, h1, user=None,
 			  food=None, foods=None, dinner=None, dinners=None, errors=None):
 	return render_template(page, 
 			       page_title=title, #on-page = parameter
 			       h1=h1,
-			       user=user, # may need to replace with like a flask.session.get('user', None) or something
-			       location=location,
+			       user=user,
 			       food=food,
 			       foods=foods,
 			       dinner=dinner,
@@ -116,18 +115,17 @@ def test():
     
     food_code = 'Food01'
     dinner_code = 'Dinner01'
-    location_code = 'Pittsburgh'
     username = 'testuser'
-    pwh = 'aa'
+    sub = 'blahblahblah'
     food = f_datastore.load_food(food_code)
+    log('loaded food: ' + food_code)
     dinner = f_datastore.load_dinner(dinner_code)
-    log('dinner object in main.py')
-    user = f_datastore.load_user(username, pwh)
-   #location = f_datastore.load_location(location_code) # note working rn
+    log('loaded dinner: ' + dinner_code)
+    user = f_datastore.load_user(sub)
+    log('loaded user: ' + sub)
     food_list = f_datastore.load_foods()
-	
-	
-    return show_page('/test.html','title here','h1 here', user=user, food=food, foods=food_list, dinner=dinner) # location=location, 
+    log('loaded food list: ' + food_list)
+    return show_page('/test.html','title here','h1 here', user=user, food=food, foods=food_list, dinner=dinner)
 
 @app.route('/test2')
 def test_two():
