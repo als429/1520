@@ -78,7 +78,8 @@ def food_to_datastore():
     food_type = request.form.get('fcategory')
     ingredients = request.form.get('fingredients')
     address = request.form.get('flocation')
-    f_datastore.save_food(name, cost, available, image, food_type, ingredients, address) # adding to db
+    phone_number = request.form.get('fphone_number')
+    f_datastore.save_food(name, cost, available, image, food_type, ingredients, address, phone_number) # adding to db
     log('loaded food_to_datastore() data')
     return 'OK' # TODO: update function to send to page where user's current food items
 
