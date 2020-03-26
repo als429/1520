@@ -111,7 +111,7 @@ def authtoken():
 
 @app.route('/test') 
 def test():
-    f_datastore.save_food('Blue Slurpie', 1213.99) # adding to db
+    #f_datastore.save_food('Blue Slurpie', 1213.99) # adding to db
     
     food_code = 'Food01'
     dinner_code = 'Dinner01'
