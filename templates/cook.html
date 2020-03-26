@@ -8,7 +8,7 @@
         <form method="POST" action="/cookvalues">
             <input type="text" name="fname" placeholder="Meal title">
             <input type="text" name="fcost" placeholder="Cost">
-            <input type="text" class="location" name="flocation" placeholder="Address">
+            <input id = "autocomplete" type="text" class="location" name="autocomplete" placeholder="Address" onFocus="geolocate()">
             <input type="text" name="fimage" placeholder="Add image">
             <!--AS: removed class="input image"-->
             <input type="file" name="file" class="inputfile" />
@@ -26,6 +26,34 @@
             <button input type="submit" class="btn sell">Sell Leftovers!</button>
 	</form>
     </div>
+    <script>
+
+var autocomplete;
+
+function initAutocomplete() {
+     autocomplete = new google.maps.places.Autocomplete(
+      document.getElementById('autocomplete'), {types: ['geocode']});
+
+}
+
+function geolocate() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var geolocation = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+      var circle = new google.maps.Circle(
+          {center: geolocation, radius: position.coords.accuracy});
+      autocomplete.setBounds(circle.getBounds());
+    });
+  }
+}
+</script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAetDGtzTKdygkWv27KM1gPEDoBYQ_szws&libraries=places&callback=initAutocomplete"
+        async defer></script>
+
 </div>
+
 
 {% endblock %}

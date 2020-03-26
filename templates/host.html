@@ -7,7 +7,7 @@
       <div class="column left">
         <form><input type="text" placeholder="Dinner title"></form>
         <form><input type="text" placeholder="Cost"></form>
-        <form><input type="text" class="location" placeholder="Address"></form>
+        <form><input id = "autocomplete" type="text" class="location" placeholder="Address" onFocus="geolocate()"></form>
         <form>
 			<input type="text" placeholder="Add image"> <!--AS: removed class="input image"-->
 			<input type="file" name="file" id="file" class="inputfile" />
@@ -26,5 +26,31 @@
 			</div>
         <button class="btn sell">Host a dinner!</button>
       </div>
+        <script>
+
+var autocomplete;
+
+function initAutocomplete() {
+     autocomplete = new google.maps.places.Autocomplete(
+      document.getElementById('autocomplete'), {types: ['geocode']});
+
+}
+
+function geolocate() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var geolocation = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+      var circle = new google.maps.Circle(
+          {center: geolocation, radius: position.coords.accuracy});
+      autocomplete.setBounds(circle.getBounds());
+    });
+  }
+}
+</script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAetDGtzTKdygkWv27KM1gPEDoBYQ_szws&libraries=places&callback=initAutocomplete"
+        async defer></script>
     </div>
 {% endblock %}
