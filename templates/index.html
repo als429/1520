@@ -16,14 +16,12 @@
 
 var autocomplete;
 
-<!--create autocomplete object and restrict predictions to geographical location types-->
 function initAutocomplete() {
      autocomplete = new google.maps.places.Autocomplete(
       document.getElementById('autocomplete'), {types: ['geocode']});
 
 }
 
-<!--search preference will be near user-->
 function geolocate() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
