@@ -11,7 +11,7 @@
 ### High priority
 * [x] set up github, invite people 
 * [ ] HTML 
-  * [ ] address autofill - Naina
+  * [x] address autofill - Naina
   * [ ] create a template for an eating list - Naina
   * [ ] create a template for attend list - Naina
   * [ ] check as use types field in /cook and /host
