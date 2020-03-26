@@ -5,7 +5,6 @@ import f_data # the classes we defined
 # kind is they type of entity that for the query 
 # definition here: https://cloud.google.com/appengine/docs/flexible/go/configuring-datastore-indexes-with-index-yaml
 _USER_ENTITY = 'User' 
-_LOCATION_ENTITY = 'Location'
 _FOOD_ENTITY = 'Food'
 _DINNER_ENTITY = 'Dinner'
 
@@ -52,7 +51,7 @@ def _load_entity(client, entity_type, entity_id, parent_key=None):
 # TODO: build this function
 # Creates a new Food key for the datastore food item
 def get_food_code():
-    return 'Food05' # using this value for testing
+    return 'Food07' # using this value for testing
 
 # TODO: build get_dinner_code()
 
@@ -114,34 +113,13 @@ def _dinner_from_entity(dinner_entity): # input: Entity
     log('built object from dinner entity: ' + str(code))
 	
     return dinner # returning our python Dinner object
-	
-def _location_from_entity(location_entity): # input: Entity
-    # Translate the Dinner entity to a regular old Python object.
-    code = location_entity.key.name # this is a string version of the key
-    log('code: ' + code)
-    # location(address, lat, long, accuracy)
-    
-    # parameters for Dinner object
-    address = location_entity['address'] # acessing Entity as a dictionary element to pull out name value (for us to use within our object)
-    lat = location_entity['lat']
-    long = location_entity['long']
-    accuracy = location_entity['accuracy']
-
-    # creating Python object
-    location = f_data.Location(address, lat, long, accuracy) # creating our object
-	
-    # logging to https://console.cloud.google.com/logs/viewer
-    log('built object from location entity: ' + str(code))
-	
-    return location # returning our python location object
 
 ##############################################################
 ############# Load Python objects from Datastore #############
 ##############################################################
 
-def load_user(username, passwordhash): # note: our User object does not contain passwordhash (it's only in datastore)
-    """Load a user based on the passwordhash; if the passwordhash doesn't match
-    the username, then this should return None."""
+def load_user(sub):
+    """Load a user based on their sub; if no sub then this should return None."""
 
     client = _get_client() # get the datastore client
     q = client.query(kind=_USER_ENTITY) # prep a query that looks at user entities
@@ -149,14 +127,13 @@ def load_user(username, passwordhash): # note: our User object does not contain 
     # .add_filter('<property>', '<operator>', <value>)
     # Filter the query based on a property name, operator and a value.
     # Documentation: https://googleapis.dev/python/datastore/latest/queries.html#google.cloud.datastore.query.Query.add_filter
-    q.add_filter('username', '=', username) # must equal username 
-    q.add_filter('passwordhash', '=', passwordhash) # must equal passwordhash
+    q.add_filter('sub', '=', sub) # must equal sub (i.e., Google's user id) 
     
     for user in q.fetch(): # fetch the information on the user
         # get the information from the datastore (accessing as one accesses a dictionary)
         # use that information as a parameter to insert in our python User object
         # return object
-        return f_data.User(user['username'], user['email']) 
+        return f_data.User(user['username'], user['sub']) # get user from datastore, translate to python User object
     return None # if info doesn't exist return None
 
 def load_food(food_code): # inputing the food code to get information from datastore
@@ -177,15 +154,6 @@ def load_dinner(dinner_code): # inputing the dinner code to get information from
     log('loaded dinner: ' + dinner_code)
     dinner = _dinner_from_entity(dinner_entity) # translated the Entity to a Course python object
     return dinner # returns python Dinner object
-	
-def load_location(location_code): 
-    # Load a location entity from the datastore, based on the location code.
-    log('loading location: ' + str(location_code))
-    client = _get_client()
-    location_entity = _load_entity(client, _Location_ENTITY, location_code) # loads the Entity from the datastore
-    log('loaded location: ' + location_code)
-    location = _location_from_entity(location_entity) # translated the Entity to a Course python object
-    return location # returns python Location object
 
 def load_foods(): # TODO: we will want to add [city] or [zip] to add query filters (q.add_filter('zip', '=', zip))
     client = _get_client()
@@ -202,14 +170,12 @@ def load_foods(): # TODO: we will want to add [city] or [zip] to add query filte
 ################ Saving entities to datastore ################
 ##############################################################
 
-def save_user(user, passwordhash):
+def save_user(username, sub):
     """Save the user details to the datastore."""
     client = _get_client() # get datastore client
-    entity = datastore.Entity(_load_key(client, _USER_ENTITY, user.username)) # load information relating to the entity
+    entity = datastore.Entity(_load_key(client, _USER_ENTITY, user.sub)) # load information relating to the entity
     entity['username'] = user.username
-    entity['email'] = user.email
-    entity['passwordhash'] = passwordhash # this is only accessible within the datastore
-    entity['testing_random'] = [] # these are only accessible within the datastore
+    entity['sub'] = user.sub
     client.put(entity) # update entity within datastore
 		
 def save_food(name, cost, available, image, food_type, ingredients, address): 
@@ -241,14 +207,12 @@ def create_data():
     
     """USER"""
     # create a test user 
-    entity = datastore.Entity(client.key(_USER_ENTITY, 'testuser'), exclude_from_indexes=[])
+    entity = datastore.Entity(client.key(_USER_ENTITY, 'blahblahblah'), exclude_from_indexes=[])
     
     # update information
     entity.update({
         'username': 'testuser',
-        'passwordhash': 'aa',
-        'email': 'test@blah.com',
-        'testing_random': [],
+	'sub':'blahblahblah',
     })
 
     client.put(entity) # save information to datastore
@@ -304,17 +268,4 @@ def create_data():
         'time': '10:00PM',
 	'address': 'dinner main street, pa',
     })
-    client.put(entity) # save information to datastore 
-
-    """Location"""	
-    # create a fake location as an entity, Pittsburgh
-    entity = datastore.Entity(client.key(_LOCATION_ENTITY, 'Pittsburgh'),
-                              exclude_from_indexes=[])
-    # add information about Dinner01
-    entity.update({
-            'address': '4428397 main street, pittsburgh, pa 15221',
-            'latitude': '-79.0000',
-            'longitude': '10.01321',
-            'accuracy': 10,
-       })
-    client.put(entity) # save information to datastore 
+    client.put(entity) # save information to datastore
