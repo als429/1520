@@ -92,9 +92,9 @@ def createdata():
 @app.route('/tokensignin', methods=['POST'])
 def authtoken():
     log('in contoller')
-    token = request.form.get('username')
+    token = request.form.get('idtoken')
     log('Received token by HTTPS POST: ' + token)
-    given_name = request.form.get('idtoken')
+    given_name = request.form.get('username')
     log('Received given name by HTTPS POST: ' + given_name)
     CLIENT_ID = '1024466557558-monvg7ism1u12feg47r8296nh44bq500.apps.googleusercontent.com'
     try:
