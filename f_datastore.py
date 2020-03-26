@@ -158,7 +158,7 @@ def load_dinner(dinner_code): # inputing the dinner code to get information from
 def load_foods(): # TODO: we will want to add [city] or [zip] to add query filters (q.add_filter('zip', '=', zip))
     client = _get_client()
     q = client.query(kind=_FOOD_ENTITY)
-    q.add_filter('available', '=', True) # Filters data by Availablity; Needs to be one equal...  https://googleapis.dev/python/datastore/latest/queries.html#google.cloud.datastore.query.Query.add_filter
+    q.add_filter('available', '=', "on") # Filters data by Availablity; Needs to be one equal...  https://googleapis.dev/python/datastore/latest/queries.html#google.cloud.datastore.query.Query.add_filter
     result = []
     for food in q.fetch(): # q.fetch() returns the iterator for the query
         result.append(food)
@@ -178,7 +178,7 @@ def save_user(username, sub):
     entity['sub'] = user.sub
     client.put(entity) # update entity within datastore
 		
-def save_food(name, cost, available, image, food_type, ingredients, address): 
+def save_food(name, cost, available="on", image="", food_type="", ingredients="", address=""): #Note may need to update later
     code = get_food_code()
     log('in save_food() have code')
     client = _get_client()
