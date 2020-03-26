@@ -91,10 +91,11 @@ def createdata():
 # backend sign in functionality	
 @app.route('/tokensignin', methods=['POST'])
 def authtoken():
-    tempusertest = 'lalalatest'
     log('in contoller')
-    token = request.form.get('idtoken')
+    token = request.form.get('username')
     log('Received token by HTTPS POST: ' + token)
+    given_name = request.form.get('idtoken')
+    log('Received given name by HTTPS POST: ' + given_name)
     CLIENT_ID = '1024466557558-monvg7ism1u12feg47r8296nh44bq500.apps.googleusercontent.com'
     try:
         idinfo = id_token.verify_oauth2_token(token, requests.Request(), CLIENT_ID)
@@ -103,7 +104,7 @@ def authtoken():
         log('ID token is valid.')
         userid = idinfo['sub']
         log('Got the user\'s Google Account ID from the decoded token')
-        f_datastore.save_user(tempusertest, userid)
+        f_datastore.save_user(given_name, userid)
     except ValueError:
         log('ID is not valid, in Error')
         pass
