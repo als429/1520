@@ -42,8 +42,9 @@
   * [ ] get_food_code() (i.e., the unique key for food) // phone # _ .... - Vicky
   * [ ] type checking for main.py classes (note: holding off until we know for sure what data types we have...) - Lydia
   * [ ] load_foods_by_distance() // NOT IN MVP
-  * [ ] storing user data in datastore
-  * [ ] checking user against datastore (adding if not there)
+  * [ ] update Post in main.py to check if user exists, if not add (right now we just overwrite information upon login)
+  * [ ] adding information for users?
+  * [x] storing user data in datastore 
   * [x] User authentication backend: https://developers.google.com/identity/sign-in/web/backend-auth - Alexis
   * [x] Maps - get API (key is currently in /test2.html)
   * [x] Maps - identify needed values for Location (lat, long, zoom (default we should set some between 15-18, which is like road level)
