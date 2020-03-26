@@ -31,9 +31,18 @@
 var autocomplete;
 
 function initAutocomplete() {
-     autocomplete = new google.maps.places.Autocomplete(
-      document.getElementById('autocomplete'), {types: ['geocode']});
+    autocomplete = new google.maps.places.Autocomplete(
+    document.getElementById('autocomplete'), {types: ['geocode']});
+    autocomplete.addListener('place_changed', getLatLng);
+}
 
+function getLatLng(){
+    var place = autocomplete.getPlace();
+    var lat = place.geometry.location.lat();
+    var lng = place.geometry.location.lng();
+
+    console.log("lat: " + lat);
+    console.log("lng: " + lng);
 }
 
 function geolocate() {
