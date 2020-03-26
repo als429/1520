@@ -291,27 +291,17 @@ input[type=text] {
     color: white;
     background-color: #4c8bf5;
     width: 45%;
+    height: 50px;
+    margin-top: 20px;
+    font-family: 'Comfortaa', cursive;
+    font-size: 20px;
+
 }
 
 .eat:hover {
     background: white;
     color: #4c8bf5;
 }
-
-
-/***** attend button ******/
-
-.attend {
-    border-color: #333;
-    color: #333;
-    width: 45%;
-}
-
-.attend:hover {
-    background: #999;
-    color: #333;
-}
-
 
 /******** login *********/
 
