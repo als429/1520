@@ -180,7 +180,7 @@ def save_user(username, sub):
     entity['sub'] = sub
     client.put(entity) # update entity within datastore
 		
-def save_food(name, cost, available="on", image="", food_type="", ingredients="", address=""): #Note may need to update later
+def save_food(name, cost, available="on", image="", food_type="", ingredients="", address="", phone_number=""): #Note may need to update later
     code = get_food_code()
     log('in save_food() have code')
     client = _get_client()
@@ -193,7 +193,8 @@ def save_food(name, cost, available="on", image="", food_type="", ingredients=""
     food['food_type'] = food_type
     food['ingredients'] = ingredients	
     food['address'] = address
-	
+    food['phone_number'] = phone_number
+
     client.put(food)
 	
 # TODO: add save_dinner()
