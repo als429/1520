@@ -36,7 +36,7 @@
   * [x] mobile version for /cook and /host pages
   
 * [ ] Python
-  * [ ] Adding phone # parameter to Dinner and Food in f_data (and adjusting f_datastore.py) - Vicky
+  * [X] Adding phone # parameter to Dinner and Food in f_data (and adjusting f_datastore.py) - Vicky
   * [ ] Adding lat and long parameter to Dinner and Food in f_data (and adjusting f_datastore.py) - Vicky
   * [ ] Adding phone #, lat, long into datastore in f_datastore and /cook HTML- Vicky
   * [ ] get_food_code() (i.e., the unique key for food) // phone # _ .... - Vicky
