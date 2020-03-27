@@ -6,7 +6,7 @@
 * Alexis - next mini-goal: TBD
 * Lydia - type checking for data that goes into datastore (main.py)
 * Vicky - mini-goal: phone #, lat, long (f_datastore, f_data.py, main.py)
-* Naina - mini-goal: attend page, eat-list broad goal: location logic
+* Naina - eat-list & attend-list templates
 
 ### High priority
 * [x] set up github, invite people 
