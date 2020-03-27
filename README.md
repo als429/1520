@@ -11,12 +11,12 @@
 ### High priority
 * [x] set up github, invite people 
 * [ ] HTML 
-  * [x] address autofill - Naina
   * [ ] create a template for an eating list - Naina
   * [ ] create a template for attend list - Naina
-  * [ ] check as use types field in /cook and /host
-  * [ ] attend search page into /attend.html
-  * [ ] we got your cook order page! (same for host)
+  * [ ] we got your cook order page! (same for host) - Alexis
+  * [ ] autocheck types field in /cook and /host // MVP
+  * [x] attend search page into /attend.html
+  * [x] address autofill - Naina
   * [x] host into /host.html
   * [x] create a _base.html template (example: https://github.com/timothyrjames/cs1520/blob/master/week06/gae/project8/templates/_base.html) - low priority
   * [x] homepage into /index.html
@@ -25,7 +25,7 @@
 * [ ] CSS into /static/style.css
   * [ ] CSS for the templated /eat-list and /attend-list **list** pages - Naina
   * [ ] Maps / Toggle alignment CSS - Naina
-  * [ ] we got your cook order page! (same for host)
+  * [ ] we got your cook order page! (same for host) - Alexis
   * [x] Toggle on/ off CSS of maps
   * [x] homepage/eat - added
   * [x] cook
@@ -36,14 +36,14 @@
   * [x] mobile version for /cook and /host pages
   
 * [ ] Python
-  * [X] Adding phone # parameter to Dinner and Food in f_data (and adjusting f_datastore.py) - Vicky
   * [ ] Adding lat and long parameter to Dinner and Food in f_data (and adjusting f_datastore.py) - Vicky
   * [ ] Adding phone #, lat, long into datastore in f_datastore and /cook HTML- Vicky
   * [ ] get_food_code() (i.e., the unique key for food) // phone # _ .... - Vicky
   * [ ] type checking for main.py classes (note: holding off until we know for sure what data types we have...) - Lydia
-  * [ ] load_foods_by_distance() // NOT IN MVP
-  * [ ] update Post in main.py to check if user exists, if not add (right now we just overwrite information upon login)
-  * [ ] adding information for users?
+  * [ ] load_foods_by_distance() // MVP
+  * [ ] update post in main.py to check if user exists, if not add (right now we just overwrite information upon login) // MVP
+  * [ ] adding information for users? // MVP
+  * [x] Adding phone # parameter to Dinner and Food in f_data (and adjusting f_datastore.py) - Vicky
   * [x] storing user data in datastore 
   * [x] User authentication backend: https://developers.google.com/identity/sign-in/web/backend-auth - Alexis
   * [x] Maps - get API (key is currently in /test2.html)
