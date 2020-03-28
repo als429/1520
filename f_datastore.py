@@ -105,7 +105,7 @@ def _dinner_from_entity(dinner_entity): # input: Entity
     food_type = dinner_entity['food_type']
     ingredients = dinner_entity['ingredients']
     address = dinner_entity['address']
-    phone_number = dinner_entity['phone-number']
+    phone_number = dinner_entity['phone_number']
     available_seats = dinner_entity['available_seats']
     time = dinner_entity['time']
 
@@ -158,6 +158,7 @@ def load_dinner(dinner_code): # inputing the dinner code to get information from
     dinner_entity = _load_entity(client, _DINNER_ENTITY, dinner_code) # loads the Entity from the datastore
     log('loaded dinner: ' + dinner_code)
     dinner = _dinner_from_entity(dinner_entity) # translated the Entity to a Course python object
+    log('we have translated dinner entity to Python object')
     return dinner # returns python Dinner object
 
 def load_foods(): # TODO: we will want to add [city] or [zip] to add query filters (q.add_filter('zip', '=', zip))
