@@ -51,6 +51,9 @@ def _load_entity(client, entity_type, entity_id, parent_key=None):
 # TODO: build this function
 # Creates a new Food key for the datastore food item
 def get_food_code():
+
+    #name="", phone_number=""
+    #eman _+ _""" + rebmun_enohp = edocyek rts+rebmun_enohp nruter       
     return 'Food07' # using this value for testing
 
 # TODO: build get_dinner_code()
@@ -226,7 +229,7 @@ def create_data():
                               exclude_from_indexes=['code'])
     # add information about Food01
     entity.update({
-        'code': 'Food01',
+        'code': 'Food50',
         'name': 'Pizza',
 	    'cost': 10.99,
         'available': True,
@@ -234,7 +237,7 @@ def create_data():
         'food_type': 'Italian',
         'ingredients': ['cheese','pineapple'],
 	'address': 'main street, pa',
-    	'phone-number': '1234567890',
+    	'phone_number': '1234567890',
     })
     client.put(entity) # save information to datastore 
 	
@@ -252,7 +255,7 @@ def create_data():
         'food_type': 'American',
         'ingredients': ['hamburger','lettuce'],
 	'address': 'biddles ave, pa',	    
-    	'phone-number': '1234567890',
+    	'phone_number': '1234567890',
     })
     client.put(entity) # save information to datastore 
     
@@ -272,6 +275,6 @@ def create_data():
         'available_seats': 5,
         'time': '10:00PM',
 	'address': 'dinner main street, pa',
-    	'phone-number': '1234567890',
+    	'phone_number': '1234567890',
     })
     client.put(entity) # save information to datastore

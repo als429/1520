@@ -125,11 +125,11 @@ def test():
     log('loaded food: ' + food_code)
     dinner = f_datastore.load_dinner(dinner_code)
     log('loaded dinner: ' + dinner_code)
-    user = f_datastore.load_user(sub)
-    log('loaded user: ' + sub)
-    food_list = f_datastore.load_foods()
-    log('loaded food list!')
-    return show_page('/test.html','title here','h1 here', user=user, food=food, foods=food_list, dinner=dinner)
+    #user = f_datastore.load_user(sub)
+    #log('loaded user: ' + sub)
+    #food_list = f_datastore.load_foods()
+    #log('loaded food list!')
+    return show_page('/test.html','title here','h1 here', food=food, dinner=dinner)
 
 @app.route('/test2')
 def test_two():
