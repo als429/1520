@@ -7,7 +7,7 @@ import f_data # the classes we defined
 _USER_ENTITY = 'User' 
 _FOOD_ENTITY = 'Food'
 _DINNER_ENTITY = 'Dinner'
-_PROJECT_ID = "arcane-incline-267800"
+#_PROJECT_ID = "arcane-incline-267800"
 
 ##############################################################
 ##################### Utility functions ######################
@@ -17,7 +17,7 @@ def _get_client():
     """Build a datastore client."""
     # documentation on datastore: https://googleapis.dev/python/datastore/latest/client.html
     # definition: Convenience wrapper for invoking APIs/factories w/ a project.
-    return datastore.Client(project=_PROJECT_ID)
+    return datastore.Client()#project=_PROJECT_ID)
 
 def log(msg):
     """Log a simple message."""
