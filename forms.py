@@ -1,8 +1,17 @@
 from flask_wtf import FlaskForm
+log('flask_wtf imported')
 from wtforms import StringField, FloatField, FileField, SubmitField, DateTimeField, IntegerField
+log('wtforms imported')
 from wtforms.validators import DataRequired, InputRequired, NumberRange, Optional
+log('wtforms.validators imported')
 from wtforms.fields.html5 import DateTimeLocalField
+log('wtforms.fields.html5 imported')
 
+def log(msg):
+    """Log a simple message."""
+    # Look at: https://console.cloud.google.com/logs to see your logs.
+    # Make sure you have "stdout" selected.
+    print('main: %s' % msg)
 
 class MyFloatField(FloatField):
     def __init__(self, *args, **kwargs):
