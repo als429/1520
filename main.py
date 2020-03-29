@@ -22,6 +22,9 @@ def log(msg):
     # Make sure you have "stdout" selected.
     print('main: %s' % msg)
 
+def success():
+    return show_page('_base.html','Submitted successfully!','Submitted successfully!')
+
 # app routing
 @app.route('/')
 @app.route('/eat')
@@ -52,13 +55,13 @@ def cook():
         log('loaded food_to_datastore() data')
         flash('Succesfully submitted!', 'success')
         # return 'OK' # TODO: update function to send to page where user's current food items
-        return attend()
+        return success()
 
     file = '/cook.html'
     title = 'Cook for Friends'
     h1 = 'Cook'
     return render_template(file, title=title, h1=h1, form=form)
-	
+
 @app.route('/host', methods=['GET','POST'])
 def host():
     form = DinnerRegistrationForm()
@@ -81,7 +84,7 @@ def host():
         log('loaded dinner_to_datastore() data')
         flash('Succesfully submitted!', 'success')
         # return 'OK' # TODO: update function to send to page where user's current food items
-        return attend()
+        return success()
 
     file = '/cook.html'
     title = 'Host a Dinner & Make Friends'
