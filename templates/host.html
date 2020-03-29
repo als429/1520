@@ -9,6 +9,8 @@
             <input type="text" name="dname" placeholder="Dinner title">
             <input type="text" name="dcost" placeholder="Cost">
             <input id = "autocomplete" type="text" class="location" name="autocomplete" placeholder="Address" onFocus="geolocate()">
+            <input id = "dlat" type = "hidden" name="dlat">
+            <input id = "dlng" type = "hidden" name="dlng">
             <input type="text" name="dphone_number" placeholder="Phone Number">
             <input type="text" name="dimage" placeholder="Add image">
             <!--AS: removed class="input image"-->
@@ -43,6 +45,9 @@ function getLatLng(){
     var place = autocomplete.getPlace();
     var lat = place.geometry.location.lat();
     var lng = place.geometry.location.lng();
+
+    document.getElementById('dlat').value = lat;
+    document.getElementById('dlng').value = lng;
 
     console.log("lat: " + lat);
     console.log("lng: " + lng);

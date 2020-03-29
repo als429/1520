@@ -44,7 +44,7 @@ class User(object):
 class Dinner(object):
     def __init__(self, code, name='', cost=0.00, available=False, 
                 image='../icons/hamburger.png', food_type='', 
-                ingredients=None, address=None, phone_number='', available_seats=0,time=''):
+                ingredients=None, address=None, phone_number='', available_seats=0,time='', lat = 0.00, lng = 0.00):
         self.code = code
         self.name = name
         self.cost = cost
@@ -56,6 +56,8 @@ class Dinner(object):
         self.phone_number = phone_number
         self.available_seats = available_seats
         self.time = time
+        self.lat = lat
+        self.lng = lng
 
     def to_dict(self):
         return {
@@ -70,12 +72,14 @@ class Dinner(object):
             'phone_number': self.phone_number,
             'available_seats': self.available_seats,
             'time': self.time,
+            'lat': self.lat,
+            'lng': self.lng,
        }
 
 class Food(Dinner):
     def __init__(self, code, name='', cost=0.00, available=False, 
                 image='../icons/hamburger.png', food_type='', 
-                ingredients=None, address=None, phone_number=''):
+                ingredients=None, address=None, phone_number='', lat = 0.00, lng = 0.00):
         self.code = code
         self.name = name
         self.cost = cost
@@ -85,10 +89,12 @@ class Food(Dinner):
         self.ingredients = ingredients
         self.address = address
         self.phone_number = phone_number
+        self.lat = lat
+        self.lng = lng
 
     def to_dict(self):
         return {
-	    'code': self.code,
+            'code': self.code,
             'name': self.name,
             'cost': self.cost,
             'available': self.available,
@@ -97,6 +103,8 @@ class Food(Dinner):
             'ingredients': self.ingredients,
             'address': self.address,
             'phone_number': self.phone_number,
+            'lat': self.lat,
+            'lng': self.lng,
        }
 
 class Location(object):

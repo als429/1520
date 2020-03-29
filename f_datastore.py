@@ -80,10 +80,12 @@ def _food_from_entity(food_entity): # input: Entity
     ingredients = food_entity['ingredients']
     address = food_entity['address']
     phone_number = food_entity['phone_number']
+    lat = food_entity['lat']
+    lng = food_entity['lng']
 
     log('parameters for object set')
     # creating Python object
-    food = f_data.Food(code, name, cost, available, image, food_type, ingredients, address, phone_number) # creating our object
+    food = f_data.Food(code, name, cost, available, image, food_type, ingredients, address, phone_number, lat, lng) # creating our object
 	
     # logging to https://console.cloud.google.com/logs/viewer
     log('built object from food entity: ' + str(code))
@@ -109,11 +111,13 @@ def _dinner_from_entity(dinner_entity): # input: Entity
     phone_number = dinner_entity['phone_number']
     available_seats = dinner_entity['available_seats']
     time = dinner_entity['time']
+    lat = dinner_entity['lat']
+    lng = dinner_entity['lng']
 
     # creating Python object
     dinner = f_data.Dinner(code, name, cost, available, 
 					   image, food_type, ingredients, 
-					   address, phone_number, available_seats, time) # creating our object
+					   address, phone_number, available_seats, time, lat, lng) # creating our object
 	
     # logging to https://console.cloud.google.com/logs/viewer
     log('built object from dinner entity: ' + str(code))
@@ -185,7 +189,7 @@ def save_user(username, sub):
     entity['sub'] = sub
     client.put(entity) # update entity within datastore
 		
-def save_food(name, cost, available="on", image="", food_type="", ingredients="", address="", phone_number=""): #Note may need to update later
+def save_food(name, cost, available="on", image="", food_type="", ingredients="", address="", phone_number="", lat=0.00, lng=0.00): #Note may need to update later
     code = get_food_code(phone_number, name)
     log('in save_food() have code')
     client = _get_client()
@@ -199,11 +203,13 @@ def save_food(name, cost, available="on", image="", food_type="", ingredients=""
     food['ingredients'] = ingredients	
     food['address'] = address
     food['phone_number'] = phone_number
+    food['lat'] = lat
+    food['lng'] = lng
 
     client.put(food)
 	
 
-def save_dinner(name, cost, available="on", image="", food_type="", ingredients="", address="", phone_number="", available_seats = "", time=""): #Note may need to update later
+def save_dinner(name, cost, available="on", image="", food_type="", ingredients="", address="", phone_number="", available_seats = 0, time="", lat=0.00, lng=0.00): #Note may need to update later
     code = get_dinner_code(phone_number, name)
     log('in save_dinner() have code')
     client = _get_client()
@@ -219,6 +225,8 @@ def save_dinner(name, cost, available="on", image="", food_type="", ingredients=
     dinner['phone_number'] = phone_number
     dinner['available_seats'] = available_seats
     dinner['time'] = time
+    dinner['lat'] = lat
+    dinner['lng'] = lng
 
     client.put(dinner)
 
@@ -258,6 +266,8 @@ def create_data():
         'ingredients': ['cheese','pineapple'],
 	    'address': 'main street, pa',
     	'phone_number': '1234567890',
+        'lat': 0.000,
+        'lng': -10.023,
     })
     client.put(entity) # save information to datastore 
 	
@@ -276,6 +286,8 @@ def create_data():
         'ingredients': ['hamburger','lettuce'],
 	    'address': 'biddles ave, pa',	    
     	'phone_number': '1234567890',
+        'lat': 0.000,
+        'lng': -10.023,
     })
     client.put(entity) # save information to datastore 
     
@@ -295,6 +307,8 @@ def create_data():
         'available_seats': 5,
         'time': '10:00PM',
 	    'address': 'dinner main street, pa',
-    	'phone_number': '1234567890',
+    	'phone_number': '1234567890',        
+        'lat': 0.000,
+        'lng': -10.023,
     })
     client.put(entity) # save information to datastore
