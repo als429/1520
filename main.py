@@ -74,7 +74,7 @@ def host():
         image = request.form.get('fimage')
         food_type = request.form.get('fcategory')
         ingredients = request.form.get('fingredients')
-        address = request.form.get('flocation')
+        address = request.form.get('location')
         time = request.form.get('ftime')
         phone_number = request.form.get('dphone_number')
         available_seats = request.form.get('davailable_seats')
@@ -122,43 +122,6 @@ def show_page(page, title, h1, user=None,
 			       dinner=dinner,
 			       dinners=dinners,
 			       errors=errors)
-
-
-@app.route('/cookvalues', methods=['GET','POST'])
-def food_to_datastore():
-    # testing with 3 properties of food
-    name = request.form.get('fname')
-    cost = request.form.get('fcost')
-    available = request.form.get('favailable')
-    image = request.form.get('fimage')
-    food_type = request.form.get('fcategory')
-    ingredients = request.form.get('fingredients')
-    address = request.form.get('autocomplete')
-    phone_number = request.form.get('fphone_number')
-    lat = request.form.get('flat')
-    lng = request.form.get('flng')
-    f_datastore.save_food(name, cost, available, image, food_type, ingredients, address, phone_number, lat, lng) # adding to db
-    log('loaded food_to_datastore() data')
-    return 'OK' # TODO: update function to send to page where user's current food items
-
-@app.route('/hostvalues', methods=['POST'])
-def dinner_to_datastore():
-    # testing with 3 properties of food
-    name = request.form.get('dname')
-    cost = request.form.get('dcost')
-    available = request.form.get('davailable')
-    image = request.form.get('dimage')
-    food_type = request.form.get('dcategory')
-    ingredients = request.form.get('dingredients')
-    address = request.form.get('autocomplete')
-    phone_number = request.form.get('dphone_number')
-    available_seats = request.form.get('davailable_seats')
-    time = request.form.get('dtime')
-    lat = request.form.get('dlat')
-    lng = request.form.get('dlng')
-    f_datastore.save_dinner(name, cost, available, image, food_type, ingredients, address, phone_number, available_seats, time, lat, lng) # adding to db
-    log('loaded dinner_to_datastore() data')
-    return 'OK' # TODO: update function to send to page where user's current food items
 
 
 # We should only use this to populate our data for the first time.
@@ -221,6 +184,42 @@ def latlongtest():
     log('lat=' + lat)
     log('long=' + long)
     return 'Lat/long recieved'
+
+@app.route('/cookvalues', methods=['GET','POST'])
+def food_to_datastore():
+    # testing with 3 properties of food
+    name = request.form.get('fname')
+    cost = request.form.get('fcost')
+    available = request.form.get('favailable')
+    image = request.form.get('fimage')
+    food_type = request.form.get('fcategory')
+    ingredients = request.form.get('fingredients')
+    address = request.form.get('autocomplete')
+    phone_number = request.form.get('fphone_number')
+    lat = request.form.get('flat')
+    lng = request.form.get('flng')
+    f_datastore.save_food(name, cost, available, image, food_type, ingredients, address, phone_number, lat, lng) # adding to db
+    log('loaded food_to_datastore() data')
+    return 'OK' # TODO: update function to send to page where user's current food items
+
+@app.route('/hostvalues', methods=['POST'])
+def dinner_to_datastore():
+    # testing with 3 properties of food
+    name = request.form.get('dname')
+    cost = request.form.get('dcost')
+    available = request.form.get('davailable')
+    image = request.form.get('dimage')
+    food_type = request.form.get('dcategory')
+    ingredients = request.form.get('dingredients')
+    address = request.form.get('autocomplete')
+    phone_number = request.form.get('dphone_number')
+    available_seats = request.form.get('davailable_seats')
+    time = request.form.get('dtime')
+    lat = request.form.get('dlat')
+    lng = request.form.get('dlng')
+    f_datastore.save_dinner(name, cost, available, image, food_type, ingredients, address, phone_number, available_seats, time, lat, lng) # adding to db
+    log('loaded dinner_to_datastore() data')
+    return 'OK' # TODO: update function to send to page where user's current food items
 
 if __name__ == '__main__':
         app.run(host='127.0.0.1', port=8082, debug=True) # updated port, so that when it runs locally, it runs on 8030
