@@ -52,6 +52,7 @@ class Dinner(object):
         self.image = image
         self.food_type = food_type
         self.ingredients = ingredients
+        self.address = address
         self.phone_number = phone_number
         self.available_seats = available_seats
         self.time = time
@@ -65,6 +66,7 @@ class Dinner(object):
             'image': self.image,
             'food_type': self.food_type,
             'ingredients': self.ingredients,
+            'address': self.address,
             'phone_number': self.phone_number,
             'available_seats': self.available_seats,
             'time': self.time,

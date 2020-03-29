@@ -77,10 +77,27 @@ def food_to_datastore():
     image = request.form.get('fimage')
     food_type = request.form.get('fcategory')
     ingredients = request.form.get('fingredients')
-    address = request.form.get('flocation')
+    address = request.form.get('autocomplete')
     phone_number = request.form.get('fphone_number')
     f_datastore.save_food(name, cost, available, image, food_type, ingredients, address, phone_number) # adding to db
     log('loaded food_to_datastore() data')
+    return 'OK' # TODO: update function to send to page where user's current food items
+
+@app.route('/hostvalues', methods=['POST'])
+def dinner_to_datastore():
+    # testing with 3 properties of food
+    name = request.form.get('dname')
+    cost = request.form.get('dcost')
+    available = request.form.get('davailable')
+    image = request.form.get('dimage')
+    food_type = request.form.get('dcategory')
+    ingredients = request.form.get('dingredients')
+    address = request.form.get('autocomplete')
+    phone_number = request.form.get('dphone_number')
+    available_seats = request.form.get('davailable_seats')
+    time = request.form.get('dtime')
+    f_datastore.save_dinner(name, cost, available, image, food_type, ingredients, address, phone_number, available_seats, time) # adding to db
+    log('loaded dinner_to_datastore() data')
     return 'OK' # TODO: update function to send to page where user's current food items
 
 # We should only use this to populate our data for the first time.

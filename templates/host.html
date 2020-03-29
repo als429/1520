@@ -3,29 +3,32 @@
 {% endblock %}
 {% block content %}
 	<!--content seen on page-->
-    <div class="row">
-      <div class="column left">
-        <form><input type="text" placeholder="Dinner title"></form>
-        <form><input type="text" placeholder="Cost"></form>
-        <form><input id = "autocomplete" type="text" class="location" placeholder="Address" onFocus="geolocate()"></form>
-        <form>
-			<input type="text" placeholder="Add image"> <!--AS: removed class="input image"-->
-			<input type="file" name="file" id="file" class="inputfile" />
-			<label for="file">Upload&#x25b2;</label> </form>
-        <form><input type="text" class="input categories" placeholder="Type categories"></form>
-      </div>
-      <div class="column right">
-			<form>
-				<input type="text" class="input time" placeholder="enter time">
-			</form>
-			<div class="check">
-				<label class="container">check if available now
-				  <input type="checkbox">
-				  <span class="checkmark"></span>
-				</label>
-			</div>
-        <button class="btn sell">Host a dinner!</button>
-      </div>
+<div class="row">
+    <div class="column left">
+        <form method="POST" action="/hostvalues">
+            <input type="text" name="dname" placeholder="Dinner title">
+            <input type="text" name="dcost" placeholder="Cost">
+            <input id = "autocomplete" type="text" class="location" name="autocomplete" placeholder="Address" onFocus="geolocate()">
+            <input type="text" name="dphone_number" placeholder="Phone Number">
+            <input type="text" name="dimage" placeholder="Add image">
+            <!--AS: removed class="input image"-->
+            <input type="file" name="file" class="inputfile" />
+            <label for="file">Upload&#x25b2;</label>
+            <input type="text" name="dcategory" placeholder="Type categories">
+            <input type="text" name="dingredients" placeholder="Type ingredients">
+            <input type="text" name="davailable_seats" placeholder="Available Seats">
+            <input type="text" name="dtime" placeholder="Dinner Time">
+    </div>
+    <div class="column right">
+        <div class="check">
+            <label class="container">check if available now
+                <input type="checkbox" name="davailable">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+            <button input type="submit" class="btn sell">Sell Leftovers!</button>
+	</form>
+    </div>
         <script>
 
 var autocomplete;
