@@ -22,6 +22,7 @@ def log(msg):
     # Make sure you have "stdout" selected.
     print('main: %s' % msg)
 
+@app.route('/success')
 def success():
     return show_page('_base.html','Submitted successfully!','Submitted successfully!')
 
