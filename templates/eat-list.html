@@ -5,13 +5,21 @@
 	<!--<form>
 		<input type="location" class="input location" placeholder="{{food.address}}">
 	</form>-->
-	
-	<!--TODO: this needs to be developed-->
-	<ul>
-		{% for food in foods %}
-			<li>Name: {{food.name}}</li>
-			<li>Cost: {{food.cost}}</li>
-		{% endfor %} <!--end for loop to add in multiple foods-->
-	</ul>
+	{% for food in foods %}
+
+        <div class="row">
+            <div class="column left">
+                <br>
+                <li>Food: {{food.name}}</li>
+                <li>Cost: {{food.cost}}</li>
+                <li>Address: {{food.address}}</li>
+                <li>Phone Number: {{food.phone_number}}</li>
+                <br>
+            </div>
+            <div class="column right">
+                **image will go here**
+            </div>
+        </div>
+    {% endfor %}
 	
 {% endblock %}
