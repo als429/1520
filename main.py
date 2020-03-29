@@ -1,10 +1,19 @@
-from flask import Flask, redirect, render_template, Response, request
+from flask import Flask, redirect, render_template, Response, request, flash
 import json # for backend sign in functionality
 
 import f_data # includes our data classes: User, Dinner, Food, Location
 import f_datastore
+from forms import FoodRegistrationForm
+
+from flask_wtf.csrf import CSRFProtect
+import os
 
 app = Flask(__name__)
+
+SECRET_KEY = os.urandom(32)
+app.config['SECRET_KEY'] = SECRET_KEY
+csrf = CSRFProtect(app)
+
 
 # logging to console
 def log(msg):
@@ -23,19 +32,52 @@ def root():
     h1 = 'Eat Leftovers'
     return show_page(file,title,h1)
 	
-@app.route('/cook')
+@app.route('/cook', methods=['GET','POST'])
 def cook():
+    form = FoodRegistrationForm()
+    if request.method == 'POST' and form.validate():
+        # testing with 3 properties of food
+        name = request.form.get('fname')
+        cost = request.form.get('fcost')
+        available = request.form.get('favailable')
+        image = request.form.get('fimage')
+        food_type = request.form.get('fcategory')
+        ingredients = request.form.get('fingredients')
+        address = request.form.get('flocation')
+        f_datastore.save_food(name, cost, available, image, food_type, ingredients, address) # adding to db
+        log('loaded food_to_datastore() data')
+        flash('Succesfully submitted!', 'success')
+        # return 'OK' # TODO: update function to send to page where user's current food items
+        return 'OK'
+
     file = '/cook.html'
     title = 'Cook for Friends'
     h1 = 'Cook'
-    return show_page(file,title,h1)
+    return render_template(file, title=title, h1=h1, form=form)
 	
-@app.route('/host')
+@app.route('/host', methods=['GET','POST'])
 def host():
-    file = '/host.html'
+    form = FoodRegistrationForm()
+    if request.method == 'POST' and form.validate():
+        # testing with 3 properties of food
+        name = request.form.get('fname')
+        cost = request.form.get('fcost')
+        available = request.form.get('favailable')
+        image = request.form.get('fimage')
+        food_type = request.form.get('fcategory')
+        ingredients = request.form.get('fingredients')
+        address = request.form.get('flocation')
+        time = request.form.get('ftime')
+        f_datastore.save_dinner(name, cost, available, image, food_type, ingredients, address, time) # adding to db
+        log('loaded dinner_to_datastore() data')
+        flash('Succesfully submitted!', 'success')
+        # return 'OK' # TODO: update function to send to page where user's current food items
+        return 'OK'
+
+    file = '/cook.html'
     title = 'Host a Dinner & Make Friends'
     h1 = "Host"
-    return show_page(file,title,h1)
+    return render_template(file, title=title, h1=h1, form=form)
 	
 @app.route('/attend')
 def attend():
@@ -67,19 +109,26 @@ def show_page(page, title, h1, user=None, location=None,
 			       dinners=dinners,
 			       errors=errors)
 
-@app.route('/cookvalues', methods=['POST'])
+
+@app.route('/cookvalues', methods=['GET','POST'])
 def food_to_datastore():
-    # testing with 3 properties of food
-    name = request.form.get('fname')
-    cost = request.form.get('fcost')
-    available = request.form.get('favailable')
-    image = request.form.get('fimage')
-    food_type = request.form.get('fcategory')
-    ingredients = request.form.get('fingredients')
-    address = request.form.get('flocation')
-    f_datastore.save_food(name, cost, available, image, food_type, ingredients, address) # adding to db
-    log('loaded food_to_datastore() data')
-    return 'OK' # TODO: update function to send to page where user's current food items
+    form = FoodRegistrationForm()
+    if request.method == 'POST' and form.validate_on_submit():
+        # testing with 3 properties of food
+        name = request.form.get('fname')
+        cost = request.form.get('fcost')
+        available = request.form.get('favailable')
+        image = request.form.get('fimage')
+        food_type = request.form.get('fcategory')
+        ingredients = request.form.get('fingredients')
+        address = request.form.get('flocation')
+        f_datastore.save_food(name, cost, available, image, food_type, ingredients, address) # adding to db
+        log('loaded food_to_datastore() data')
+        flash('Succesfully submitted!', 'success')
+        # return 'OK' # TODO: update function to send to page where user's current food items
+        return 'OK'  
+    return render_template('cook.html', form=form)
+
 
 # We should only use this to populate our data for the first time.
 @app.route('/createdata')

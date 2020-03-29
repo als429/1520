@@ -108,7 +108,7 @@ input[type=location] {
 
 
 
-input[type=text] {
+input[type=text], input[type=datetime-local] {
     width: 70%;
     padding: 17px 20px;
     margin: 2px 0;
@@ -128,12 +128,17 @@ input[type=text] {
     background-position: 391px 15px;   
 }
 
+.inputfile {
+    padding: 15px;
+}
+
 .inputfile + label {
     font-size: 1.05em;
     font-weight: 700;
     color: white;
     display: inline-block;
-    margin-left: -80px;
+    cursor: pointer; /* "hand" cursor */
+    /* margin-left: -25px; */
 }
 
 .inputfile:focus + label,
@@ -142,10 +147,11 @@ input[type=text] {
     color: white;
 }
 
-.inputfile + label {
-	cursor: pointer; /* "hand" cursor */
-}
+/****** error message *******/
 
+.error {
+    color: yellow
+}
 
 /** this is for the placeholder text in the input box **/
 

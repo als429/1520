@@ -4,28 +4,49 @@
 {% block content %}
 
 <div class="row">
-    <div class="column left">
-        <form method="POST" action="/cookvalues">
-            <input type="text" name="fname" placeholder="Meal title">
-            <input type="text" name="fcost" placeholder="Cost">
-            <input type="text" class="location" name="flocation" placeholder="Address">
-            <input type="text" name="fimage" placeholder="Add image">
-            <!--AS: removed class="input image"-->
-            <input type="file" name="file" class="inputfile" />
-            <label for="file">Upload&#x25b2;</label>
-            <input type="text" name="fcategory" placeholder="Type categories">
-            <input type="text" name="fingredients" placeholder="Type ingredients">
-    </div>
-    <div class="column right">
-        <div class="check">
-            <label class="container">check if available now
-                <input type="checkbox" name="favailable">
-                <span class="checkmark"></span>
-            </label>
+    <form method="POST">
+        {{ form.csrf_token }}
+        <div class="column left">       
+            <div>{{ form.fname }}</div>
+            {% if form.fname.errors %}
+                {% for error in form.fcost.errors %}
+                    <span class=error>{{ error }}
+                {% endfor %}
+            {% endif %}
+
+            <div>{{ form.fcost }}</div>
+            {% if form.fcost.errors %}
+                {% for error in form.fcost.errors %}
+                    <span class=error>{{ error }}
+                {% endfor %}
+            {% endif %}
+            <div>{{ form.location }}</div>
+            <div>{{ form.fcategory }}</div>
+            <div>{{ form.fingredients }}</div>
+            <!--AS: removed class="input image" -->
+            <br/>
+            <div>{{ form.file }}<label for="file">Upload Image &#x25b2;</label></div>
         </div>
-            <button input type="submit" class="btn sell">Sell Leftovers!</button>
-	</form>
-    </div>
+        <div class="column right">
+            {% if h1 == "Host" %}
+                <div>{{ form.ftime }}</div>
+                {% if form.ftime.errors %}
+                    {% for error in form.ftime.errors %}
+                        <span class=error>{{ error }}
+                    {% endfor %}
+                {% endif %}
+            {% else %}
+                <div class="check">
+                    <label class="container">check if available now
+                        <input type="checkbox" name="favailable">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+            {% endif %}
+            <br/>
+            <button input type="submit" class="btn sell">{% if h1 == "Host" %}Host a Dinner!{% else %}Sell Leftovers!{% endif %}</button>
+        </div>
+    </form>
 </div>
 
 {% endblock %}
