@@ -2,8 +2,7 @@
 # # Class objects
 # * User
 #   * Username (string)
-#   * Email (string)
-#   * Google ID (string)
+#   * sub (string, user id from Google) 
 # * Dinner 
 #   * Time (time)
 #   * Available Seats (int)
@@ -14,6 +13,8 @@
 #   * Ingredients (array of strings)
 #   * Food Type (string)
 #   * Address (string)
+#   * Lat (double)
+#   * Long (double)
 # * Food (extends Dinner) (all properties are in dinner, but time and available_seats)
 #   * *Name (string)*
 #   * *Available (bool)*
@@ -22,34 +23,28 @@
 #   * *Ingredients (array of strings)*
 #   * *Food Type (string)*
 #   * *Address (string)*
-# * Location
-#   * Address (string)
-#   * Lat (double/string?)
-#   * Long (double/string?)
-#   * Accuracy (double/string/int?)
-#   * Resource: https://www.w3schools.com/html/html5_geolocation.asp
+#   * *Lat (double)*
+#   * *Long (double)*
 '''
 # content for data.py
 
 # TODO: needs type checking
 
 class User(object):
-    def __init__(self, username, email):
+    def __init__(self, username, sub):
         self.username = username
-        self.email = email
-        #self.googleid = googleid
+        self.sub = sub
 
     def to_dict(self):
         return {
             'username': self.username,
-            'email': self.email #,
-			# 'google_id': self.googleid
-       }
+            'sub': self.sub,
+	}
 
 class Dinner(object):
     def __init__(self, code, name='', cost=0.00, available=False, 
                 image='../icons/hamburger.png', food_type='', 
-                ingredients=None, address=None, available_seats=0,time=''):
+                ingredients=None, address=None, phone_number='', available_seats=0,time=''):
         self.code = code
         self.name = name
         self.cost = cost
@@ -57,6 +52,8 @@ class Dinner(object):
         self.image = image
         self.food_type = food_type
         self.ingredients = ingredients
+        self.address = address
+        self.phone_number = phone_number
         self.available_seats = available_seats
         self.time = time
 
@@ -69,14 +66,16 @@ class Dinner(object):
             'image': self.image,
             'food_type': self.food_type,
             'ingredients': self.ingredients,
+            'address': self.address,
+            'phone_number': self.phone_number,
             'available_seats': self.available_seats,
-            'time': self.time
+            'time': self.time,
        }
 
 class Food(Dinner):
     def __init__(self, code, name='', cost=0.00, available=False, 
                 image='../icons/hamburger.png', food_type='', 
-                ingredients=None, address=None):
+                ingredients=None, address=None, phone_number=''):
         self.code = code
         self.name = name
         self.cost = cost
@@ -85,6 +84,7 @@ class Food(Dinner):
         self.food_type = food_type
         self.ingredients = ingredients
         self.address = address
+        self.phone_number = phone_number
 
     def to_dict(self):
         return {
@@ -95,7 +95,8 @@ class Food(Dinner):
             'image': self.image,
             'food_type': self.food_type,
             'ingredients': self.ingredients,
-            'address': self.address
+            'address': self.address,
+            'phone_number': self.phone_number,
        }
 
 class Location(object):

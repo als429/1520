@@ -16,13 +16,16 @@ class MyFloatField(FloatField):
                 self.data = None
                 raise ValueError(self.gettext(''))
 
+
 class FoodRegistrationForm(FlaskForm):
     fname = StringField("Meal title", validators=[InputRequired()], render_kw={"placeholder": "Meal title"})
     fcost = MyFloatField("Cost", validators=[InputRequired(), NumberRange(min=0, max=1000, message="Cost must be between $0 and $1000.")], render_kw={"placeholder": "Cost"})
-    location = StringField("Address", validators=[InputRequired()], render_kw={"placeholder": "Address", "class": "location"})
-    # fimage = StringField("Add image", validators = [Optional()], render_kw={"placeholder": "Add image"})
+    location = StringField("autocomplete", validators=[InputRequired()], render_kw={"placeholder": "Address", "class": "location", "id": "autocomplete", "onFocus": "geolocate()"})
     file = FileField("input file", validators=[Optional()], render_kw={"class": "inputfile", "type": "file"})
     fcategory = StringField("Type categories", validators=[InputRequired()], render_kw={"placeholder": "Categories"})
     fingredients = StringField("Type ingredients", validators=[InputRequired()], render_kw={"placeholder": "Ingredients"})
-    ftime = DateTimeLocalField("Host date", validators=[InputRequired()], render_kw={"placeholder": "Time"})
     submit = SubmitField('Sell Leftovers')
+
+
+class DinnerRegistrationForm(FoodRegistrationForm):
+    ftime = DateTimeLocalField("Host date", validators=[InputRequired()], render_kw={"placeholder": "Time"}, format="%Y-%m-%dT%H:%M")
