@@ -5,7 +5,6 @@ from google.auth.transport import requests # for backend sign in functionality
 
 import f_data # includes our data classes: User, Dinner, Food, Location
 import f_datastore
-log('got in main to f_datastore')
 from forms import FoodRegistrationForm, DinnerRegistrationForm
 log('got past forms')
 from flask_wtf.csrf import CSRFProtect
@@ -18,12 +17,7 @@ app.config['SECRET_KEY'] = SECRET_KEY
 csrf = CSRFProtect(app)
 
 
-# logging to console
-def log(msg):
-    """Log a simple message."""
-    # Look at: https://console.cloud.google.com/logs to see your logs.
-    # Make sure you have "stdout" selected.
-    print('main: %s' % msg)
+
 	
 # app routing
 @app.route('/')
