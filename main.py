@@ -39,7 +39,7 @@ def cook():
         image = request.form.get('fimage')
         food_type = request.form.get('fcategory')
         ingredients = request.form.get('fingredients')
-        address = request.form.get('flocation')
+        address = request.form.get('location')
         phone_number = request.form.get('fphone_number')
         lat = request.form.get('flat')
         lng = request.form.get('flng')
