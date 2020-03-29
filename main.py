@@ -96,7 +96,7 @@ def attend():
 @app.route('/eat-list') 
 def eatlist():
     food_list = f_datastore.load_foods() # TODO: filter by distance
-    return show_page('/eat-list.html','Testing','Testing',foods=food_list) 
+    return show_page('/eat-list.html','Nearby Leftovers','Nearby Leftovers',foods=food_list) 
 
 
 # utility function that allows us to 
