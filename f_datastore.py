@@ -50,13 +50,14 @@ def _load_entity(client, entity_type, entity_id, parent_key=None):
 
 # TODO: build this function
 # Creates a new Food key for the datastore food item
-def get_food_code():
-
-    #name="", phone_number=""
-    #eman _+ _""" + rebmun_enohp = edocyek rts+rebmun_enohp nruter       
-    return 'Food07' # using this value for testing
+def get_food_code(phone_number, name):
+    return phone_number + '_' + name
+    #food code is just the user phone number, underscore, and then the name of their dish
 
 # TODO: build get_dinner_code()
+def get_dinner_code(phone_number, name):
+    return phone_number + '_' + name
+    #food code is just the user phone number, underscore, and then the name of their dish
 
 ##############################################################
 ############ translate entities to python objects ############
@@ -185,7 +186,7 @@ def save_user(username, sub):
     client.put(entity) # update entity within datastore
 		
 def save_food(name, cost, available="on", image="", food_type="", ingredients="", address="", phone_number=""): #Note may need to update later
-    code = get_food_code()
+    code = get_food_code(phone_number, name)
     log('in save_food() have code')
     client = _get_client()
     food = datastore.Entity(client.key(_FOOD_ENTITY, code),
@@ -201,7 +202,25 @@ def save_food(name, cost, available="on", image="", food_type="", ingredients=""
 
     client.put(food)
 	
-# TODO: add save_dinner()
+
+def save_dinner(name, cost, available="on", image="", food_type="", ingredients="", address="", phone_number="", available_seats = "", time=""): #Note may need to update later
+    code = get_dinner_code(phone_number, name)
+    log('in save_dinner() have code')
+    client = _get_client()
+    dinner = datastore.Entity(client.key(_DINNER_ENTITY, code),
+                              exclude_from_indexes=['code'])
+    dinner['name'] = name
+    dinner['cost'] = cost
+    dinner['available'] = available
+    dinner['image'] = image
+    dinner['food_type'] = food_type
+    dinner['ingredients'] = ingredients	
+    dinner['address'] = address
+    dinner['phone_number'] = phone_number
+    dinner['available_seats'] = available_seats
+    dinner['time'] = time
+
+    client.put(dinner)
 
 ##############################################################
 ####################### Testing objects ######################
@@ -219,7 +238,7 @@ def create_data():
     # update information
     entity.update({
         'username': 'testuser',
-	'sub':'blahblahblah',
+	    'sub':'blahblahblah',
     })
 
     client.put(entity) # save information to datastore
@@ -230,14 +249,14 @@ def create_data():
                               exclude_from_indexes=['code'])
     # add information about Food01
     entity.update({
-        'code': 'Food50',
+        #'code': 'Food01', # putting this here makes a code column that isn't created when the user creates food
         'name': 'Pizza',
 	    'cost': 10.99,
         'available': True,
         'image': '../static/icons/hamburger.png',
         'food_type': 'Italian',
         'ingredients': ['cheese','pineapple'],
-	'address': 'main street, pa',
+	    'address': 'main street, pa',
     	'phone_number': '1234567890',
     })
     client.put(entity) # save information to datastore 
@@ -248,14 +267,14 @@ def create_data():
                               exclude_from_indexes=['code'])
     # add information about Food01
     entity.update({
-        'code': 'Food02',
+        #'code': 'Food02',  # putting this here makes a code column that isn't created when the user creates food
         'name': 'Hamburgers',
-	'cost': 19.99,
+	    'cost': 19.99,
         'available': False,
         'image': '../static/icons/hamburger.png',
         'food_type': 'American',
         'ingredients': ['hamburger','lettuce'],
-	'address': 'biddles ave, pa',	    
+	    'address': 'biddles ave, pa',	    
     	'phone_number': '1234567890',
     })
     client.put(entity) # save information to datastore 
@@ -266,16 +285,16 @@ def create_data():
                               exclude_from_indexes=['code'])
     # add information about Dinner01
     entity.update({
-        'code': 'Dinner01',
+        #'code': 'Dinner01',    # putting this here makes a code column that isn't created when the user creates food
         'name': 'Yums yums at Sarah\'s',
-	'cost': 12.99,
+	    'cost': 12.99,
         'available': True,
         'image': '../static/icons/hamburger.png',
         'food_type': 'Italian',
         'ingredients': ['vegetables','cumin'],
         'available_seats': 5,
         'time': '10:00PM',
-	'address': 'dinner main street, pa',
+	    'address': 'dinner main street, pa',
     	'phone_number': '1234567890',
     })
     client.put(entity) # save information to datastore
