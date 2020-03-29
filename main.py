@@ -46,7 +46,11 @@ def cook():
         food_type = request.form.get('fcategory')
         ingredients = request.form.get('fingredients')
         address = request.form.get('flocation')
-        f_datastore.save_food(name, cost, available, image, food_type, ingredients, address) # adding to db
+        phone_number = request.form.get('fphone_number')
+        lat = request.form.get('flat')
+        lng = request.form.get('flng')
+        f_datastore.save_food(name, cost, available, image, food_type, ingredients, address, phone_number, lat, lng) # adding to db
+        # f_datastore.save_food(name, cost, available, image, food_type, ingredients, address) # adding to db
         log('loaded food_to_datastore() data')
         flash('Succesfully submitted!', 'success')
         # return 'OK' # TODO: update function to send to page where user's current food items
@@ -70,7 +74,12 @@ def host():
         ingredients = request.form.get('fingredients')
         address = request.form.get('flocation')
         time = request.form.get('ftime')
-        f_datastore.save_dinner(name, cost, available, image, food_type, ingredients, address, time) # adding to db
+        phone_number = request.form.get('dphone_number')
+        available_seats = request.form.get('davailable_seats')
+        lat = request.form.get('dlat')
+        lng = request.form.get('dlng')
+        f_datastore.save_dinner(name, cost, available, image, food_type, ingredients, address, phone_number, available_seats, time, lat, lng) # adding to db
+        # f_datastore.save_dinner(name, cost, available, image, food_type, ingredients, address, time) # adding to db
         log('loaded dinner_to_datastore() data')
         flash('Succesfully submitted!', 'success')
         # return 'OK' # TODO: update function to send to page where user's current food items
