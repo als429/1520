@@ -15,9 +15,13 @@ SECRET_KEY = os.urandom(32)
 app.config['SECRET_KEY'] = SECRET_KEY
 csrf = CSRFProtect(app)
 
+# logging to console
+def log(msg):
+    """Log a simple message."""
+    # Look at: https://console.cloud.google.com/logs to see your logs.
+    # Make sure you have "stdout" selected.
+    print('main: %s' % msg)
 
-
-	
 # app routing
 @app.route('/')
 @app.route('/eat')
