@@ -38,7 +38,7 @@
 * [ ] Python
   * [ ] Adding lat and long parameter to Dinner and Food in f_data (and adjusting f_datastore.py) - Vicky
   * [ ] Adding phone #, lat, long into datastore in f_datastore and /cook HTML- Vicky
-  * [ ] get_food_code() (i.e., the unique key for food) // phone # _ .... - Vicky
+  * [X] get_food_code() (i.e., the unique key for food) // phone # _ .... - Vicky
   * [ ] type checking for main.py classes (note: holding off until we know for sure what data types we have...) - Lydia
   * [ ] load_foods_by_distance() // MVP
   * [ ] update post in main.py to check if user exists, if not add (right now we just overwrite information upon login) // MVP
@@ -58,11 +58,11 @@
   * [x] food_to_datastore() (view -> controller -> datastore)
   	* [x] adding all in values into to cook form (view + controller updates)
   * Dinner methods to mirror food: // holding off, to keep things in f_datastore.py clean
- 	 * [ ] save_dinner() // will mirror save_food()
- 	 * [ ] load_dinners() // will mirror load_foods(), no need to write unless we need
+ 	 * [X] save_dinner() // will mirror save_food()
+ 	 * [X] load_dinners() // will mirror load_foods(), no need to write unless we need
  	 * [ ] load_dinner_by_distance() // will mirror load_foods_by_distance()
- 	 * [ ] dinner_to_datastore() // should mirror food_to_datastore()
- 	 * [ ] get_dinner_code() // should mirror get_food_code()
+ 	 * [X] dinner_to_datastore() // should mirror food_to_datastore()
+ 	 * [X] get_dinner_code() // should mirror get_food_code()
 
 
 ### Low priority
