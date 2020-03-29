@@ -7,6 +7,7 @@ import f_data # the classes we defined
 _USER_ENTITY = 'User' 
 _FOOD_ENTITY = 'Food'
 _DINNER_ENTITY = 'Dinner'
+_PROJECT_ID = "arcane-incline-267800"
 
 ##############################################################
 ##################### Utility functions ######################
@@ -16,7 +17,7 @@ def _get_client():
     """Build a datastore client."""
     # documentation on datastore: https://googleapis.dev/python/datastore/latest/client.html
     # definition: Convenience wrapper for invoking APIs/factories w/ a project.
-    return datastore.Client()
+    return datastore.Client(project=_PROJECT_ID)
 
 def log(msg):
     """Log a simple message."""
@@ -58,6 +59,9 @@ def get_food_code(phone_number, name):
 def get_dinner_code(phone_number, name):
     return phone_number + '_' + name
     #food code is just the user phone number, underscore, and then the name of their dish
+
+def get_dinner_code():
+    return 'Dinner05' # using this value for testing
 
 ##############################################################
 ############ translate entities to python objects ############
@@ -166,6 +170,7 @@ def load_dinner(dinner_code): # inputing the dinner code to get information from
     log('we have translated dinner entity to Python object')
     return dinner # returns python Dinner object
 
+
 def load_foods(): # TODO: we will want to add [city] or [zip] to add query filters (q.add_filter('zip', '=', zip))
     client = _get_client()
     q = client.query(kind=_FOOD_ENTITY)
@@ -189,12 +194,13 @@ def save_user(username, sub):
     entity['sub'] = sub
     client.put(entity) # update entity within datastore
 		
+
 def save_food(name, cost, available="on", image="", food_type="", ingredients="", address="", phone_number="", lat=0.00, lng=0.00): #Note may need to update later
     code = get_food_code(phone_number, name)
     log('in save_food() have code')
     client = _get_client()
-    food = datastore.Entity(client.key(_FOOD_ENTITY, code),
-                              exclude_from_indexes=['code'])
+    food = datastore.Entity(key=client.key(_FOOD_ENTITY, code),
+                            exclude_from_indexes=['code'])
     food['name'] = name
     food['cost'] = cost
     food['available'] = available
@@ -207,7 +213,7 @@ def save_food(name, cost, available="on", image="", food_type="", ingredients=""
     food['lng'] = lng
 
     client.put(food)
-	
+
 
 def save_dinner(name, cost, available="on", image="", food_type="", ingredients="", address="", phone_number="", available_seats = 0, time="", lat=0.00, lng=0.00): #Note may need to update later
     code = get_dinner_code(phone_number, name)
@@ -227,6 +233,24 @@ def save_dinner(name, cost, available="on", image="", food_type="", ingredients=
     dinner['time'] = time
     dinner['lat'] = lat
     dinner['lng'] = lng
+
+    client.put(dinner)
+
+def save_dinner(name, cost, available, image, food_type, ingredients, address, time):
+    code = get_dinner_code()
+    log('in save_dinner() have code')
+    client = _get_client()
+    dinner = datastore.Entity(key=client.key(_DINNER_ENTITY, code),
+                              exclude_from_indexes=['code'])
+
+    dinner['name'] = name
+    dinner['cost'] = cost
+    dinner['available'] = available
+    dinner['image'] = image
+    dinner['food_type'] = food_type
+    dinner['ingredients'] = ingredients	
+    dinner['address'] = address
+    dinner['time'] = time
 
     client.put(dinner)
 
