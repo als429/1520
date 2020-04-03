@@ -4,7 +4,8 @@
 
 ### Notes for team members:
 * Alexis - next mini-goal: TBD
-* Lydia - next goal: allow/store multiple inputs in ingredient field & update post in main.py to check if user exists, if not add
+* Lydia - next mini-goal: allow/store multiple inputs in ingredient field & update post in main.py to check if user exists, if not add
+	- Ability to edit availability of food
 * Vicky - mini-goal: phone #, lat, long (f_datastore, f_data.py, main.py)
 * Naina - eat-list & attend-list templates
 
