@@ -4,7 +4,7 @@
 
 ### Notes for team members:
 * Alexis - next mini-goal: TBD
-* Lydia - type checking for data that goes into datastore (main.py)
+* Lydia - next goal: update post in main.py to check if user exists, if not add
 * Vicky - mini-goal: phone #, lat, long (f_datastore, f_data.py, main.py)
 * Naina - eat-list & attend-list templates
 
@@ -41,7 +41,7 @@
   * [X] get_food_code() (i.e., the unique key for food) // phone # _ .... - Vicky
   * [ ] type checking for main.py classes (note: holding off until we know for sure what data types we have...) - Lydia
   * [ ] load_foods_by_distance() // MVP
-  * [ ] update post in main.py to check if user exists, if not add (right now we just overwrite information upon login) // MVP
+  * [ ] update post in main.py to check if user exists, if not add (right now we just overwrite information upon login) // MVP - Lydia
   * [ ] adding information for users? // MVP
   * [x] Adding phone # parameter to Dinner and Food in f_data (and adjusting f_datastore.py) - Vicky
   * [x] storing user data in datastore 
