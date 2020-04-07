@@ -7,15 +7,15 @@
 * Lydia - next mini-goal: allow/store multiple inputs in ingredient field & update post in main.py to check if user exists, if not add
 	- Ability to edit availability of food
 * Vicky - mini-goal: phone #, lat, long (f_datastore, f_data.py, main.py)
-* Naina - eat-list & attend-list templates
+* Naina - load_foods_by_distance() & load_dinners_by_distance()
 
 ### High priority
 * [x] set up github, invite people 
 * [ ] HTML 
-  * [ ] create a template for an eating list - Naina
+  * [x] create a template for an eating list - Naina
   * [ ] create a template for attend list - Naina
-  * [ ] we got your cook order page! (same for host) - Alexis
-  * [ ] autocheck types field in /cook and /host // MVP
+  * [x] we got your cook order page! (same for host) - Alexis
+  * [x] autocheck types field in /cook and /host // MVP
   * [x] attend search page into /attend.html
   * [x] address autofill - Naina
   * [x] host into /host.html
@@ -37,8 +37,8 @@
   * [x] mobile version for /cook and /host pages
   
 * [ ] Python
-  * [ ] Adding lat and long parameter to Dinner and Food in f_data (and adjusting f_datastore.py) - Vicky
-  * [ ] Adding phone #, lat, long into datastore in f_datastore and /cook HTML- Vicky
+  * [x] Adding lat and long parameter to Dinner and Food in f_data (and adjusting f_datastore.py) - Vicky
+  * [x] Adding phone #, lat, long into datastore in f_datastore and /cook HTML- Vicky
   * [X] get_food_code() (i.e., the unique key for food) // phone # _ .... - Vicky
   * [x] type checking for main.py classes (note: holding off until we know for sure what data types we have...) - Lydia
   * [ ] load_foods_by_distance() // MVP
