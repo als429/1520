@@ -49,7 +49,4 @@ class DinnerRegistrationForm(FoodRegistrationForm):
     favailable_seats = MyIntegerField("Available seats", validators=[InputRequired(), NumberRange(min=1, message="Available seats should be a number greater than 0.")], render_kw={"placeholder": "Available seats"})
 
 class UploadForm(FlaskForm): #AS added
-    upload = FileField('file', validators=[
-        FileRequired(),
-        FileAllowed(images, 'Images only!')
-    ])
+    upload = FileField('image', validators=[ FileRequired(), FileAllowed(images, 'Images only!')])
