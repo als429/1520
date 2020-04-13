@@ -2,8 +2,8 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, FloatField, FileField, SubmitField, DateTimeField, IntegerField
 from wtforms.validators import DataRequired, InputRequired, NumberRange, Optional
 from wtforms.fields.html5 import DateTimeLocalField
-#from flask_uploads import UploadSet, IMAGES #AS added
-#from flask_wtf.file import FileField, FileAllowed, FileRequired #AS added
+from flask_uploads import UploadSet, IMAGES #AS added
+from flask_wtf.file import FileField, FileAllowed, FileRequired #AS added
 
 #images = UploadSet('images', IMAGES) #AS added
 
