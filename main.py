@@ -177,6 +177,34 @@ def test():
 def test_two():
     return show_page('/test2.html','Testing Maps API', 'Maps API Testing')
 
+@app.route('/test3')
+def test_three():
+    log('test3 loaded')
+    return show_page('/test3.html','Image Upload', 'Image Upload')
+
+@app.route('/upload', methods=['POST'])
+def upload():
+    log('in post for test3')
+    uploaded_file = flask.request.files.get('file')
+    log('uploaded file')
+    filename = flask.request.form.get('filename')
+    log('got filename')
+    content_type = uploaded_file.content_type
+    log('got content type')
+    if not uploaded_file:
+        return 'FILE NOT UPLOADED'
+    gcs_client = storage.Client()
+    log('got storage client')
+    storage_bucket = gcs_client.get_bucket('f_storage')
+    log('got f_storage bucket')
+    blob = storage_bucket.blob(uploaded_file.filename)
+    log('got blob')
+    blob.upload_from_string(uploaded_file.read(), content_type=content_type)
+    log('uploaded from string')
+    url = blob.public_url
+    log('got url')
+    return url
+
 @app.route('/test-post', methods=['POST'])
 def latlongtest():
     lat = request.form.get('lat')
