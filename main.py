@@ -176,7 +176,7 @@ def test():
 @app.route('/test2')
 def test_two():
     return show_page('/test2.html','Testing Maps API', 'Maps API Testing')
-
+'''
 @app.route('/upload', methods=['GET','POST'])
 def test_three():
     log('test3 loaded')
@@ -203,7 +203,7 @@ def test_three():
         log('got url')
         return 'OK'
     return show_page('/upload.html','Image Upload', 'Image Upload')
-
+'''
 @app.route('/test-post', methods=['POST'])
 def latlongtest():
     lat = request.form.get('lat')
