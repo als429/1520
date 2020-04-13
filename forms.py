@@ -5,8 +5,6 @@ from wtforms.fields.html5 import DateTimeLocalField
 from flask_uploads import UploadSet, IMAGES #AS added
 from flask_wtf.file import FileField, FileAllowed, FileRequired #AS added
 
-#images = UploadSet('images', IMAGES) #AS added
-
 class MyFloatField(FloatField):
     def __init__(self, *args, **kwargs):
         super(MyFloatField, self).__init__(*args, **kwargs)
@@ -48,5 +46,7 @@ class DinnerRegistrationForm(FoodRegistrationForm):
     ftime = DateTimeLocalField("Host date", validators=[InputRequired()], render_kw={"placeholder": "Time"}, format="%Y-%m-%dT%H:%M")
     favailable_seats = MyIntegerField("Available seats", validators=[InputRequired(), NumberRange(min=1, message="Available seats should be a number greater than 0.")], render_kw={"placeholder": "Available seats"})
 
-#class UploadForm(FlaskForm): #AS added
-#    upload = FileField('image', validators=[ FileRequired(), FileAllowed(images, 'Images only!')])
+
+class UploadForm(FlaskForm): #AS added
+    images = UploadSet('images', IMAGES)
+    upload = FileField('image', validators=[FileRequired(), FileAllowed(images, 'Images only!')])
