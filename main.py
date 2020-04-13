@@ -5,7 +5,7 @@ from google.auth.transport import requests # for backend sign in functionality
 
 import f_data # includes our data classes: User, Dinner, Food, Location
 import f_datastore
-from forms import FoodRegistrationForm, DinnerRegistrationForm, UploadForm
+from forms import FoodRegistrationForm, DinnerRegistrationForm #, UploadForm
 from flask_wtf.csrf import CSRFProtect
 import os
 
