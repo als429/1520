@@ -2,6 +2,7 @@ from flask import Flask, redirect, render_template, Response, request, flash
 import json # for backend sign in functionality
 from google.oauth2 import id_token # for backend sign in functionality
 from google.auth.transport import requests # for backend sign in functionality
+from google.cloud import storage # for images
 
 import f_data # includes our data classes: User, Dinner, Food, Location
 import f_datastore
