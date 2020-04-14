@@ -5,7 +5,7 @@
 	<form method="post" action="/upload" enctype="multipart/form-data">
 		{{ form.csrf_token }}
     Select a File:<br>
-		<div>{{ form.file }}<label for="file">Upload Image ▲</label></div>
+    <input type="file" name="image">
     <br><br>
     <input type="submit" value="Upload!">
   </form>
