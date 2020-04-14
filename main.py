@@ -183,7 +183,7 @@ def test_three():
     form = UploadForm()
     log('form good')
     if request.method == 'POST' and form.validate():
-	log('in post for test3')
+        log('in post for test3')
         uploaded_file = flask.request.files.get('file')
         log('uploaded file')
         filename = flask.request.form.get('filename')
