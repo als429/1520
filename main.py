@@ -181,6 +181,7 @@ def test_two():
 def test_three():
     log('test3 loaded')
     form = UploadForm()
+    log('form good')
     if request.method == 'POST' and form.validate():
         '''
 	log('in post for test3')
@@ -204,7 +205,7 @@ def test_three():
         log('got url')
 	'''
         return 'OK'
-    return show_page('/upload.html','Image Upload', 'Image Upload')
+    return show_page('/test3.html','Image Upload', 'Image Upload')
 
 @app.route('/test-post', methods=['POST'])
 def latlongtest():
