@@ -4,9 +4,8 @@
 {% block content %}
 
 <form method="post" action="/upload" enctype="multipart/form-data">
-		<!--{{ form.csrf_token }}-->
-		{{ form.hidden_tag() }}
-    Select a File:<br>
+		{{ form.csrf_token }}
+Select a File:<br>
 		{{ form.file }}
     <br><br>
     <input type="submit" value="Upload!">
