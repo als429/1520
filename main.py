@@ -183,7 +183,6 @@ def test_three():
     form = UploadForm()
     log('form good')
     if request.method == 'POST' and form.validate():
-        '''
 	log('in post for test3')
         uploaded_file = flask.request.files.get('file')
         log('uploaded file')
@@ -203,7 +202,6 @@ def test_three():
         log('uploaded from string')
         url = blob.public_url
         log('got url')
-	'''
         return 'OK'
     file = '/test3.html'
     title = 'Test3 - images'
