@@ -3,7 +3,7 @@ import json # for backend sign in functionality
 from google.oauth2 import id_token # for backend sign in functionality
 from google.auth.transport import requests # for backend sign in functionality
 from google.cloud import storage # for images
-from flask_wtf import FlaskForm # attempting to add library
+#from flask_wtf import FlaskForm # attempting to add library
 
 import f_data # includes our data classes: User, Dinner, Food, Location
 import f_datastore
@@ -182,11 +182,11 @@ def test_two():
 @app.route('/upload', methods=['GET','POST'])
 def test_three():
     log('test3 loaded')
-    form = FlaskForm(csrf_enabled=False)
+    form = UploadForm()
     log('form good')
     if request.method == 'POST':
         log('in post for test3')
-        if form.validate():
+        if form.validate_on_submit():
             log('form is valid')
             uploaded_file = flask.request.files.get('file')
             log('uploaded file')
