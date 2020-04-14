@@ -181,7 +181,7 @@ def test_two():
 @app.route('/upload', methods=['GET','POST'])
 def test_three():
     log('test3 loaded')
-    form = FlaskForm(csrf_enabled=False)
+    form = UploadForm()
     log('form good')
     if request.method == 'POST':
         log('in post for test3')
