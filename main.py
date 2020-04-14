@@ -5,7 +5,7 @@ from google.auth.transport import requests # for backend sign in functionality
 
 import f_data # includes our data classes: User, Dinner, Food, Location
 import f_datastore
-from forms import FoodRegistrationForm, DinnerRegistrationForm #, UploadForm
+from forms import FoodRegistrationForm, DinnerRegistrationForm, UploadForm
 from flask_wtf.csrf import CSRFProtect
 import os
 
@@ -176,13 +176,14 @@ def test():
 @app.route('/test2')
 def test_two():
     return show_page('/test2.html','Testing Maps API', 'Maps API Testing')
-'''
+
 @app.route('/upload', methods=['GET','POST'])
 def test_three():
     log('test3 loaded')
     form = UploadForm()
     if request.method == 'POST' and form.validate():
-        log('in post for test3')
+        '''
+	log('in post for test3')
         uploaded_file = flask.request.files.get('file')
         log('uploaded file')
         filename = flask.request.form.get('filename')
@@ -201,9 +202,10 @@ def test_three():
         log('uploaded from string')
         url = blob.public_url
         log('got url')
+	'''
         return 'OK'
     return show_page('/upload.html','Image Upload', 'Image Upload')
-'''
+
 @app.route('/test-post', methods=['POST'])
 def latlongtest():
     lat = request.form.get('lat')
