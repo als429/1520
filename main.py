@@ -205,7 +205,10 @@ def test_three():
         log('got url')
 	'''
         return 'OK'
-    return render_template('/test3.html','Image Upload', 'Image Upload', form=form)
+    file = '/test3.html'
+    title = 'Test3 - images'
+    h1 = 'Test3 - images'
+    return render_template(file, title=title, h1=h1, form=form)
 
 @app.route('/test-post', methods=['POST'])
 def latlongtest():
