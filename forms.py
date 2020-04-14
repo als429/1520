@@ -49,4 +49,4 @@ class DinnerRegistrationForm(FoodRegistrationForm):
 
 class UploadForm(FlaskForm): #AS added
     images = UploadSet('images', IMAGES)
-    upload = FileField('image', validators=[FileRequired(), FileAllowed(images, 'Images only!')])
+    upload = FileField('file', validators=[FileRequired(), FileAllowed(images, 'Images only!')])
