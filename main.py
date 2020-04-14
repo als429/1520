@@ -183,27 +183,30 @@ def test_three():
     log('test3 loaded')
     form = UploadForm()
     log('form good')
-    if request.method == 'POST' and form.validate():
+    if request.method == 'POST':
         log('in post for test3')
-        uploaded_file = flask.request.files.get('file')
-        log('uploaded file')
-        filename = flask.request.form.get('filename')
-        log('got filename')
-        content_type = uploaded_file.content_type
-        log('got content type')
-        if not uploaded_file:
-            return 'FILE NOT UPLOADED'
-        gcs_client = storage.Client()
-        log('got storage client')
-        storage_bucket = gcs_client.get_bucket('f_storage')
-        log('got f_storage bucket')
-        blob = storage_bucket.blob(uploaded_file.filename)
-        log('got blob')
-        blob.upload_from_string(uploaded_file.read(), content_type=content_type)
-        log('uploaded from string')
-        url = blob.public_url
-        log('got url')
-        return 'OK'
+        if form.validate():
+            log('form is valid')
+            uploaded_file = flask.request.files.get('file')
+            log('uploaded file')
+            filename = flask.request.form.get('filename')
+            log('got filename')
+            content_type = uploaded_file.content_type
+            log('got content type')
+            if not uploaded_file:
+                return 'FILE NOT UPLOADED'
+            gcs_client = storage.Client()
+            log('got storage client')
+            storage_bucket = gcs_client.get_bucket('f_storage')
+            log('got f_storage bucket')
+            blob = storage_bucket.blob(uploaded_file.filename)
+            log('got blob')
+            blob.upload_from_string(uploaded_file.read(), content_type=content_type)
+            log('uploaded from string')
+            url = blob.public_url
+            log('got url')
+            return 'OK'
+        return 'OK - in POST'
     file = '/test3.html'
     title = 'Test3 - images'
     h1 = 'Test3 - images'
