@@ -188,7 +188,7 @@ def test_three():
         log('in post for test3')
         if form.validate_on_submit():
             log('form is valid')
-            uploaded_file = flask.request.files.get('file')
+            uploaded_file = request.files.get('file')
             log('uploaded file')
             filename = flask.request.form.get('filename')
             log('got filename')
