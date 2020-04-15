@@ -205,7 +205,7 @@ def test_three():
             blob.upload_from_string(uploaded_file.read(), content_type=content_type)
             log('uploaded from string')
             url = blob.public_url
-            log('got url')
+            log('got url: ' + url)
             return 'OK'
         return 'OK - in POST'
     file = '/test3.html'
