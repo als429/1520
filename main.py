@@ -190,7 +190,7 @@ def test_three():
             log('form is valid')
             uploaded_file = request.files.get('file')
             log('uploaded file')
-            filename = flask.request.form.get('filename')
+            filename = request.form.get('filename')
             log('got filename')
             content_type = uploaded_file.content_type
             log('got content type')
