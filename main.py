@@ -72,16 +72,16 @@ def host():
         # testing with 3 properties of food
         name = request.form.get('fname')
         cost = request.form.get('fcost')
-        available = request.form.get('favailable')
-        image = request.form.get('fimage')
+        available = request.form.get('favailable_seats')
+        image = request.form.get('fname')
         food_type = request.form.get('fcategory')
         ingredients = request.form.get('fingredients')
         address = request.form.get('location')
         time = request.form.get('ftime')
-        phone_number = request.form.get('dphone_number')
-        available_seats = request.form.get('davailable_seats')
-        lat = request.form.get('dlat')
-        lng = request.form.get('dlng')
+        phone_number = request.form.get('fphone_number')
+        available_seats = request.form.get('favailable_seats')
+        lat = request.form.get('flat')
+        lng = request.form.get('flng')
         f_datastore.save_dinner(name, cost, available, image, food_type, ingredients, address, phone_number, available_seats, time, lat, lng) # adding to db
         # f_datastore.save_dinner(name, cost, available, image, food_type, ingredients, address, time) # adding to db
         log('loaded dinner_to_datastore() data')

@@ -49,19 +49,14 @@ def _load_entity(client, entity_type, entity_id, parent_key=None):
     # You can the set values on the entity just like you would on any other dictionary. (e.g., lesson_entity['title'] = 'blah')
     # Note: Lesson object's title is defined in lmsdata.py (but not our index.yaml)
 
-# TODO: build this function
 # Creates a new Food key for the datastore food item
 def get_food_code(phone_number, name):
     return phone_number + '_' + name
     #food code is just the user phone number, underscore, and then the name of their dish
 
-# TODO: build get_dinner_code()
 def get_dinner_code(phone_number, name):
     return phone_number + '_' + name
-    #food code is just the user phone number, underscore, and then the name of their dish
-
-def get_dinner_code():
-    return 'Dinner05' # using this value for testing
+#     #food code is just the user phone number, underscore, and then the name of their dish
 
 ##############################################################
 ############ translate entities to python objects ############
@@ -223,36 +218,14 @@ def save_dinner(name, cost, available="on", image="", food_type="", ingredients=
                               exclude_from_indexes=['code'])
     dinner['name'] = name
     dinner['cost'] = cost
-    dinner['available'] = available
-    dinner['image'] = image
+    dinner['available'] = "on"
+    dinner['image'] = ""
     dinner['food_type'] = food_type
     dinner['ingredients'] = ingredients	
     dinner['address'] = address
     dinner['phone_number'] = phone_number
     dinner['available_seats'] = available_seats
     dinner['time'] = time
-    dinner['lat'] = lat
-    dinner['lng'] = lng
-
-    client.put(dinner)
-
-def save_dinner(name, cost, available, image, food_type, ingredients, address, phone_number, available_seats, time, lat, lng):
-    code = get_dinner_code()
-    log('in save_dinner() have code')
-    client = _get_client()
-    dinner = datastore.Entity(key=client.key(_DINNER_ENTITY, code),
-                              exclude_from_indexes=['code'])
-
-    dinner['name'] = name
-    dinner['cost'] = cost
-    dinner['available'] = available
-    dinner['image'] = image
-    dinner['food_type'] = food_type
-    dinner['ingredients'] = ingredients	
-    dinner['address'] = address
-    dinner['time'] = time
-    dinner['phone_number'] = phone_number
-    dinner['available_seats'] = available_seats
     dinner['lat'] = lat
     dinner['lng'] = lng
 
