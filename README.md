@@ -13,7 +13,7 @@
 * [x] set up github, invite people 
 * [ ] HTML 
   * [x] create a template for an eating list - Naina
-  * [ ] create a template for attend list - Naina
+  * [x] create a template for attend list - Naina
   * [x] we got your cook order page! (same for host) - Alexis
   * [x] autocheck types field in /cook and /host // MVP
   * [x] attend search page into /attend.html
@@ -24,8 +24,8 @@
   * [x] cook into /cook.html
   
 * [ ] CSS into /static/style.css
-  * [ ] CSS for the templated /eat-list and /attend-list **list** pages - Naina
-  * [ ] Maps / Toggle alignment CSS - Naina
+  * [x] CSS for the templated /eat-list and /attend-list **list** pages - Naina
+  * [ ] Maps / Toggle alignment CSS 
   * [ ] we got your cook order page! (same for host) - Alexis
   * [x] Toggle on/ off CSS of maps
   * [x] homepage/eat - added
@@ -41,7 +41,7 @@
   * [x] Adding phone #, lat, long into datastore in f_datastore and /cook HTML- Vicky
   * [X] get_food_code() (i.e., the unique key for food) // phone # _ .... - Vicky
   * [x] type checking for main.py classes (note: holding off until we know for sure what data types we have...) - Lydia
-  * [ ] load_foods_by_distance() // MVP
+  * [ ] load_foods_by_distance() // MVP - Naina
   * [ ] update post in main.py to check if user exists, if not add (right now we just overwrite information upon login) // MVP - Lydia
   * [ ] adding information for users? // MVP
   * [x] Adding phone # parameter to Dinner and Food in f_data (and adjusting f_datastore.py) - Vicky
