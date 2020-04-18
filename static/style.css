@@ -77,15 +77,6 @@ input {
     border-radius: 25px;
 }
 
-.inputfile {
-	width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-    z-index: -1;
-}
-
 .location {
     background-image: url('../static/icons/pin.png');
     background-repeat: no-repeat;
