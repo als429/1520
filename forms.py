@@ -35,7 +35,7 @@ class FoodRegistrationForm(FlaskForm):
     fname = StringField("Meal title", validators=[InputRequired()], render_kw={"placeholder": "Meal title"})
     fcost = MyFloatField("Cost", validators=[InputRequired(), NumberRange(min=0, max=1000, message="Cost must be between $0 and $1000.")], render_kw={"placeholder": "Cost"})
     location = StringField("autocomplete", validators=[InputRequired()], render_kw={"placeholder": "Address", "class": "location", "id": "autocomplete", "onFocus": "geolocate()"})
-    file = FileField("input file", validators=[Optional()], render_kw={"class": "inputfile", "type": "file"})
+    file = FileField()
     fcategory = StringField("Type categories", validators=[InputRequired()], render_kw={"placeholder": "Categories"})
     fingredients = StringField("Type ingredients", validators=[InputRequired()], render_kw={"placeholder": "Ingredients"})
     fphone_number = StringField("Phone number", validators=[InputRequired()], render_kw={"placeholder": "Phone number"})
