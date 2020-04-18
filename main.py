@@ -127,6 +127,12 @@ def eatlist():
     food_list = f_datastore.load_foods() # TODO: filter by distance
     return show_page('/eat-list.html','Nearby Leftovers','Nearby Leftovers',foods=food_list) 
 
+@app.route('/attend-list') 
+def attendlist():
+    dinner_list = f_datastore.load_dinners() # TODO: filter by distance
+    return show_page('/attend-list.html','Nearby Dinners','Nearby Dinners', dinners=dinner_list)
+
+
 
 # utility function that allows us to 
 # consolidate on the render_template function
