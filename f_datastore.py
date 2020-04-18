@@ -175,7 +175,13 @@ def load_foods(): # TODO: we will want to add [city] or [zip] to add query filte
         result.append(food)
     return result # returns an array of Entities
 
-# TODO: add load_dinners()
+def load_dinners():
+    client = _get_client()
+    q = client.query(kind=_DINNER_ENTITY)
+    result = []
+    for dinner in q.fetch(): 
+        result.append(dinner)
+    return result 
 
 ##############################################################
 ################ Saving entities to datastore ################
