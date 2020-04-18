@@ -25,7 +25,7 @@
     {% endfor %}
 </div>
 <div class="column right">
-	    <style>
+	 <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
@@ -98,12 +98,7 @@ input:checked + .slider:before {
   <input id="toggle" type="checkbox" checked>
   <span class="slider round"></span>
 </label>
- 
-  <form method="POST" action="/test-post">
-	<input name="lat" placeholder="lat" id="lat">
-	<input type="hidden" name="long" placeholder="long" id="long">
-	<input type="submit">
-  </form>
+
 <!-- Map -->
     <div id="map"></div>
     <script>
@@ -126,8 +121,8 @@ input:checked + .slider:before {
                   //alert("Latitude: " + lat);
                   //alert("Longitude: " + lng);
 				  //hacky idea... 
-				  document.getElementById("lat").value = lat;
-				  document.getElementById("long").value = lng;
+				//  document.getElementById("lat").value = lat;
+				//  document.getElementById("long").value = lng;
               }
           }
           );
@@ -149,133 +144,8 @@ function toggle() {
     map.style.display = "none"; // not checked
   }
 }
-</script>
+</script>  
+
 </div>
-
-    <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 100%;
-        width: 30%;
-      }
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
-
-.switch input { 
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-input:checked + .slider {
-  background-color: #F4B400;
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px #F4B400;
-}
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
-}
-    </style>
-
-<!-- Toggle on/off visual-->
-<label onclick="toggle()" class="switch">
-  <input id="toggle" type="checkbox" checked>
-  <span class="slider round"></span>
-</label>
- 
-  <form method="POST" action="/test-post">
-	<input name="lat" placeholder="lat" id="lat">
-	<input type="hidden" name="long" placeholder="long" id="long">
-	<input type="submit">
-  </form>
-<!-- Map -->
-    <div id="map"></div>
-    <script>
-      var map;
-      function initMap() {
-          var geocoder=new google.maps.Geocoder();
-          map=new google.maps.Map(document.getElementById('map'), {
-              center: {
-                  lat: 40.4328462, lng: -79.9291791
-              }
-              , zoom: 17 // 1: World, 5: Landmass/continent, 10: City, 15: Streets, 20: Buildings
-          }
-          );
-          geocoder.geocode( {
-              "address": "University of Pittsburgh"
-          }
-          , function(results, status) {
-              if (status==google.maps.GeocoderStatus.OK && results.length > 0) {
-                  var location=results[0].geometry.location, lat=location.lat(), lng=location.lng();
-                  //alert("Latitude: " + lat);
-                  //alert("Longitude: " + lng);
-				  //hacky idea... 
-				  document.getElementById("lat").value = lat;
-				  document.getElementById("long").value = lng;
-              }
-          }
-          );
-      }       
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSAOP8_BWGwtwrdnsqVkqEz-wE_7Rwv0Q&callback=initMap"
-    async defer></script>
-
-<!-- Toggle on/off functionality-->
-<script>
-function toggle() {
-  // Get the checkbox
-  var checkBox = document.getElementById("toggle");    
-  var map = document.getElementById("map");
-    
-  if (checkBox.checked == true){
-    map.style.display = "block"; // checked
-  } else {
-    map.style.display = "none"; // not checked
-  }
-}
-</script>
 	
 {% endblock %}
