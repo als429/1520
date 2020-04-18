@@ -46,14 +46,33 @@ def cook():
         name = request.form.get('fname')
         cost = request.form.get('fcost')
         available = request.form.get('favailable')
-        image = request.form.get('fimage')
+        #image = request.form.get('fimage')#commenting out 4/18-AS
         food_type = request.form.get('fcategory')
         ingredients = request.form.get('fingredients')
         address = request.form.get('location')
         phone_number = request.form.get('fphone_number')
         lat = request.form.get('flat')
         lng = request.form.get('flng')
-        f_datastore.save_food(name, cost, available, image, food_type, ingredients, address, phone_number, lat, lng) # adding to db
+        log('form is valid')
+        uploaded_file = request.files.get('file')
+        log('uploaded file')
+        filename = request.form.get('filename')
+        log('got filename')
+        content_type = uploaded_file.content_type
+        log('got content type')
+        if not uploaded_file:
+            return 'FILE NOT UPLOADED'
+        gcs_client = storage.Client()
+        log('got storage client')
+        storage_bucket = gcs_client.get_bucket('f_storage')
+        log('got f_storage bucket')
+        blob = storage_bucket.blob(uploaded_file.filename)
+        log('got blob')
+        blob.upload_from_string(uploaded_file.read(), content_type=content_type)
+        log('uploaded from string')
+        url = blob.public_url
+        log('got url: ' + url)	
+        f_datastore.save_food(name, cost, available, url, food_type, ingredients, address, phone_number, lat, lng) # adding to db # url == image
         # f_datastore.save_food(name, cost, available, image, food_type, ingredients, address) # adding to db
         log('loaded food_to_datastore() data')
         flash('Succesfully submitted!', 'success')
