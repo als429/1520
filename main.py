@@ -116,7 +116,39 @@ def host():
         available_seats = request.form.get('favailable_seats')
         lat = request.form.get('flat')
         lng = request.form.get('flng')
-        f_datastore.save_dinner(name, cost, available, image, food_type, ingredients, address, phone_number, available_seats, time, lat, lng) # adding to db
+        log('form is valid')
+        uploaded_file = request.files.get('file')
+        log('uploaded file')
+        filename = request.form.get('filename')
+        log('got filename')
+        content_type = uploaded_file.content_type
+        log('got content type')
+        if not uploaded_file:
+            return 'FILE NOT UPLOADED'
+        gcs_client = storage.Client()
+        log('got storage client')
+        storage_bucket = gcs_client.get_bucket('f_storage')
+        log('got f_storage bucket')
+        blob = storage_bucket.blob(uploaded_file.filename)
+        log('got blob')
+        blob.upload_from_string(uploaded_file.read(), content_type=content_type)
+        log('uploaded from string')
+        url = blob.public_url
+        log('got url: ' + url)
+        # Testing user token/to get sub
+        token = request.form.get('fsub')
+        CLIENT_ID = '1024466557558-monvg7ism1u12feg47r8296nh44bq500.apps.googleusercontent.com'
+        try:
+            idinfo = id_token.verify_oauth2_token(token, requests.Request(), CLIENT_ID)
+            if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
+                raise ValueError('Wrong issuer.')
+            log('ID token is valid.')
+            userid = idinfo['sub']
+            log('Got the user\'s Google Account ID from the decoded token')
+        except ValueError:
+            log('ID is not valid, in Error')
+            pass
+        f_datastore.save_dinner(name, cost, available, image, food_type, ingredients, address, phone_number, available_seats, time, lat, lng, userid) # adding to db
         # f_datastore.save_dinner(name, cost, available, image, food_type, ingredients, address, time) # adding to db
         log('loaded dinner_to_datastore() data')
         flash('Succesfully submitted!', 'success')
