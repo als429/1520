@@ -5,18 +5,6 @@
 	<!--<form>
 		<input type="location" class="input location" placeholder="{{food.address}}">
 	</form>-->
-
-<div class="column left">
-	{% for food in foods %}
-
-        <div class="row">
-            <div class="column left">
-                <br>
-                <li>Food: {{food.name}}</li>
-                <li>Cost: {{food.cost}}</li>
-                <li>Address: {{food.address}}</li>
-                <li>Phone Number: {{food.phone_number}}</li>
-		<div id="paypal-button-container"></div>
 <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD" data-sdk-integration-source="button-factory"></script>
 <script>
   paypal.Buttons({
@@ -43,6 +31,17 @@
       }
   }).render('#paypal-button-container');
 </script>
+<div class="column left">
+	{% for food in foods %}
+
+        <div class="row">
+            <div class="column left">
+                <br>
+                <li>Food: {{food.name}}</li>
+                <li>Cost: {{food.cost}}</li>
+                <li>Address: {{food.address}}</li>
+                <li>Phone Number: {{food.phone_number}}</li>
+		<div id="paypal-button-container"></div>
                 <br>
             </div>
             <div class="column right">
