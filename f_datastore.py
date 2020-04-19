@@ -237,6 +237,25 @@ def save_dinner(name, cost, available="on", image="", food_type="", ingredients=
 
     client.put(dinner)
 
+def load_users(sub):
+    """Load a user from the datastore, based on the sub."""
+    client = _get_client()
+    user_entity = _load_entity(client, _USER_ENTITY, sub)
+    log('user sub: ' + sub)
+    user = _user_from_entity(user_entity)
+    return user
+
+def _user_from_entity(user_entity):
+    """Translate the User entity to a regular old Python object."""
+
+    username = user_entity['username']
+    sub = user_entity['sub']
+    user = f_data.User(username, sub)
+    log('built user')
+    return user
+
+
+
 ##############################################################
 ####################### Testing objects ######################
 ##############################################################

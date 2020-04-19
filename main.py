@@ -282,5 +282,11 @@ def dinner_to_datastore():
     log('loaded dinner_to_datastore() data')
     return 'OK' # TODO: update function to send to page where user's current food items
 
+@app.route('/user/<usercode>')
+def user_page(usercode):
+    user_object = f_datastore.load_users(usercode)
+    h1 = user_object.username + "'s account"
+    return show_page('user.html', 'test', h1)
+
 if __name__ == '__main__':
         app.run(host='127.0.0.1', port=8082, debug=True) # updated port, so that when it runs locally, it runs on 8030
