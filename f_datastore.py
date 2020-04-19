@@ -225,7 +225,7 @@ def save_food(name, cost, available="on", image="", food_type="", ingredients=""
     client.put(food)
 
 
-def save_dinner(name, cost, available="on", image="", food_type="", ingredients="", address="", phone_number="", available_seats = 0, time="", lat=0.00, lng=0.00): #Note may need to update later
+def save_dinner(name, cost, available="on", image="", food_type="", ingredients="", address="", phone_number="", available_seats = 0, time="", lat=0.00, lng=0.00, sub=''): #Note may need to update later
     code = get_dinner_code(phone_number, name)
     log('in save_dinner() have code')
     client = _get_client()
@@ -243,6 +243,7 @@ def save_dinner(name, cost, available="on", image="", food_type="", ingredients=
     dinner['time'] = time
     dinner['lat'] = lat
     dinner['lng'] = lng
+    dinner['sub'] = sub
 
     client.put(dinner)
 
