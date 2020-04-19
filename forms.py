@@ -39,6 +39,7 @@ class FoodRegistrationForm(FlaskForm):
     fcategory = StringField("Type categories", validators=[InputRequired()], render_kw={"placeholder": "Categories"})
     fingredients = StringField("Type ingredients", validators=[InputRequired()], render_kw={"placeholder": "Ingredients"})
     fphone_number = StringField("Phone number", validators=[InputRequired()], render_kw={"placeholder": "Phone number"})
+    fsub = StringField("Sub",validators=[InputRequired()])
     submit = SubmitField('Sell Leftovers')
 
 
