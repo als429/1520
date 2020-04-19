@@ -234,7 +234,7 @@ def save_dinner(name, cost, available="on", image="", food_type="", ingredients=
     dinner['name'] = name
     dinner['cost'] = cost
     dinner['available'] = "on"
-    dinner['image'] = ""
+    dinner['image'] = image
     dinner['food_type'] = food_type
     dinner['ingredients'] = ingredients	
     dinner['address'] = address
