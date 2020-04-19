@@ -72,8 +72,22 @@ def cook():
         blob.upload_from_string(uploaded_file.read(), content_type=content_type)
         log('uploaded from string')
         url = blob.public_url
-        log('got url: ' + url)	
-        f_datastore.save_food(name, cost, available, url, food_type, ingredients, address, phone_number, lat, lng) # adding to db # url == image
+        log('got url: ' + url)
+        # Testing user token/to get sub
+        token = request.form.get('fsub')
+        CLIENT_ID = '1024466557558-monvg7ism1u12feg47r8296nh44bq500.apps.googleusercontent.com'
+        try:
+            idinfo = id_token.verify_oauth2_token(token, requests.Request(), CLIENT_ID)
+            if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
+                raise ValueError('Wrong issuer.')
+            log('ID token is valid.')
+            userid = idinfo['sub']
+            log('Got the user\'s Google Account ID from the decoded token')
+        except ValueError:
+            log('ID is not valid, in Error')
+            pass
+
+        f_datastore.save_food(name, cost, available, url, food_type, ingredients, address, phone_number, lat, lng, userid) # adding to db # url == image
         # f_datastore.save_food(name, cost, available, image, food_type, ingredients, address) # adding to db
         log('loaded food_to_datastore() data')
         flash('Succesfully submitted!', 'success')
