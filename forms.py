@@ -46,6 +46,9 @@ class DinnerRegistrationForm(FoodRegistrationForm):
     ftime = DateTimeLocalField("Host date", validators=[InputRequired()], render_kw={"placeholder": "Time"}, format="%Y-%m-%dT%H:%M")
     favailable_seats = MyIntegerField("Available seats", validators=[InputRequired(), NumberRange(min=1, message="Available seats should be a number greater than 0.")], render_kw={"placeholder": "Available seats"})
 
+class CurrentLocationForm(FlaskForm):
+    location = StringField("autocomplete", validators=[InputRequired()], render_kw={"placeholder": "Address", "class": "location", "id": "autocomplete", "onFocus": "geolocate()"})
+    submit = SubmitField('Get Leftovers Near Me')
 
 class UploadForm(FlaskForm): #AS added
     file = FileField()
