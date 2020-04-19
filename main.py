@@ -103,6 +103,7 @@ def cook():
 def host():
     form = DinnerRegistrationForm()
     if request.method == 'POST' and form.validate():
+        log('in host POST')
         # testing with 3 properties of food
         name = request.form.get('fname')
         cost = request.form.get('fcost')
@@ -116,7 +117,7 @@ def host():
         available_seats = request.form.get('favailable_seats')
         lat = request.form.get('flat')
         lng = request.form.get('flng')
-        log('form is valid')
+        log('form is valid - got everything up to lat/long')
         uploaded_file = request.files.get('file')
         log('uploaded file')
         filename = request.form.get('filename')
