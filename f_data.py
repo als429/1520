@@ -31,14 +31,18 @@
 # TODO: needs type checking
 
 class User(object):
-    def __init__(self, username, sub):
+    def __init__(self, username, sub, fullname, image):
         self.username = username
         self.sub = sub
+        self.fullname = fullname
+        self.image = image
 
     def to_dict(self):
         return {
             'username': self.username,
             'sub': self.sub,
+            'fullname': self.fullname,
+            'image': self.image,
 	}
 
 class Dinner(object):

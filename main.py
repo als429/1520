@@ -164,7 +164,9 @@ def authtoken():
     log('in contoller')
     token = request.form.get('idtoken')
     log('Received token by HTTPS POST: ' + token)
-    given_name = request.form.get('username')
+    given_name = request.form.get('username')    
+    fullname = request.form.get('fullname')    
+    image = request.form.get('image')
     log('Received given name by HTTPS POST: ' + given_name)
     CLIENT_ID = '1024466557558-monvg7ism1u12feg47r8296nh44bq500.apps.googleusercontent.com'
     try:
@@ -174,7 +176,7 @@ def authtoken():
         log('ID token is valid.')
         userid = idinfo['sub']
         log('Got the user\'s Google Account ID from the decoded token')
-        f_datastore.save_user(given_name, userid)
+        f_datastore.save_user(given_name, userid, fullname, image)
     except ValueError:
         log('ID is not valid, in Error')
         pass
@@ -285,8 +287,8 @@ def dinner_to_datastore():
 @app.route('/user/<usercode>')
 def user_page(usercode):
     user_object = f_datastore.load_users(usercode)
-    h1 = user_object.username + "'s account"
-    return show_page('user.html', 'test', h1)
+    h1 = user_object.fullname + "'s Account"
+    return show_page('user.html', user_object.fullname, h1, user=user_object)
 
 if __name__ == '__main__':
         app.run(host='127.0.0.1', port=8082, debug=True) # updated port, so that when it runs locally, it runs on 8030

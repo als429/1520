@@ -187,12 +187,14 @@ def load_dinners():
 ################ Saving entities to datastore ################
 ##############################################################
 
-def save_user(username, sub):
+def save_user(username, sub,  fullname, image):
     """Save the user details to the datastore."""
     client = _get_client() # get datastore client
     entity = datastore.Entity(_load_key(client, _USER_ENTITY, sub)) # load information relating to the entity
     entity['username'] = username
     entity['sub'] = sub
+    entity['fullname'] = fullname
+    entity['image'] = image
     client.put(entity) # update entity within datastore
 		
 
@@ -250,7 +252,9 @@ def _user_from_entity(user_entity):
 
     username = user_entity['username']
     sub = user_entity['sub']
-    user = f_data.User(username, sub)
+    fullname = user_entity['fullname']
+    image = user_entity['image']
+    user = f_data.User(username, sub, fullname, image)
     log('built user')
     return user
 

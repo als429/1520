@@ -62,7 +62,7 @@
 			    xhr.onload = function() {
 					console.log('Signed in as: ' + xhr.responseText);
 			    };
-			    xhr.send('idtoken=' + id_token+'&username=' + profile.getGivenName());
+			    xhr.send('idtoken=' + id_token+'&username=' + profile.getGivenName()+'&fullname=' + profile.getName()+'&image=' + profile.getImageUrl());
 			    console.log('Sent id_token to server');
 			  }
 			  
