@@ -148,7 +148,7 @@ def host():
         except ValueError:
             log('ID is not valid, in Error')
             pass
-        f_datastore.save_dinner(name, cost, available, image, food_type, ingredients, address, phone_number, available_seats, time, lat, lng, userid) # adding to db
+        f_datastore.save_dinner(name, cost, available, url, food_type, ingredients, address, phone_number, available_seats, time, lat, lng, userid) # adding to db
         # f_datastore.save_dinner(name, cost, available, image, food_type, ingredients, address, time) # adding to db
         log('loaded dinner_to_datastore() data')
         flash('Succesfully submitted!', 'success')
