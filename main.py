@@ -7,7 +7,7 @@ from google.cloud import storage # for images
 
 import f_data # includes our data classes: User, Dinner, Food, Location
 import f_datastore
-from forms import FoodRegistrationForm, DinnerRegistrationForm, UploadForm
+from forms import FoodRegistrationForm, DinnerRegistrationForm, UploadForm, CurrentLocationForm
 from flask_wtf.csrf import CSRFProtect
 import os
 
@@ -33,6 +33,7 @@ def success():
 @app.route('/eat')
 @app.route('/index.html')
 def root():
+    
     file = '/index.html'
     title = 'Food with Friends: Eat up!'
     h1 = 'Eat Leftovers'
@@ -116,10 +117,14 @@ def host():
 
 @app.route('/attend')
 def attend():
+    form = CurrentLocationForm()
+    log('form is good')
+    if form.validate_on_submit():
+        log('form validated')
     file = '/attend.html'
     title = 'Attend a Dinner & Make Friends'
     h1 ="Attend"
-    return render_template(file, title=title, h1=h1)
+    return render_template(file, title=title, h1=h1, form=form)
 
 
 @app.route('/eat-list') 
@@ -127,12 +132,24 @@ def eatlist():
     food_list = f_datastore.load_foods() # TODO: filter by distance
     return show_page('/eat-list.html','Nearby Leftovers','Nearby Leftovers',foods=food_list) 
 
-@app.route('/attend-list') 
+@app.route('/attend-list', methods=['GET', 'POST']) 
 def attendlist():
-    dinner_list = f_datastore.load_dinners() # TODO: filter by distance
+    if request.method =='POST':
+        log('posted')
+        currentaddress = request.form.get('location')
+        currentlat = request.form.get('clat')
+        currentlng = request.form.get('clng')
+        log(currentlat)
+        log(currentlng)
+        return attendlistll(currentlat, currentlng)
+    dinner_list = f_datastore.load_dinners() 
     return show_page('/attend-list.html','Nearby Dinners','Nearby Dinners', dinners=dinner_list)
 
-
+@app.route('/attend-list/<lat>-<lng>')
+def attendlistll(lat, lng):
+    h1 = 'Lat: ' + lat + ' Lng: ' + lng
+    dinner_list = f_datastore.load_dinners(lat, lng) 
+    return show_page('/attend-list.html','Attend List', h1, dinners=dinner_list)
 
 # utility function that allows us to 
 # consolidate on the render_template function
