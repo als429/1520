@@ -2,19 +2,18 @@
 {% block header %}
 {% endblock %}
 {% block content %}
-<body>
 
-    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+<form method="POST" >
+    <input id = "autocomplete" type="text" class="location" name="autocomplete" placeholder="Address" onFocus="geolocate()">
+    <input id = "clat" type = "hidden" name="clat">
+    <input id = "clng" type = "hidden" name="clng">
 
-    <div id="locationField">
-      <input id="autocomplete"
-             placeholder="Enter your address"
-             onFocus="geolocate()"
-             class="location"
-             type="text"/>
-    </div>
-    <script>
+    <button input type="submit" class="eat">Get Leftovers Near Me</button>
 
+</form>
+
+
+<script>
 var autocomplete;
 
 function initAutocomplete() {
@@ -48,11 +47,5 @@ function geolocate() {
 </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAetDGtzTKdygkWv27KM1gPEDoBYQ_szws&libraries=places&callback=initAutocomplete"
         async defer></script>
-
-</body>
-
-<form action="eat-list">
-    <button class="eat">Get Leftovers Near Me</button>
-</form>
 
 {% endblock %}
