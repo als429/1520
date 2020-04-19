@@ -55,6 +55,7 @@
                 </div>
             {% endif %}
             <br/>
+            <input id="fsub" type = "hidden" name="fsub">              
             <button input type="submit" class="btn sell">{% if h1 == "Host" %}Host a Dinner!{% else %}Sell Leftovers!{% endif %}</button>
         </div>
     </form>
@@ -93,9 +94,9 @@ function geolocate() {
   }
 }
 </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAetDGtzTKdygkWv27KM1gPEDoBYQ_szws&libraries=places&callback=initAutocomplete"
+                   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAetDGtzTKdygkWv27KM1gPEDoBYQ_szws&libraries=places&callback=initAutocomplete"
         async defer></script>
 </div>
 
-
+		
 {% endblock %}
