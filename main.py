@@ -33,10 +33,15 @@ def success():
 @app.route('/eat')
 @app.route('/index.html')
 def root():
+    form = CurrentLocationForm()
+    log('form is good')
+    if form.validate_on_submit():
+        log('form validated')
+
     file = '/index.html'
     title = 'Food with Friends: Eat up!'
     h1 = 'Eat Leftovers'
-    return show_page(file,title,h1)
+    return render_template(file, title=title, h1=h1, form=form)
 	
 @app.route('/cook', methods=['GET','POST'])
 def cook():
@@ -163,18 +168,33 @@ def host():
 @app.route('/attend')
 def attend():
     form = CurrentLocationForm()
-    #log('form is good')
-    #if form.validate_on_submit():
-    #    log('form validated')
+    log('form is good')
+    if form.validate_on_submit():
+        log('form validated')
+
     file = '/attend.html'
     title = 'Attend a Dinner & Make Friends'
     h1 ="Attend"
     return render_template(file, title=title, h1=h1, form=form)
 
 
-@app.route('/eat-list') 
+@app.route('/eat-list', methods=['GET', 'POST']) 
 def eatlist():
+    if request.method =='POST':
+        log('posted')
+        currentaddress = request.form.get('location')
+        currentlat = request.form.get('clat')
+        currentlng = request.form.get('clng')
+        log(currentlat)
+        log(currentlng)
+        return eatlistll(currentlat, currentlng)
     food_list = f_datastore.load_foods() # TODO: filter by distance
+    return show_page('/eat-list.html','Nearby Leftovers','Nearby Leftovers',foods=food_list) 
+
+@app.route('/eat-list/<lat>-<lng>')
+def eatlistll(lat, lng):
+    h1 = 'Lat: ' + lat + ' Lng: ' + lng
+    food_list = f_datastore.load_foods()
     return show_page('/eat-list.html','Nearby Leftovers','Nearby Leftovers',foods=food_list) 
 
 @app.route('/attend-list', methods=['GET', 'POST']) 
