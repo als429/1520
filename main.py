@@ -187,6 +187,9 @@ def eatlist():
         currentlng = request.form.get('clng')
         log(currentlat)
         log(currentlng)
+        log(type(currentlat))
+        if currentlat =='': currentlat = '0'
+        if currentlat =='': currentlat = '0'
         return eatlistll(currentlat, currentlng)
     else:
         lat = '40.1' # for map
