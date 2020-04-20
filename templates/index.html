@@ -27,6 +27,9 @@ function getLatLng(){
     var place = autocomplete.getPlace();
     var lat = place.geometry.location.lat();
     var lng = place.geometry.location.lng();
+    
+    document.getElementById('clat').value = lat;
+    document.getElementById('clng').value = lng;
 
     console.log("lat: " + lat);
     console.log("lng: " + lng);
