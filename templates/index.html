@@ -5,7 +5,8 @@
 
 <form method="POST"  action="/eat-list">
     {{form.csrf_token}}
-    <input id = "autocomplete" type="text" class="location" name="autocomplete" placeholder="Address" onFocus="geolocate()">
+    <!-- <input id = "autocomplete" type="text" class="location" name="autocomplete" placeholder="Address" onFocus="geolocate()"> -->
+    <div>{{ form.location }}</div>
     <input id = "clat" type = "hidden" name="clat">
     <input id = "clng" type = "hidden" name="clng">
 

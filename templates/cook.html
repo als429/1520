@@ -24,7 +24,7 @@
             <input id = "flat" type = "hidden" name="flat">
             <input id = "flng" type = "hidden" name="flng">
             <div>{{ form.fphone_number }}</div>
-            {% if h1 == "Host" %}
+            {% if h1 == "Host" or h1 == "Edit Host" %}
                 <div>{{ form.favailable_seats }}</div>
                 {% if form.favailable_seats.errors %}
                     {% for error in form.favailable_seats.errors %}
@@ -39,7 +39,7 @@
             <div>{{ form.file }}</div><!--<label for="file">Upload Image &#x25b2;</label>-->
         </div>
         <div class="column right">
-            {% if h1 == "Host" %}
+            {% if h1 == "Host" or h1 == "Edit Host" %}
                 <div>{{ form.ftime }}</div>
                 {% if form.ftime.errors %}
                     {% for error in form.ftime.errors %}
@@ -56,7 +56,7 @@
                 </div>
             {% endif %}
             <br/>
-            <input id="fsub" type = "hidden" name="fsub">  
+            <input id="fsub" type="hidden" name="fsub">  
             <button input type="submit" class="btn sell">{% if h1 == "Host" %}Host a Dinner!{% elif h1 == "Cook" %}Sell Leftovers!{% else %}Submit Changes{% endif %}</button>
         </div>
     </form>

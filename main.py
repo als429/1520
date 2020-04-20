@@ -10,6 +10,7 @@ import f_datastore
 from forms import FoodRegistrationForm, DinnerRegistrationForm, UploadForm, FlaskForm, CurrentLocationForm
 from flask_wtf.csrf import CSRFProtect
 import os
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -36,9 +37,12 @@ def success():
 def root():
     form = CurrentLocationForm()
     log('form is good')
-    if form.validate_on_submit():
+    if request.method == 'POST' and form.validate_on_submit():
         log('form validated')
-
+        address = request.form.get('location')
+        lat = request.form.get('clat')
+        lng = request.form.get('clng')
+        return redirect(url_for('eatlistll', lat=lat, lng=lng))
     file = '/index.html'
     title = 'Food with Friends: Eat up!'
     h1 = 'Eat Leftovers'
@@ -204,7 +208,8 @@ def edit_cook(food):
 
 @app.route('/edit_host/<dinner>', methods=['GET','POST'])
 def edit_host(dinner):
-    form = DinnerRegistrationForm()
+    food_entity = f_datastore.query_dinner(dinner)
+    form = DinnerRegistrationForm(obj=food_entity)
     if request.method == 'POST' and form.validate():
         # testing with 3 properties of food
         user = get_user()
@@ -223,7 +228,27 @@ def edit_host(dinner):
         if not lat:
             lat = food_entity.get('lat')
             lng = food_entity.get('lng')
-        f_datastore.save_dinner(user, name, cost, available, image, food_type, ingredients, address, phone_number, available_seats, time, lat, lng) # adding to db
+        log('form is valid')
+        uploaded_file = request.files.get('file')
+        log('uploaded file')
+        filename = request.form.get('filename')
+        log('got filename')
+        content_type = uploaded_file.content_type
+        log('got content type')
+        if uploaded_file:
+            gcs_client = storage.Client()
+            log('got storage client')
+            storage_bucket = gcs_client.get_bucket('f_storage')
+            log('got f_storage bucket')
+            blob = storage_bucket.blob(uploaded_file.filename)
+            log('got blob')
+            blob.upload_from_string(uploaded_file.read(), content_type=content_type)
+            log('uploaded from string')
+            url = blob.public_url
+            log('got url: ' + url)	
+        else:
+            url = food_entity.get('image')
+        f_datastore.save_dinner(user, name, cost, available, url, food_type, ingredients, address, phone_number, available_seats, time, lat, lng) # adding to db
         log('loaded dinner_to_datastore() data')
         flash('Succesfully submitted!', 'success')
         return redirect('/activity')
@@ -239,7 +264,7 @@ def edit_host(dinner):
     form.flat.data = food_entity.get('lat')
     form.flng.data = food_entity.get('lng')
     form.favailable_seats.data = food_entity.get('available_seats')
-    form.ftime.data = food_entity.get('time')
+    form.ftime.data = datetime.strptime(food_entity.get('time'), "%Y-%m-%dT%H:%M")
 
     file = '/cook.html'
     title = 'Host a Dinner & Make Friends'
@@ -352,19 +377,26 @@ def authtoken():
 
 @app.route('/activity', methods=['GET','POST'])
 def activity():
-    edit = request.form.get('edit')
-    if edit is not None:
-        return redirect(url_for('edit_cook', food=edit))
-    delete = request.form.get('delete')
-    if delete is not None:
-        f_datastore.delete_food(delete)
+    edit_food = request.form.get('edit_food')
+    if edit_food is not None:
+        return redirect(url_for('edit_cook', food=edit_food))
+    delete_food = request.form.get('delete_food')
+    if delete_food is not None:
+        f_datastore.delete_food(delete_food)
+    edit_dinner = request.form.get('edit_dinner')
+    if edit_dinner is not None:
+        return redirect(url_for('edit_host', dinner=edit_dinner))
+    delete_dinner = request.form.get('delete_dinner')
+    if delete_dinner is not None:
+        f_datastore.delete_dinner(delete_dinner)
     file = '/activity.html'
     title = 'Attend a Dinner & Make Friends'
     h1 ="My Foods"
     user = get_user()
     food_list = f_datastore.query_food_list(user)
+    dinner_list = f_datastore.query_dinner_list(user)
     form = FlaskForm()
-    return render_template(file, title=title, h1=h1, food_list=food_list, form=form, user=get_user())
+    return render_template(file, title=title, h1=h1, food_list=food_list, dinner_list=dinner_list, form=form, user=get_user())
 
 
 @app.route('/logout')
@@ -488,4 +520,4 @@ def user_page(usercode):
     return show_page('user.html', user_object.fullname, h1, user=user_object, foods = food_list, dinner=rate, dinners=int_rate)
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=8082, debug=True) # updated port, so that when it runs locally, it runs on 8030
+    app.run(host='0.0.0.0', port=8030, debug=True) # updated port, so that when it runs locally, it runs on 8030

@@ -46,9 +46,10 @@ class User(object):
 	}
 
 class Dinner(object):
-    def __init__(self, code, name='', cost=0.00, available=False, 
+    def __init__(self, code, user, name='', cost=0.00, available=False, 
                 image='../icons/hamburger.png', food_type='', 
                 ingredients=None, address=None, phone_number='', available_seats=0,time='', lat = 0.00, lng = 0.00, rate=5.00, sub=''):
+        self.user = user
         self.code = code
         self.name = name
         self.cost = cost

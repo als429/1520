@@ -41,19 +41,21 @@ class FoodRegistrationForm(FlaskForm):
     fingredients = StringField("Type ingredients", validators=[InputRequired()], render_kw={"placeholder": "Ingredients"})
     fphone_number = StringField("Phone number", validators=[InputRequired()], render_kw={"placeholder": "Phone number"})
     favailable = BooleanField("Checkbox")
-    fsub = StringField("Sub",validators=[InputRequired()])
+    fsub = StringField("Sub",validators=[Optional()])
     submit = SubmitField('Sell Leftovers')
     flat = FloatField("Latitude", validators=[Optional()])
     flng = FloatField("Longitude", validators=[Optional()])
 
 
 class DinnerRegistrationForm(FoodRegistrationForm):
-    file = FileField(validators=[FileRequired()])
+    # file = FileField(validators=[FileRequired()])
     ftime = DateTimeLocalField("Host date", validators=[InputRequired()], render_kw={"placeholder": "Time"}, format="%Y-%m-%dT%H:%M")
     favailable_seats = MyIntegerField("Available seats", validators=[InputRequired(), NumberRange(min=1, message="Available seats should be a number greater than 0.")], render_kw={"placeholder": "Available seats"})
 
 class CurrentLocationForm(FlaskForm):
     location = StringField("autocomplete", validators=[InputRequired()], render_kw={"placeholder": "Address", "class": "location", "id": "autocomplete", "onFocus": "geolocate()"})
+    flat = FloatField("Latitude", validators=[Optional()])
+    flng = FloatField("Longitude", validators=[Optional()])
     submit = SubmitField('Get Leftovers Near Me')
 
 class UploadForm(FlaskForm): #AS added

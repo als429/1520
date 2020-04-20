@@ -186,18 +186,15 @@ def load_foods(lat='40.1', lng='80.2'):
     q.add_filter('lat', '>', latLower)
 
     # lng
-    #lngUpper = float(lng) + .1
-    #lngUpper = str(lngUpper)
-    #lngLower = float(lng) - .1
-    #lngLower = str(lngLower)
-
-    #q.add_filter('lng', '<', lngUpper)
-    #q.add_filter('lng', '>', lngLower)
+    lngUpper = float(lng) + .1
+    lngLower = float(lng) - .1
 
     result = []
     for food in q.fetch():
         log(type(food))
-        result.append(food)
+        if float(food["lng"]) < lngUpper and float(food["lng"]) > lngLower:
+            result.append(food)
+            log("food lng: " + food["lng"])
     return result
 
 def load_dinners(lat='40.1', lng='80.2'):
@@ -220,18 +217,15 @@ def load_dinners(lat='40.1', lng='80.2'):
     q.add_filter('lat', '>', latLower)
 
     # lng
-    #lngUpper = float(lng) + .1
-    #lngUpper = str(lngUpper)
-    #lngLower = float(lng) - .1
-    #lngLower = str(lngLower)
-
-    #q.add_filter('lng', '<', lngUpper)
-    #q.add_filter('lng', '>', lngLower)
+    lngUpper = float(lng) + .1
+    lngLower = float(lng) - .1
 
     result = []
     for dinner in q.fetch():
         log(type(dinner))
-        result.append(dinner)
+        if float(dinner["lng"]) < lngUpper and float(dinner["lng"]) > lngLower:
+            result.append(dinner)
+            log("dinner lng: " + dinner["lng"])   
     return result
 
 ##############################################################
@@ -268,7 +262,7 @@ def save_food(user, name, cost, available="on", image="", food_type="", ingredie
     food['phone_number'] = phone_number
     food['lat'] = lat
     food['lng'] = lng
-    food['sub'] = sub
+    # food['sub'] = sub
     food['rate'] = 5.0	
 
     client.put(food)
@@ -415,6 +409,13 @@ def create_data():
 ############## Querying entities to datastore ################
 ##############################################################
 
+def query_dinner_list(userid):
+    client = _get_client() # get datastore client
+    q = client.query(kind=_DINNER_ENTITY)
+    q.add_filter('user', '=', userid)
+    return list(q.fetch())
+
+
 def query_food_list(userid):
     client = _get_client() # get datastore client
     q = client.query(kind=_FOOD_ENTITY)
@@ -429,6 +430,13 @@ def query_food(food):
     return list(q.fetch())[0]
 
 
+def query_dinner(dinner):
+    client = _get_client() # get datastore client
+    q = client.query(kind=_DINNER_ENTITY)
+    q.add_filter('name', '=', dinner)
+    return list(q.fetch())[0]
+
+
 ##############################################################
 ############## Deleting entities to datastore ################
 ##############################################################
@@ -436,6 +444,14 @@ def query_food(food):
 def delete_food(name):
     client = _get_client() # get datastore client
     q = client.query(kind=_FOOD_ENTITY)
+    q.add_filter('name', '=', name)
+    for entity in q.fetch():
+        client.delete(entity.key)
+
+
+def delete_dinner(name):
+    client = _get_client() # get datastore client
+    q = client.query(kind=_DINNER_ENTITY)
     q.add_filter('name', '=', name)
     for entity in q.fetch():
         client.delete(entity.key)
