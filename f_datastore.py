@@ -186,18 +186,15 @@ def load_foods(lat='40.1', lng='80.2'):
     q.add_filter('lat', '>', latLower)
 
     # lng
-    #lngUpper = float(lng) + .1
-    #lngUpper = str(lngUpper)
-    #lngLower = float(lng) - .1
-    #lngLower = str(lngLower)
-
-    #q.add_filter('lng', '<', lngUpper)
-    #q.add_filter('lng', '>', lngLower)
+    lngUpper = float(lng) + .1
+    lngLower = float(lng) - .1
 
     result = []
     for food in q.fetch():
         log(type(food))
-        result.append(food)
+        if float(food["lng"]) < lngUpper and float(food["lng"]) > lngLower:
+            result.append(food)
+            log("food lng: " + food["lng"])
     return result
 
 def load_dinners(lat='40.1', lng='80.2'):
@@ -220,18 +217,15 @@ def load_dinners(lat='40.1', lng='80.2'):
     q.add_filter('lat', '>', latLower)
 
     # lng
-    #lngUpper = float(lng) + .1
-    #lngUpper = str(lngUpper)
-    #lngLower = float(lng) - .1
-    #lngLower = str(lngLower)
-
-    #q.add_filter('lng', '<', lngUpper)
-    #q.add_filter('lng', '>', lngLower)
+    lngUpper = float(lng) + .1
+    lngLower = float(lng) - .1
 
     result = []
     for dinner in q.fetch():
         log(type(dinner))
-        result.append(dinner)
+        if float(dinner["lng"]) < lngUpper and float(dinner["lng"]) > lngLower:
+            result.append(dinner)
+            log("dinner lng: " + dinner["lng"])   
     return result
 
 ##############################################################
