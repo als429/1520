@@ -133,7 +133,7 @@ input:checked + .slider:before {
           var geocoder=new google.maps.Geocoder();
           map=new google.maps.Map(document.getElementById('map'), {
               center: {
-                  lat: 40.4328462, lng: -79.9291791
+                  lat: {{lat}}, lng: {{long}}
               }
               , zoom: 17 // 1: World, 5: Landmass/continent, 10: City, 15: Streets, 20: Buildings
           }
