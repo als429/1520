@@ -162,7 +162,7 @@ def host():
 
 @app.route('/attend')
 def attend():
-    form = CurrentLocationForm(csrf_enabled=False)
+    form = CurrentLocationForm()
     log('form is good')
     if form.validate_on_submit():
         log('form validated')
