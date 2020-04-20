@@ -195,7 +195,7 @@ def eatlist():
 def eatlistll(lat, lng):
     h1 = 'Lat: ' + lat + ' Lng: ' + lng
     food_list = f_datastore.load_foods()
-    return show_page('/eat-list.html','Nearby Leftovers','Nearby Leftovers',foods=food_list) 
+    return show_page('/eat-list.html','Nearby Leftovers','Nearby Leftovers',foods=food_list,lat=lat,lng=lng) 
 
 @app.route('/attend-list', methods=['GET', 'POST']) 
 def attendlist():
@@ -208,7 +208,7 @@ def attendlist():
         log(currentlng)
         return attendlistll(currentlat, currentlng)
     dinner_list = f_datastore.load_dinners() 
-    return show_page('/attend-list.html','Nearby Dinners','Nearby Dinners', dinners=dinner_list)
+    return show_page('/attend-list.html','Nearby Dinners','Nearby Dinners', dinners=dinner_list,lat=lat,lng=lng)
 
 @app.route('/attend-list/<lat>-<lng>')
 def attendlistll(lat, lng):
@@ -221,7 +221,7 @@ def attendlistll(lat, lng):
 # will allow us to expand on parameters, as week04/gae/project2/main
 # start to get user, location, food, and dinner data
 def show_page(page, title, h1, user=None,
-			  food=None, foods=None, dinner=None, dinners=None, errors=None):
+			  food=None, foods=None, dinner=None, dinners=None, errors=None, lat=None, lng=None):
 	return render_template(page, 
 			       page_title=title, #on-page = parameter
 			       h1=h1,
@@ -230,6 +230,8 @@ def show_page(page, title, h1, user=None,
 			       foods=foods,
 			       dinner=dinner,
 			       dinners=dinners,
+			       lat=lat,
+			       lng=lng,
 			       errors=errors)
 
 
