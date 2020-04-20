@@ -4,7 +4,7 @@
 {% block content %}
 
 <form method="POST" action="/attend-list">
-    {{form.csrf_token}}
+    <!--{{form.csrf_token}}-->
     
     <input id = "autocomplete" type="text" class="location" name="autocomplete" placeholder="Address" onFocus="geolocate()">
     <input id = "clat" type = "hidden" name="clat">

@@ -33,7 +33,6 @@ def success():
 @app.route('/eat')
 @app.route('/index.html')
 def root():
-    
     file = '/index.html'
     title = 'Food with Friends: Eat up!'
     h1 = 'Eat Leftovers'
@@ -163,10 +162,10 @@ def host():
 
 @app.route('/attend')
 def attend():
-    form = CurrentLocationForm()
-    log('form is good')
-    if form.validate_on_submit():
-        log('form validated')
+    #form = CurrentLocationForm()
+    #log('form is good')
+    #if form.validate_on_submit():
+    #    log('form validated')
     file = '/attend.html'
     title = 'Attend a Dinner & Make Friends'
     h1 ="Attend"
