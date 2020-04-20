@@ -191,7 +191,7 @@ def eatlist():
     return show_page('/eat-list.html','Nearby Leftovers','Nearby Leftovers',foods=food_list) 
 
 @app.route('/eat-list/<lat>-<lng>')
-def attendlistll(lat, lng):
+def eatlistll(lat, lng):
     h1 = 'Lat: ' + lat + ' Lng: ' + lng
     food_list = f_datastore.load_foods()
     return show_page('/eat-list.html','Nearby Leftovers','Nearby Leftovers',foods=food_list) 
