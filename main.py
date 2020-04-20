@@ -181,17 +181,16 @@ def attend():
 @app.route('/eat-list', methods=['GET', 'POST']) 
 def eatlist():
     if request.method =='POST':
-        log('posted')
-        currentaddress = request.form.get('location')
-        currentlat = request.form.get('clat')
-        currentlng = request.form.get('clng')
-        log(currentlat)
-        log(currentlng)
-        log(type(currentlat))
-        if currentlat =='': currentlat = '0'
-        if currentlng =='': currentlng = '0'
-        log('got out of ifsss')
-        return eatlistll(currentlat, currentlng)
+	if request.form.get('clng') == '':
+            log('posted')
+            currentaddress = request.form.get('location')
+            currentlat = request.form.get('clat')
+            currentlng = request.form.get('clng')
+            log(currentlat)
+            log(currentlng)
+            log(type(currentlat))
+            log('got out of ifsss')
+            return eatlistll(currentlat, currentlng)
     else:
         lat = '40.1' # for map
         lng = '90.2' # for map
