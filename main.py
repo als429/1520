@@ -180,16 +180,13 @@ def attend():
 
 @app.route('/eat-list', methods=['GET', 'POST']) 
 def eatlist():
-    if request.method =='POST':
+    if request.method =='POST' and type(request.form.get('location'))== str:
         log('posted')
         currentaddress = request.form.get('location')
         currentlat = request.form.get('clat')
         currentlng = request.form.get('clng')
         log(currentlat)
         log(currentlng)
-        # Scranton lat/long for default
-        if currentlat == None: currentlat == '41.408969'
-        if currentlng == None: currentlng == '-75.66241219999999'
         return eatlistll(currentlat, currentlng)
     food_list = f_datastore.load_foods() # TODO: filter by distance
     return show_page('/eat-list.html','Nearby Leftovers','Nearby Leftovers',foods=food_list) 
