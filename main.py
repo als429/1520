@@ -188,7 +188,7 @@ def eatlist():
         log(currentlat)
         log(currentlng)
         return eatlistll(currentlat, currentlng)
-    food_list = f_datastore.load_foods(0,0,200) # TODO: filter by distance
+    food_list = f_datastore.load_foods('0','0',200) # TODO: filter by distance
     return show_page('/eat-list.html','Nearby Leftovers','Nearby Leftovers',foods=food_list) 
 
 @app.route('/eat-list/<lat>-<lng>')
