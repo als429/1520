@@ -208,13 +208,13 @@ def attendlist():
         log(currentlng)
         return attendlistll(currentlat, currentlng)
     dinner_list = f_datastore.load_dinners() 
-    return show_page('/attend-list.html','Nearby Dinners','Nearby Dinners', dinners=dinner_list,lat=lat,lng=lng)
+    return show_page('/attend-list.html','Nearby Dinners','Nearby Dinners', dinners=dinner_list)
 
 @app.route('/attend-list/<lat>-<lng>')
 def attendlistll(lat, lng):
     h1 = 'Lat: ' + lat + ' Lng: ' + lng
     dinner_list = f_datastore.load_dinners(lat, lng) 
-    return show_page('/attend-list.html','Attend List', h1, dinners=dinner_list)
+    return show_page('/attend-list.html','Attend List', h1, dinners=dinner_list,lat=lat,lng=lng)
 
 # utility function that allows us to 
 # consolidate on the render_template function
