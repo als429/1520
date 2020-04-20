@@ -184,11 +184,15 @@ def load_dinners(lat=40.0, lng=-80.0):
     log(type(lat))
     log('Long: ' + lng)
     log(type(lng))
+
+    # lat
     latUpper = float(lat) + .1
     latUpper = str(latUpper)
-
+    latLower = float(latLower) - .1
+    latLower = str(latLower)
 
     q.add_filter('lat', '<', latUpper)
+    q.add_filter('lat', '>', latLower)
 
     result = []
     for dinner in q.fetch():
