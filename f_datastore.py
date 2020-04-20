@@ -166,38 +166,12 @@ def load_dinner(dinner_code): # inputing the dinner code to get information from
     return dinner # returns python Dinner object
 
 
-def load_foods(lat='40.1', lng='80.2'):
+def load_foods():
     client = _get_client()
     q = client.query(kind=_FOOD_ENTITY)
-    # q.add_filter('available', '=', "on")
-
-    # logging input values
-    log('Lat: ' + lat)
-    log(type(lat))
-    log('Long: ' + lng)
-    log(type(lng))
-
-    # lat
-    latUpper = float(lat) + .1
-    latUpper = str(latUpper)
-    latLower = float(lat) - .1
-    latLower = str(latLower)
-
-    q.add_filter('lat', '<', latUpper)
-    q.add_filter('lat', '>', latLower)
-
-    # lng
-    # lngUpper = float(lng) + .1
-    # lngUpper = str(lngUpper)
-    # lngLower = float(lng) - .1
-    # lngLower = str(lngLower)
-
-    # q.add_filter('lng', '<', lngUpper)
-    # q.add_filter('lng', '>', lngLower)
-
+    q.add_filter('available', '=', "on")
     result = []
     for food in q.fetch():
-        log(type(food))
         result.append(food)
     return result
 
