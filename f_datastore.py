@@ -175,6 +175,9 @@ def load_foods(lat, lng, allowance):
     log(type(lat))
     log('Long: ' + lng)
     log(type(lng))
+	
+    log('allowance: ' + str(allowance))
+
 
     # lat
     latUpper = float(lat) + allowance
@@ -184,10 +187,14 @@ def load_foods(lat, lng, allowance):
 
     q.add_filter('lat', '<', latUpper)
     q.add_filter('lat', '>', latLower)
+    log("lat upper: " + latUpper)
+    log("lat lower: " + latLower)
 
     # lng
     lngUpper = float(lng) + allowance
     lngLower = float(lng) - allowance
+    log("lng upper: " + str(lngUpper))
+    log("lng lower: " + str(lngLower))
 
     result = []
     for food in q.fetch():
