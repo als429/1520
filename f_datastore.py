@@ -142,7 +142,7 @@ def load_user(sub):
         # get the information from the datastore (accessing as one accesses a dictionary)
         # use that information as a parameter to insert in our python User object
         # return object
-        return f_data.User(user['username'], user['sub']) # get user from datastore, translate to python User object
+        return f_data.User(user['username'], user['sub'], user['fullname'], user['image']) # get user from datastore, translate to python User object
     return None # if info doesn't exist return None
 
 def load_food(food_code): # inputing the food code to get information from datastore
@@ -271,8 +271,9 @@ def get_user_rating(sub, food_list):
     ratings = 0.0
     total = 0.0
     for x in food_list:
-        if x.sub == sub:
-            ratings += x.rate
+        food_sub = x['sub']
+        if food_sub == sub:
+            ratings += x['rate']
             total += 1.0
     average = ratings/total
     return average
