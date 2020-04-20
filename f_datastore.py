@@ -178,6 +178,10 @@ def load_foods(): # TODO: we will want to add [city] or [zip] to add query filte
 def load_dinners(lat=40.0, lng=-80.0):
     client = _get_client()
     q = client.query(kind=_DINNER_ENTITY)
+    latUpper = str(lat + 1)
+    latLower = str(lat - 1)
+    q.add_filter('lat', '<', latUpper)
+    q.add_filter('lat', '>', latLower)
     result = []
     for dinner in q.fetch():
         log(type(dinner))
