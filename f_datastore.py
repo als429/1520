@@ -175,7 +175,7 @@ def load_foods(): # TODO: we will want to add [city] or [zip] to add query filte
         result.append(food)
     return result # returns an array of Entities
 
-def load_dinners(lat='40.1', lng=-'80.2'):
+def load_dinners(lat='40.1', lng='80.2'):
     client = _get_client()
     q = client.query(kind=_DINNER_ENTITY)
 
