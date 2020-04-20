@@ -197,28 +197,23 @@ def load_foods(lat='40.1', lng='80.2'):
             log("food lng: " + food["lng"])
     return result
 
-def load_dinners(lat='40.1', lng='80.2'):
+def load_dinners(lat=1000.1, lng='80.2'): #lng parameter doesn't matter
     client = _get_client()
     q = client.query(kind=_DINNER_ENTITY)
 
     # logging input values
     log('Lat: ' + lat)
     log(type(lat))
-    log('Long: ' + lng)
-    log(type(lng))
 
-    # lat
-    latUpper = float(lat) + .1
-    latUpper = str(latUpper)
-    latLower = float(lat) - .1
-    latLower = str(latLower)
+    if(lat != 1000.1):
+        # lat
+        latUpper = float(lat) + .1
+        latUpper = str(latUpper)
+        latLower = float(lat) - .1
+        latLower = str(latLower)
 
     q.add_filter('lat', '<', latUpper)
     q.add_filter('lat', '>', latLower)
-
-    # lng
-    lngUpper = float(lng) + .1
-    lngLower = float(lng) - .1
 
     result = []
     for dinner in q.fetch():
