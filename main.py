@@ -209,6 +209,8 @@ def attendlist():
         currentlng = request.form.get('clng')
         log(currentlat)
         log(currentlng)
+        log(type(currentlat))
+        if currentlng =='': currentlng = '0'
         return attendlistll(currentlat, currentlng)
     dinner_list = f_datastore.load_dinners() 
     return show_page('/attend-list.html','Nearby Dinners','Nearby Dinners', dinners=dinner_list)
