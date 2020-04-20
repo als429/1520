@@ -142,7 +142,7 @@ def load_user(sub):
         # get the information from the datastore (accessing as one accesses a dictionary)
         # use that information as a parameter to insert in our python User object
         # return object
-        return f_data.User(user['username'], user['sub']) # get user from datastore, translate to python User object
+        return f_data.User(user['username'], user['sub'], user['fullname'], user['image']) # get user from datastore, translate to python User object
     return None # if info doesn't exist return None
 
 def load_food(food_code): # inputing the food code to get information from datastore
@@ -165,23 +165,80 @@ def load_dinner(dinner_code): # inputing the dinner code to get information from
     log('we have translated dinner entity to Python object')
     return dinner # returns python Dinner object
 
-
-def load_foods(): # TODO: we will want to add [city] or [zip] to add query filters (q.add_filter('zip', '=', zip))
+def load_foods(lat='40.1', lng='80.2'):
     client = _get_client()
     q = client.query(kind=_FOOD_ENTITY)
-    q.add_filter('available', '=', "on") # Filters data by Availablity; Needs to be one equal...  https://googleapis.dev/python/datastore/latest/queries.html#google.cloud.datastore.query.Query.add_filter
-    result = []
-    for food in q.fetch(): # q.fetch() returns the iterator for the query
-        result.append(food)
-    return result # returns an array of Entities
+    q.add_filter('available', '=', "on")
 
-# TODO: add load_dinners()
+    # logging input values
+    log('Lat: ' + lat)
+    log(type(lat))
+    log('Long: ' + lng)
+    log(type(lng))
+
+    # lat
+    latUpper = float(lat) + .1
+    latUpper = str(latUpper)
+    latLower = float(lat) - .1
+    latLower = str(latLower)
+
+    q.add_filter('lat', '<', latUpper)
+    q.add_filter('lat', '>', latLower)
+
+    # lng
+    #lngUpper = float(lng) + .1
+    #lngUpper = str(lngUpper)
+    #lngLower = float(lng) - .1
+    #lngLower = str(lngLower)
+
+    #q.add_filter('lng', '<', lngUpper)
+    #q.add_filter('lng', '>', lngLower)
+
+    result = []
+    for food in q.fetch():
+        log(type(food))
+        result.append(food)
+    return result
+
+def load_dinners(lat='40.1', lng='80.2'):
+    client = _get_client()
+    q = client.query(kind=_DINNER_ENTITY)
+
+    # logging input values
+    log('Lat: ' + lat)
+    log(type(lat))
+    log('Long: ' + lng)
+    log(type(lng))
+
+    # lat
+    latUpper = float(lat) + .1
+    latUpper = str(latUpper)
+    latLower = float(lat) - .1
+    latLower = str(latLower)
+
+    q.add_filter('lat', '<', latUpper)
+    q.add_filter('lat', '>', latLower)
+
+    # lng
+    #lngUpper = float(lng) + .1
+    #lngUpper = str(lngUpper)
+    #lngLower = float(lng) - .1
+    #lngLower = str(lngLower)
+
+    #q.add_filter('lng', '<', lngUpper)
+    #q.add_filter('lng', '>', lngLower)
+
+    result = []
+    for dinner in q.fetch():
+        log(type(dinner))
+        result.append(dinner)
+    return result
 
 ##############################################################
 ################ Saving entities to datastore ################
 ##############################################################
 
-def save_user(username, sub):
+def save_user(username, sub,  fullname, image):
     """Save the user details to the datastore."""
     client = _get_client() # get datastore client
     q = client.query(kind=_USER_ENTITY)
@@ -211,11 +268,13 @@ def save_food(user, name, cost, available="on", image="", food_type="", ingredie
     food['phone_number'] = phone_number
     food['lat'] = lat
     food['lng'] = lng
+    food['sub'] = sub
+    food['rate'] = 5.0	
 
     client.put(food)
 
 
-def save_dinner(name, cost, user, available="on", image="", food_type="", ingredients="", address="", phone_number="", available_seats = 0, time="", lat=0.00, lng=0.00): #Note may need to update later
+def save_dinner(user, name, cost, available="on", image="", food_type="", ingredients="", address="", phone_number="", available_seats = 0, time="", lat=0.00, lng=0.00): #Note may need to update later
     code = get_dinner_code(phone_number, name)
     log('in save_dinner() have code')
     client = _get_client()
@@ -225,7 +284,7 @@ def save_dinner(name, cost, user, available="on", image="", food_type="", ingred
     dinner['cost'] = cost
     dinner['user'] = user
     dinner['available'] = "on"
-    dinner['image'] = ""
+    dinner['image'] = image
     dinner['food_type'] = food_type
     dinner['ingredients'] = ingredients	
     dinner['address'] = address
@@ -234,8 +293,39 @@ def save_dinner(name, cost, user, available="on", image="", food_type="", ingred
     dinner['time'] = time
     dinner['lat'] = lat
     dinner['lng'] = lng
+    # dinner['sub'] = sub
+    dinner['rate'] = 5.0
 
     client.put(dinner)
+
+def load_users(sub):
+    """Load a user from the datastore, based on the sub."""
+    client = _get_client()
+    user_entity = _load_entity(client, _USER_ENTITY, sub)
+    log('user sub: ' + sub)
+    user = _user_from_entity(user_entity)
+    return user
+
+def _user_from_entity(user_entity):
+    """Translate the User entity to a regular old Python object."""
+    username = user_entity['username']
+    sub = user_entity['sub']
+    fullname = user_entity['fullname']
+    image = user_entity['image']
+    user = f_data.User(username, sub, fullname, image)
+    log('built user')
+    return user
+
+def get_user_rating(sub, food_list):
+    ratings = 0.0
+    total = 0.0
+    for x in food_list:
+        food_sub = x['sub']
+        if food_sub == sub:
+            ratings += x['rate']
+            total += 1.0
+    average = ratings/total
+    return average
 
 ##############################################################
 ####################### Testing objects ######################

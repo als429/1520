@@ -2,9 +2,8 @@
 {% block header %}
 {% endblock %}
 {% block content %}
-	<!--<form>
-		<input type="location" class="input location" placeholder="{{food.address}}">
-	</form>-->
+<script src="https://www.paypal.com/sdk/js?client-id=AYsZMVkG0D6EEVzEcKBj5vc4GvmwqJbv0GQ6TdkUXFZ4a3XHJP2uFdyPn7_YczJE5CRgCKrqBMYZEKfB&currency=USD" data-sdk-integration-source="button-factory"></script>
+
 
 <div class="column left">
 	{% for food in foods %}
@@ -16,10 +15,37 @@
                 <li>Cost: {{food.cost}}</li>
                 <li>Address: {{food.address}}</li>
                 <li>Phone Number: {{food.phone_number}}</li>
-                <br>
+                <a href="/./user/{{food.sub}}">Check Chef Rating</a>
+		    <br>
+		<div id="paypal-button-container-{{food.phone_number}}"></div>
+		    <script>
+			  paypal.Buttons({
+			      style: {
+				  shape: 'rect',
+				  color: 'white',
+				  layout: 'horizontal',
+				  label: 'pay',
+
+			      },
+			      createOrder: function(data, actions) {
+				  return actions.order.create({
+				      purchase_units: [{
+					  amount: {
+					      value: '{{food.cost}}'
+					  }
+				      }]
+				  });
+			      },
+			      onApprove: function(data, actions) {
+				  return actions.order.capture().then(function(details) {
+				      alert('Transaction completed by ' + details.payer.name.given_name + '!');
+				  });
+			      }
+			  }).render('#paypal-button-container-{{food.phone_number}}');
+			 </script>
             </div>
             <div class="column right">
-                <img src="{{food.image}}" alt="{{food.name}}" style="height: 200px;">
+                <img src="{{food.image}}" alt="{{food.name}}" style="height: 150px; max-width: 150px; border-radius: 50%;">
             </div>
         </div>
     {% endfor %}
@@ -30,7 +56,7 @@
        * element that contains the map. */
       #map {
         height: 100%;
-        width: 30%;
+        width: 100%;
       }
 .switch {
   position: relative;
@@ -98,7 +124,7 @@ input:checked + .slider:before {
   <input id="toggle" type="checkbox" checked>
   <span class="slider round"></span>
 </label>
-
+&nbsp;
 <!-- Map -->
     <div id="map"></div>
     <script>
@@ -107,7 +133,7 @@ input:checked + .slider:before {
           var geocoder=new google.maps.Geocoder();
           map=new google.maps.Map(document.getElementById('map'), {
               center: {
-                  lat: 40.4328462, lng: -79.9291791
+                  lat: {{lat}}, lng: {{long}}
               }
               , zoom: 17 // 1: World, 5: Landmass/continent, 10: City, 15: Streets, 20: Buildings
           }

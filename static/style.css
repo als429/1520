@@ -23,6 +23,18 @@ h1 {
     text-align: center;
 }
 
+h2 {
+    font-size: 40px;
+    font-weight: normal;
+    margin-top: 5px;
+    text-align: center;
+}
+h3 {
+    font-size: 25px;
+    font-weight: normal;
+    margin-top: 5px;
+    text-align: center;
+}
 
 /************ main navigation ************/
 

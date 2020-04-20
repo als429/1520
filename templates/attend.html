@@ -2,19 +2,19 @@
 {% block header %}
 {% endblock %}
 {% block content %}
-<body>
 
-    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+<form method="POST" action="/attend-list">
+    {{form.csrf_token}}
+    
+    <input id = "autocomplete" type="text" class="location" name="autocomplete" placeholder="Address" onFocus="geolocate()">
+    <input id = "clat" type = "hidden" name="clat">
+    <input id = "clng" type = "hidden" name="clng">
 
-    <div id="locationField">
-      <input id="autocomplete"
-             placeholder="Enter your address"
-             onFocus="geolocate()"
-             class="location"
-             type="text"/>
-    </div>
-    <script>
+    <button input type="submit" class="eat">Eat Dinner Near Me</button>
 
+</form>
+
+<script>
 var autocomplete;
 
 function initAutocomplete() {
@@ -27,6 +27,9 @@ function getLatLng(){
     var place = autocomplete.getPlace();
     var lat = place.geometry.location.lat();
     var lng = place.geometry.location.lng();
+
+    document.getElementById('clat').value = lat;
+    document.getElementById('clng').value = lng;
 
     console.log("lat: " + lat);
     console.log("lng: " + lng);
@@ -49,10 +52,5 @@ function geolocate() {
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAetDGtzTKdygkWv27KM1gPEDoBYQ_szws&libraries=places&callback=initAutocomplete"
         async defer></script>
 
-</body>
-
-<div>
-    <button class="eat">Attend Dinner Near Me</button>
-</div>
 
 {% endblock %}

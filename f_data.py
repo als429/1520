@@ -31,20 +31,24 @@
 # TODO: needs type checking
 
 class User(object):
-    def __init__(self, username, sub):
+    def __init__(self, username, sub, fullname, image):
         self.username = username
         self.sub = sub
+        self.fullname = fullname
+        self.image = image
 
     def to_dict(self):
         return {
             'username': self.username,
             'sub': self.sub,
+            'fullname': self.fullname,
+            'image': self.image,
 	}
 
 class Dinner(object):
     def __init__(self, code, name='', cost=0.00, available=False, 
                 image='../icons/hamburger.png', food_type='', 
-                ingredients=None, address=None, phone_number='', available_seats=0,time='', lat = 0.00, lng = 0.00):
+                ingredients=None, address=None, phone_number='', available_seats=0,time='', lat = 0.00, lng = 0.00, rate=5.00, sub=''):
         self.code = code
         self.name = name
         self.cost = cost
@@ -58,6 +62,8 @@ class Dinner(object):
         self.time = time
         self.lat = lat
         self.lng = lng
+        self.rate = rate
+        self.sub = sub
 
     def to_dict(self):
         return {
@@ -74,12 +80,14 @@ class Dinner(object):
             'time': self.time,
             'lat': self.lat,
             'lng': self.lng,
+            'rate': self.rate,
+            'sub': self.sub,
        }
 
 class Food(Dinner):
     def __init__(self, code, user, name='', cost=0.00, available=False, 
                 image='../icons/hamburger.png', food_type='', 
-                ingredients=None, address=None, phone_number='', lat = 0.00, lng = 0.00):
+                ingredients=None, address=None, phone_number='', lat = 0.00, lng = 0.00, rate=5.00, sub=''):
         self.code = code
         self.user = user
         self.name = name
@@ -92,7 +100,8 @@ class Food(Dinner):
         self.phone_number = phone_number
         self.lat = lat
         self.lng = lng
-        
+        self.rate = rate
+        self.sub = sub
 
     def to_dict(self):
         return {
@@ -108,6 +117,8 @@ class Food(Dinner):
             'phone_number': self.phone_number,
             'lat': self.lat,
             'lng': self.lng,
+            'rate': self.rate,
+            'sub': self.sub,
        }
 
 class Location(object):
