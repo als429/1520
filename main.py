@@ -187,7 +187,7 @@ def eatlist():
         currentlng = request.form.get('clng')
         log(currentlat)
         log(currentlng)
-        log('Type: ' + type(currentlat))
+        log(type(currentlat))
         if currentlat =='': currentlat = '0'
         if currentlng =='': currentlng = '0'
         log('got out of ifsss')
