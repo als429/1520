@@ -6,13 +6,15 @@
 <div class="row">
     <div class="column left">        
         <img src="{{user.image}}" alt="{{user.name}}" style="height: 200px;">
+        <!-- <h2>{{rates}} Stars</h2> -->
     </div>
     <div class="column right">
-        <h1>Past Ratings</h1>
+        <h2>Past Ratings</h2>
         <div class="row">
         {% for food in foods %}
             {% if user.sub == food.sub %}
                 <li>Food: {{food.name}}</li>
+                <li>Rate: {{food.rate}} Stars</li>
             {% endif %}
         {% endfor %}            
         </div>

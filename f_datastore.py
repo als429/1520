@@ -220,7 +220,8 @@ def save_food(name, cost, available="on", image="", food_type="", ingredients=""
     food['phone_number'] = phone_number
     food['lat'] = lat
     food['lng'] = lng
-    food['sub'] = sub	
+    food['sub'] = sub
+    food['rate'] = 5.0	
 
     client.put(food)
 
@@ -244,6 +245,7 @@ def save_dinner(name, cost, available="on", image="", food_type="", ingredients=
     dinner['lat'] = lat
     dinner['lng'] = lng
     dinner['sub'] = sub
+    dinner['rate'] = 5.0
 
     client.put(dinner)
 
@@ -257,7 +259,6 @@ def load_users(sub):
 
 def _user_from_entity(user_entity):
     """Translate the User entity to a regular old Python object."""
-
     username = user_entity['username']
     sub = user_entity['sub']
     fullname = user_entity['fullname']
@@ -266,7 +267,15 @@ def _user_from_entity(user_entity):
     log('built user')
     return user
 
-
+def get_user_rating(sub, food_list):
+    ratings = 0.0
+    total = 0.0
+    for x in food_list:
+        if x.sub == sub:
+            ratings += x.rate
+            total += 1.0
+    average = ratings/total
+    return average
 
 ##############################################################
 ####################### Testing objects ######################
