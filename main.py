@@ -180,7 +180,7 @@ def attend():
 
 @app.route('/eat-list', methods=['GET', 'POST']) 
 def eatlist():
-    if request.method =='POST' and type(request.form.get('location'))== str:
+    if request.method =='POST':
         log('posted')
         currentaddress = request.form.get('location')
         currentlat = request.form.get('clat')
