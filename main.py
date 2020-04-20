@@ -162,10 +162,10 @@ def host():
 
 @app.route('/attend')
 def attend():
-    #form = CurrentLocationForm()
-    #log('form is good')
-    #if form.validate_on_submit():
-    #    log('form validated')
+    form = CurrentLocationForm(csrf_enabled=False)
+    log('form is good')
+    if form.validate_on_submit():
+        log('form validated')
     file = '/attend.html'
     title = 'Attend a Dinner & Make Friends'
     h1 ="Attend"
