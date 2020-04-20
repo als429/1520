@@ -6,15 +6,21 @@
 <div class="row">
     <div class="column left">        
         <img src="{{user.image}}" alt="{{user.name}}" style="height: 200px;">
-        <!-- <h2>{{rates}} Stars</h2> -->
+        <h2>{{dinner}} Stars</h2>
+        <div>
+        {% for x in range(dinners): %}
+            <img src="https://www.freeiconspng.com/uploads/yellow-christmas-star-png-18.png" alt="{{user.name}}" style="height: 150px;">
+        {% endfor %}
+        </div>
     </div>
     <div class="column right">
-        <h2>Past Ratings</h2>
+        <h2>Past Meals and Ratings</h2>
         <div class="row">
         {% for food in foods %}
             {% if user.sub == food.sub %}
-                <li>Food: {{food.name}}</li>
-                <li>Rate: {{food.rate}} Stars</li>
+            <div>
+                <h3>{{food.name}}: {{food.rate}} Stars</h3>
+            </div>
             {% endif %}
         {% endfor %}            
         </div>

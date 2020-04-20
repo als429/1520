@@ -162,7 +162,7 @@ def host():
 
 @app.route('/attend')
 def attend():
-    #form = CurrentLocationForm()
+    form = CurrentLocationForm()
     #log('form is good')
     #if form.validate_on_submit():
     #    log('form validated')
@@ -350,9 +350,10 @@ def dinner_to_datastore():
 def user_page(usercode):
     user_object = f_datastore.load_user(usercode)
     food_list = f_datastore.load_foods()
-    h1 = user_object.fullname + "'s Account"
+    h1 = "Chef " + user_object.fullname
     rate = f_datastore.get_user_rating(usercode, food_list)
-    return show_page('user.html', user_object.fullname, h1, user=user_object, foods = food_list)
+    int_rate = int(rate)
+    return show_page('user.html', user_object.fullname, h1, user=user_object, foods = food_list, dinner=rate, dinners=int_rate)
 
 if __name__ == '__main__':
         app.run(host='127.0.0.1', port=8082, debug=True) # updated port, so that when it runs locally, it runs on 8030
