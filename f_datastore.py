@@ -1,5 +1,6 @@
 from google.cloud import datastore
-
+import flask_login
+from flask import Flask
 import f_data # the classes we defined
 
 # kind is they type of entity that for the query 
@@ -7,7 +8,6 @@ import f_data # the classes we defined
 _USER_ENTITY = 'User' 
 _FOOD_ENTITY = 'Food'
 _DINNER_ENTITY = 'Dinner'
-#_PROJECT_ID = "arcane-incline-267800"
 
 ##############################################################
 ##################### Utility functions ######################
@@ -17,7 +17,7 @@ def _get_client():
     """Build a datastore client."""
     # documentation on datastore: https://googleapis.dev/python/datastore/latest/client.html
     # definition: Convenience wrapper for invoking APIs/factories w/ a project.
-    return datastore.Client()#project=_PROJECT_ID)
+    return datastore.Client()
 
 def log(msg):
     """Log a simple message."""
@@ -184,18 +184,23 @@ def load_foods(): # TODO: we will want to add [city] or [zip] to add query filte
 def save_user(username, sub):
     """Save the user details to the datastore."""
     client = _get_client() # get datastore client
-    entity = datastore.Entity(_load_key(client, _USER_ENTITY, sub)) # load information relating to the entity
-    entity['username'] = username
-    entity['sub'] = sub
-    client.put(entity) # update entity within datastore
+    q = client.query(kind=_USER_ENTITY)
+    q.add_filter('username', '=', username)
+    
+    if len(list(q.fetch())) == 0:
+        entity = datastore.Entity(_load_key(client, _USER_ENTITY, sub)) # load information relating to the entity
+        entity['username'] = username
+        entity['sub'] = sub
+        client.put(entity) # update entity within datastore
 		
 
-def save_food(name, cost, available="on", image="", food_type="", ingredients="", address="", phone_number="", lat=0.00, lng=0.00): #Note may need to update later
+def save_food(user, name, cost, available="on", image="", food_type="", ingredients="", address="", phone_number="", lat=0.00, lng=0.00): #Note may need to update later
     code = get_food_code(phone_number, name)
     log('in save_food() have code')
     client = _get_client()
     food = datastore.Entity(key=client.key(_FOOD_ENTITY, code),
                             exclude_from_indexes=['code'])
+    food['user'] = user
     food['name'] = name
     food['cost'] = cost
     food['available'] = available
@@ -210,7 +215,7 @@ def save_food(name, cost, available="on", image="", food_type="", ingredients=""
     client.put(food)
 
 
-def save_dinner(name, cost, available="on", image="", food_type="", ingredients="", address="", phone_number="", available_seats = 0, time="", lat=0.00, lng=0.00): #Note may need to update later
+def save_dinner(name, cost, user, available="on", image="", food_type="", ingredients="", address="", phone_number="", available_seats = 0, time="", lat=0.00, lng=0.00): #Note may need to update later
     code = get_dinner_code(phone_number, name)
     log('in save_dinner() have code')
     client = _get_client()
@@ -218,6 +223,7 @@ def save_dinner(name, cost, available="on", image="", food_type="", ingredients=
                               exclude_from_indexes=['code'])
     dinner['name'] = name
     dinner['cost'] = cost
+    dinner['user'] = user
     dinner['available'] = "on"
     dinner['image'] = ""
     dinner['food_type'] = food_type
@@ -313,3 +319,33 @@ def create_data():
         'lng': -10.023,
     })
     client.put(entity) # save information to datastore
+
+
+##############################################################
+############## Querying entities to datastore ################
+##############################################################
+
+def query_food_list(userid):
+    client = _get_client() # get datastore client
+    q = client.query(kind=_FOOD_ENTITY)
+    q.add_filter('user', '=', userid)
+    return list(q.fetch())
+
+
+def query_food(food):
+    client = _get_client() # get datastore client
+    q = client.query(kind=_FOOD_ENTITY)
+    q.add_filter('name', '=', food)
+    return list(q.fetch())[0]
+
+
+##############################################################
+############## Deleting entities to datastore ################
+##############################################################
+
+def delete_food(name):
+    client = _get_client() # get datastore client
+    q = client.query(kind=_FOOD_ENTITY)
+    q.add_filter('name', '=', name)
+    for entity in q.fetch():
+        client.delete(entity.key)

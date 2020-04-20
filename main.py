@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, Response, request, flash
+from flask import Flask, redirect, render_template, Response, request, flash, session, url_for
 import json # for backend sign in functionality
 from google.oauth2 import id_token # for backend sign in functionality
 from google.auth.transport import requests # for backend sign in functionality
@@ -7,7 +7,7 @@ from google.cloud import storage # for images
 
 import f_data # includes our data classes: User, Dinner, Food, Location
 import f_datastore
-from forms import FoodRegistrationForm, DinnerRegistrationForm, UploadForm
+from forms import FoodRegistrationForm, DinnerRegistrationForm, UploadForm, FlaskForm
 from flask_wtf.csrf import CSRFProtect
 import os
 
@@ -16,6 +16,7 @@ app = Flask(__name__)
 SECRET_KEY = os.urandom(32)
 app.config['SECRET_KEY'] = SECRET_KEY
 csrf = CSRFProtect(app)
+
 
 # logging to console
 def log(msg):
@@ -26,7 +27,7 @@ def log(msg):
 
 @app.route('/success')
 def success():
-    return show_page('_base.html','Submitted successfully!','Submitted successfully!')
+    return show_page('_base.html','Succesfully submitted!','',user=get_user())
 
 # app routing
 @app.route('/')
@@ -36,13 +37,14 @@ def root():
     file = '/index.html'
     title = 'Food with Friends: Eat up!'
     h1 = 'Eat Leftovers'
-    return show_page(file,title,h1)
+    return show_page(file,title,h1,user=get_user())
 	
 @app.route('/cook', methods=['GET','POST'])
 def cook():
     form = FoodRegistrationForm()
     if request.method == 'POST' and form.validate():
         # testing with 3 properties of food
+        user = get_user()
         name = request.form.get('fname')
         cost = request.form.get('fcost')
         available = request.form.get('favailable')
@@ -72,23 +74,24 @@ def cook():
         log('uploaded from string')
         url = blob.public_url
         log('got url: ' + url)	
-        f_datastore.save_food(name, cost, available, url, food_type, ingredients, address, phone_number, lat, lng) # adding to db # url == image
+        f_datastore.save_food(user, name, cost, available, url, food_type, ingredients, address, phone_number, lat, lng) # adding to db # url == image
         # f_datastore.save_food(name, cost, available, image, food_type, ingredients, address) # adding to db
         log('loaded food_to_datastore() data')
         flash('Succesfully submitted!', 'success')
         # return 'OK' # TODO: update function to send to page where user's current food items
-        return success()
+        return redirect('/activity')
 
     file = '/cook.html'
     title = 'Cook for Friends'
     h1 = 'Cook'
-    return render_template(file, title=title, h1=h1, form=form)
+    return render_template(file, title=title, h1=h1, form=form, user=get_user())
 
 @app.route('/host', methods=['GET','POST'])
 def host():
     form = DinnerRegistrationForm()
     if request.method == 'POST' and form.validate():
         # testing with 3 properties of food
+        user = get_user()
         name = request.form.get('fname')
         cost = request.form.get('fcost')
         available = request.form.get('favailable_seats')
@@ -101,17 +104,123 @@ def host():
         available_seats = request.form.get('favailable_seats')
         lat = request.form.get('flat')
         lng = request.form.get('flng')
-        f_datastore.save_dinner(name, cost, available, image, food_type, ingredients, address, phone_number, available_seats, time, lat, lng) # adding to db
+        f_datastore.save_dinner(user, name, cost, available, image, food_type, ingredients, address, phone_number, available_seats, time, lat, lng) # adding to db
         # f_datastore.save_dinner(name, cost, available, image, food_type, ingredients, address, time) # adding to db
         log('loaded dinner_to_datastore() data')
         flash('Succesfully submitted!', 'success')
         # return 'OK' # TODO: update function to send to page where user's current food items
-        return success()
+        return redirect('/activity')
 
     file = '/cook.html'
     title = 'Host a Dinner & Make Friends'
     h1 = "Host"
-    return render_template(file, title=title, h1=h1, form=form)
+    return render_template(file, title=title, h1=h1, form=form, user=get_user())
+
+
+@app.route('/edit_cook/<food>', methods=['GET','POST'])
+def edit_cook(food):
+    food_entity = f_datastore.query_food(food)
+    form = FoodRegistrationForm(obj=food_entity)
+    if request.method == 'POST' and form.validate():
+        # testing with 3 properties of food
+        user = get_user()
+        name = request.form.get('fname')
+        cost = request.form.get('fcost')
+        available = request.form.get('favailable')
+        food_type = request.form.get('fcategory')
+        ingredients = request.form.get('fingredients')
+        address = request.form.get('location')
+        phone_number = request.form.get('fphone_number')
+        lat = request.form.get('flat')
+        lng = request.form.get('flng')
+        if not lat:
+            lat = food_entity.get('lat')
+            lng = food_entity.get('lng')
+        log('form is valid')
+        uploaded_file = request.files.get('file')
+        log('uploaded file')
+        filename = request.form.get('filename')
+        log('got filename')
+        content_type = uploaded_file.content_type
+        log('got content type')
+        if uploaded_file:
+            gcs_client = storage.Client()
+            log('got storage client')
+            storage_bucket = gcs_client.get_bucket('f_storage')
+            log('got f_storage bucket')
+            blob = storage_bucket.blob(uploaded_file.filename)
+            log('got blob')
+            blob.upload_from_string(uploaded_file.read(), content_type=content_type)
+            log('uploaded from string')
+            url = blob.public_url
+            log('got url: ' + url)	
+        else:
+            url = food_entity.get('image')
+        f_datastore.save_food(user, name, cost, available, url, food_type, ingredients, address, phone_number, lat, lng) # adding to db # url == image
+        log('loaded food_to_datastore() data')
+        flash('Changes have been applied!', 'success')
+        return redirect('/activity')
+
+    form.fname.data = food_entity.get('name')
+    form.fcost.data = food_entity.get('cost')
+    form.favailable.data = food_entity.get('available')
+    form.fcategory.data = food_entity.get('food_type')
+    form.fingredients.data = food_entity.get('ingredients')
+    form.location.data = food_entity.get('address')
+    form.fphone_number.data = food_entity.get('phone_number')
+    form.file.data = food_entity.get('image')
+    form.flat.data = food_entity.get('lat')
+    form.flng.data = food_entity.get('lng')
+       
+    file = '/cook.html'
+    title = 'Cook for Friends'
+    h1 = 'Edit Cook'
+    return render_template(file, title=title, h1=h1, form=form, user=get_user())
+
+
+@app.route('/edit_host/<dinner>', methods=['GET','POST'])
+def edit_host(dinner):
+    form = DinnerRegistrationForm()
+    if request.method == 'POST' and form.validate():
+        # testing with 3 properties of food
+        user = get_user()
+        name = request.form.get('fname')
+        cost = request.form.get('fcost')
+        available = request.form.get('favailable_seats')
+        image = request.form.get('fname')
+        food_type = request.form.get('fcategory')
+        ingredients = request.form.get('fingredients')
+        address = request.form.get('location')
+        time = request.form.get('ftime')
+        phone_number = request.form.get('fphone_number')
+        available_seats = request.form.get('favailable_seats')
+        lat = request.form.get('flat')
+        lng = request.form.get('flng')
+        if not lat:
+            lat = food_entity.get('lat')
+            lng = food_entity.get('lng')
+        f_datastore.save_dinner(user, name, cost, available, image, food_type, ingredients, address, phone_number, available_seats, time, lat, lng) # adding to db
+        log('loaded dinner_to_datastore() data')
+        flash('Succesfully submitted!', 'success')
+        return redirect('/activity')
+
+    form.fname.data = food_entity.get('name')
+    form.fcost.data = food_entity.get('cost')
+    form.favailable.data = food_entity.get('available')
+    form.fcategory.data = food_entity.get('food_type')
+    form.fingredients.data = food_entity.get('ingredients')
+    form.location.data = food_entity.get('address')
+    form.fphone_number.data = food_entity.get('phone_number')
+    form.file.data = food_entity.get('image')
+    form.flat.data = food_entity.get('lat')
+    form.flng.data = food_entity.get('lng')
+    form.favailable_seats.data = food_entity.get('available_seats')
+    form.ftime.data = food_entity.get('time')
+
+    file = '/cook.html'
+    title = 'Host a Dinner & Make Friends'
+    h1 = "Edit Host"
+    return render_template(file, title=title, h1=h1, form=form, user=get_user())
 
 
 @app.route('/attend')
@@ -119,13 +228,13 @@ def attend():
     file = '/attend.html'
     title = 'Attend a Dinner & Make Friends'
     h1 ="Attend"
-    return render_template(file, title=title, h1=h1)
+    return render_template(file, title=title, h1=h1, user=get_user())
 
 
 @app.route('/eat-list') 
 def eatlist():
     food_list = f_datastore.load_foods() # TODO: filter by distance
-    return show_page('/eat-list.html','Nearby Leftovers','Nearby Leftovers',foods=food_list) 
+    return show_page('/eat-list.html','Nearby Leftovers','Nearby Leftovers',foods=food_list, user=get_user()) 
 
 
 # utility function that allows us to 
@@ -167,13 +276,40 @@ def authtoken():
             raise ValueError('Wrong issuer.')
         log('ID token is valid.')
         userid = idinfo['sub']
+        session['user'] = userid
         log('Got the user\'s Google Account ID from the decoded token')
         f_datastore.save_user(given_name, userid)
     except ValueError:
         log('ID is not valid, in Error')
         pass
-    return 'OK - test success'
-	
+    return redirect('/')
+
+
+@app.route('/activity', methods=['GET','POST'])
+def activity():
+    edit = request.form.get('edit')
+    if edit is not None:
+        return redirect(url_for('edit_cook', food=edit))
+    delete = request.form.get('delete')
+    if delete is not None:
+        f_datastore.delete_food(delete)
+    file = '/activity.html'
+    title = 'Attend a Dinner & Make Friends'
+    h1 ="My Foods"
+    user = get_user()
+    food_list = f_datastore.query_food_list(user)
+    form = FlaskForm()
+    return render_template(file, title=title, h1=h1, food_list=food_list, form=form, user=get_user())
+
+
+@app.route('/logout')
+def logout():
+    session['user'] = None
+    return redirect('/')
+
+def get_user():
+    return session.get('user', None)
+
 ##############################Test goes below this line vvvvvvvvvv
 
 @app.route('/test') 
@@ -231,6 +367,7 @@ def test_three():
     title = 'Test3 - images'
     h1 = 'Test3 - images'
     return render_template(file, title=title, h1=h1, form=form)
+
 
 @app.route('/test-post', methods=['POST'])
 def latlongtest():

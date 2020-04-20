@@ -18,7 +18,7 @@
 		<!-- sign in functionality -->
 		<meta name="google-signin-scope" content="profile email">
 		<!--Vicky's<meta name="google-signin-client_id" content="360923740928-1hbjoiphtutmkvmts2fispokdh33uku0.apps.googleusercontent.com">-->
-			<!--Alexis: --><meta name="google-signin-client_id" content="1024466557558-monvg7ism1u12feg47r8296nh44bq500.apps.googleusercontent.com">
+			<!-- Alexis:--> <meta name="google-signin-client_id" content="1024466557558-monvg7ism1u12feg47r8296nh44bq500.apps.googleusercontent.com"> 
 		<script src="https://apis.google.com/js/platform.js" async defer></script>
     </head>
     <body>
@@ -33,13 +33,18 @@
 						  <li><img src="../static/icons/attend-dark.png" class="icon"><a href="/attend">Attend</a></li>
 						  <li><img src="../static/icons/cook-dark.png" class="icon"><a href="/cook">Cook</a></li>
 						  <li><img src="../static/icons/host-dark.png" class="icon"><a href="/host">Host</a></li>
+                          {% if user %}
+                            <li><img src="../static/icons/host-dark.png" class="icon"><a href="/activity">My Foods</a></li>
+                            <li><div class="btn" onclick="signOut()" data-theme="dark" id="logout">Logout</div></li>
+                          {% else %}
+                            <li><div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark" id="login"></div></li>
+                          {% endif %}
 					</ul>
 				</div>
 			</nav>
 
 			<!-- sign in functionality -->
-			<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark" id="login"></div>
-			<script>
+            <script>
 			  function onSignIn(googleUser) {
 				// Useful data for your client-side scripts:
 				var profile = googleUser.getBasicProfile();
@@ -55,7 +60,8 @@
 				console.log("ID Token: " + id_token);
 				
 				var xhr = new XMLHttpRequest();
-			    xhr.open('POST', 'https://foodfriends-269817.appspot.com/tokensignin');
+			    //xhr.open('POST', 'https://foodfriends-269817.appspot.com/tokensignin'); 
+                xhr.open('POST', '/tokensignin');
                 	    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
 			    var csrf_token = "{{ csrf_token() }}"; // attempting to fix issue with validation
 			    xhr.setRequestHeader("X-CSRFToken", csrf_token); // attempting to fix issue with validation
@@ -67,6 +73,20 @@
 			  }
 			  
 			</script>
+
+            <script>
+                function signOut(googleUser) {
+                    gapi.load('auth2', function() {
+                        gapi.auth2.init().then(function() {
+                            var auth2 = gapi.auth2.getAuthInstance();
+                            auth2.signOut().then(function () {
+                                document.location= '/logout';
+                                console.log('User signed out.');
+                            });
+                        });
+                    });
+                }
+            </script>
 		
 	    <!-- Global site tag (gtag.js) - Google Analytics -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-163954640-1"></script>

@@ -1,4 +1,5 @@
 runtime: python37
+# entrypoint: gunicorn -b 0.0.0.0:8080
 
 handlers:
 - url: /static

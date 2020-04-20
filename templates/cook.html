@@ -36,7 +36,7 @@
             <div>{{ form.fingredients }}</div>
             <!--AS: removed class="input image" -->
             <br/>
-            {{ form.file }}<!--<label for="file">Upload Image &#x25b2;</label>-->
+            <div>{{ form.file }}</div><!--<label for="file">Upload Image &#x25b2;</label>-->
         </div>
         <div class="column right">
             {% if h1 == "Host" %}
@@ -48,14 +48,15 @@
                 {% endif %}
             {% else %}
                 <div class="check">
+                    {{ form.favailable }}
                     <label class="container">check if available now
-                        <input type="checkbox" name="favailable">
-                        <span class="checkmark"></span>
+                        <!-- <input type="checkbox" name="favailable">
+                        <span class="checkmark"></span> -->
                     </label>
                 </div>
             {% endif %}
             <br/>
-            <button input type="submit" class="btn sell">{% if h1 == "Host" %}Host a Dinner!{% else %}Sell Leftovers!{% endif %}</button>
+                <button input type="submit" class="btn sell">{% if h1 == "Host" %}Host a Dinner!{% elif h1 == "Cook" %}Sell Leftovers!{% else %}Submit Changes{% endif %}</button>
         </div>
     </form>
 <script>

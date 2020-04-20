@@ -1,9 +1,10 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, FloatField, FileField, SubmitField, DateTimeField, IntegerField
+from wtforms import StringField, FloatField, FileField, SubmitField, DateTimeField, IntegerField, BooleanField
 from wtforms.validators import DataRequired, InputRequired, NumberRange, Optional
 from wtforms.fields.html5 import DateTimeLocalField
 from flask_uploads import UploadSet, IMAGES #AS added
 from flask_wtf.file import FileField, FileAllowed, FileRequired #AS added
+from wtforms.widgets import TextInput
 
 class MyFloatField(FloatField):
     def __init__(self, *args, **kwargs):
@@ -32,17 +33,21 @@ class MyIntegerField(IntegerField):
 
 
 class FoodRegistrationForm(FlaskForm):
-    fname = StringField("Meal title", validators=[InputRequired()], render_kw={"placeholder": "Meal title"})
-    fcost = MyFloatField("Cost", validators=[InputRequired(), NumberRange(min=0, max=1000, message="Cost must be between $0 and $1000.")], render_kw={"placeholder": "Cost"})
+    fname = StringField("Meal title", validators=[InputRequired(message="This field is required")], render_kw={"placeholder": "Meal title"})
+    fcost = MyFloatField("Cost", validators=[InputRequired(message="This field is required"), NumberRange(min=0, max=1000, message="Cost must be between $0 and $1000.")], render_kw={"placeholder": "Cost"})
     location = StringField("autocomplete", validators=[InputRequired()], render_kw={"placeholder": "Address", "class": "location", "id": "autocomplete", "onFocus": "geolocate()"})
     file = FileField()
     fcategory = StringField("Type categories", validators=[InputRequired()], render_kw={"placeholder": "Categories"})
     fingredients = StringField("Type ingredients", validators=[InputRequired()], render_kw={"placeholder": "Ingredients"})
     fphone_number = StringField("Phone number", validators=[InputRequired()], render_kw={"placeholder": "Phone number"})
+    favailable = BooleanField("Checkbox")
     submit = SubmitField('Sell Leftovers')
+    flat = FloatField("Latitude", validators=[Optional()])
+    flng = FloatField("Longitude", validators=[Optional()])
 
 
 class DinnerRegistrationForm(FoodRegistrationForm):
+    file = FileField(validators=[FileRequired()])
     ftime = DateTimeLocalField("Host date", validators=[InputRequired()], render_kw={"placeholder": "Time"}, format="%Y-%m-%dT%H:%M")
     favailable_seats = MyIntegerField("Available seats", validators=[InputRequired(), NumberRange(min=1, message="Available seats should be a number greater than 0.")], render_kw={"placeholder": "Available seats"})
 
@@ -51,3 +56,4 @@ class UploadForm(FlaskForm): #AS added
     file = FileField()
     #images = UploadSet('images', IMAGES)
     #upload = FileField('file', validators=[FileRequired(), FileAllowed(images, 'Images only!')])
+

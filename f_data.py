@@ -77,10 +77,11 @@ class Dinner(object):
        }
 
 class Food(Dinner):
-    def __init__(self, code, name='', cost=0.00, available=False, 
+    def __init__(self, code, user, name='', cost=0.00, available=False, 
                 image='../icons/hamburger.png', food_type='', 
                 ingredients=None, address=None, phone_number='', lat = 0.00, lng = 0.00):
         self.code = code
+        self.user = user
         self.name = name
         self.cost = cost
         self.available = available
@@ -91,10 +92,12 @@ class Food(Dinner):
         self.phone_number = phone_number
         self.lat = lat
         self.lng = lng
+        
 
     def to_dict(self):
         return {
             'code': self.code,
+            'user': self.user,
             'name': self.name,
             'cost': self.cost,
             'available': self.available,
