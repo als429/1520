@@ -165,7 +165,7 @@ def load_dinner(dinner_code): # inputing the dinner code to get information from
     log('we have translated dinner entity to Python object')
     return dinner # returns python Dinner object
 
-def load_foods(lat='40.1', lng='80.2', allowance =.1):
+def load_foods(lat, lng, allowance):
     client = _get_client()
     q = client.query(kind=_FOOD_ENTITY)
     q.add_filter('available', '=', "on")
@@ -197,7 +197,7 @@ def load_foods(lat='40.1', lng='80.2', allowance =.1):
             log("food lng: " + food["lng"])
     return result
 
-def load_dinners(lat='40.1', lng='80.2'):
+def load_dinners(lat, lng):
     client = _get_client()
     q = client.query(kind=_DINNER_ENTITY)
 
