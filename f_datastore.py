@@ -186,6 +186,7 @@ def load_dinners(lat=40.0, lng=-80.0):
     #q.add_filter('lng', '<', lnglong+.1)
     result = []
     for dinner in q.fetch(): 
+        log('in for, dinner.al =' + str(dinner.lat))
         result.append(dinner)
     return result 
 
