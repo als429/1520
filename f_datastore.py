@@ -179,8 +179,11 @@ def load_dinners(lat=40.0, lng=-80.0):
     client = _get_client()
     q = client.query(kind=_DINNER_ENTITY)
     log('Lat: ' + lat)
+    lat = float(lat)
     log(type(lat))
+
     log('Long: ' + lng)
+    lng = float(lng)
     log(type(lng))
     result = []
     for dinner in q.fetch():
