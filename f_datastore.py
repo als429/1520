@@ -405,3 +405,13 @@ def create_data():
         'lng': -10.023,
     })
     client.put(entity) # save information to datastore
+
+def change_rate(name, phone_number="", rate = 0.0): #Note may need to update later
+    code = get_food_code(phone_number, name)
+    log('in change_rate() have code')
+    client = _get_client()
+    food = datastore.Entity(key=client.key(_FOOD_ENTITY, code),
+                            exclude_from_indexes=['code'])
+    food['rate'] = rate
+
+    client.put(food)
