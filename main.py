@@ -377,9 +377,10 @@ def user_page(usercode):
     int_rate = int(rate)
     return show_page('user.html', user_object.fullname, h1, user=user_object, foods = food_list, dinner=rate, dinners=int_rate)
 
-# @app.route('/rate')
-# def change_rate(code):
-#     return 'ok'
+@app.route('/rate')
+def change_rate():
+    #return show_page('/test2.html','Testing Maps API', 'Maps API Testing')
+    return show_page('/rate-test.html','title here','h1 here')
 
 if __name__ == '__main__':
         app.run(host='127.0.0.1', port=8082, debug=True) # updated port, so that when it runs locally, it runs on 8030
