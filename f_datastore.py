@@ -325,7 +325,7 @@ def get_user_rating(sub, food_list):
     for x in food_list:
         food_sub = x['sub']
         if food_sub == sub:
-            ratings += x['rate']
+            ratings += float(x['rate'])
             total += 1.0
     average = ratings/total
     return average
