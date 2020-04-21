@@ -2,14 +2,35 @@
 {% block header %}
 {% endblock %}
 {% block content %}
-<!-- <div class="row">
+<h1>hello</h1>
+<div class="row">
     <div class="column left">
-        <form method="POST" action="/changerate">
+        
+        <input type="hidden" id="phone_number" value="1112224444">
+        <input type="hidden" id="name" value="Apple pie slice">
+        <input type="text" id="rate" placeholder="5.0">
     </div>
     <div class="column right">
 
-	</form>
+        <button input type="submit" class="btn sell" onclick="submit()">Sell Leftovers!</button>
+
     </div>
 </div>
+<script>
+function submit() {
+    var name = document.getElementById('name').value;
+    var phone_number = document.getElementById('phone_number').value;
+    var rate = document.getElementById('rate').value;
+    console.log("Name: " + name + " number: " + phone_number + " rate: " + rate);
+				  
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', '/changerate');
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+	var csrf_token = "{{ csrf_token() }}"; // attempting to fix issue with validation
+	xhr.setRequestHeader("X-CSRFToken", csrf_token); // attempting to fix issue with validation
+	xhr.send('name=' + name +'&phone_number=' + phone_number+'&rate=' + rate);
+	console.log('Sent id_token to server');
+}
+</script>
 
-{% block content %} -->
+{% endblock %}

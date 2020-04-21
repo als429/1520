@@ -82,7 +82,22 @@ def cook():
         blob.upload_from_string(uploaded_file.read(), content_type=content_type)
         log('uploaded from string')
         url = blob.public_url
-        log('got url: ' + url)	
+        log('got url: ' + url)
+
+        token = request.form.get('fsub')
+        CLIENT_ID = '1024466557558-monvg7ism1u12feg47r8296nh44bq500.apps.googleusercontent.com'
+        try:
+            idinfo = id_token.verify_oauth2_token(token, requests.Request(), CLIENT_ID)
+            if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
+                "raising error"
+                raise ValueError('Wrong issuer.')
+            log('ID token is valid.')
+            userid = idinfo['sub']
+            log('Got the user\'s Google Account ID from the decoded token')
+        except ValueError:
+            log('ID is not valid, in Error')
+            pass
+
         f_datastore.save_food(user, name, cost, available, url, food_type, ingredients, address, phone_number, lat, lng) # adding to db # url == image
         log('loaded food_to_datastore() data')
         flash('Succesfully submitted!', 'success')
@@ -112,8 +127,7 @@ def host():
         phone_number = request.form.get('fphone_number')
         available_seats = request.form.get('favailable_seats')
         lat = request.form.get('flat')
-        lng = request.form.get('flng')
-        
+        lng = request.form.get('flng')    
         log('form is valid - got everything up to lat/long')
         uploaded_file = request.files.get('file')
         log('uploaded file')
@@ -133,6 +147,21 @@ def host():
         log('uploaded from string')
         url = blob.public_url
         log('got url: ' + url)
+
+        token = request.form.get('fsub')
+        CLIENT_ID = '1024466557558-monvg7ism1u12feg47r8296nh44bq500.apps.googleusercontent.com'
+        try:
+            idinfo = id_token.verify_oauth2_token(token, requests.Request(), CLIENT_ID)
+            if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
+                "raising error"
+                raise ValueError('Wrong issuer.')
+            log('ID token is valid.')
+            userid = idinfo['sub']
+            log('Got the user\'s Google Account ID from the decoded token')
+        except ValueError:
+            log('ID is not valid, in Error')
+            pass
+
         f_datastore.save_dinner(user, name, cost, available, image, food_type, ingredients, address, phone_number, available_seats, time, lat, lng) # adding to db
         log('loaded dinner_to_datastore() data')
         flash('Succesfully submitted!', 'success')
@@ -302,7 +331,7 @@ def eatlist():
         return eatlistll(currentlat, currentlng, allowance)
     else:
         lat = '40.1' # for map
-        lng = '90.2' # for map
+        lng = '-75.2' # for map
         food_list = f_datastore.load_foods('0','0',200) # TODO: filter by distance
         return show_page('/eat-list.html','All Leftovers','All Leftovers',foods=food_list,lat=lat,lng=lng, user=get_user()) 
 
@@ -331,7 +360,7 @@ def attendlist():
         return attendlistll(currentlat, currentlng, allowance)
     else:
         lat = '40.1' # for map
-        lng = '90.2' # for map
+        lng = '-75.2' # for map
         dinner_list = f_datastore.load_dinners('0','0',200) # TODO: filter by distance
         return show_page('/attend-list.html','All Dinners','All Dinners',dinners=dinner_list,lat=lat,lng=lng, user=get_user()) 
 
@@ -531,16 +560,37 @@ def dinner_to_datastore():
 @app.route('/user/<usercode>')
 def user_page(usercode):
     user_object = f_datastore.load_user(usercode)
-    food_list = f_datastore.load_foods()
+    food_list = f_datastore.load_foods('0', '0', 200)
     h1 = "Chef " + user_object.fullname
     rate = f_datastore.get_user_rating(usercode, food_list)
     int_rate = int(rate)
     return show_page('user.html', user_object.fullname, h1, user=user_object, foods = food_list, dinner=rate, dinners=int_rate)
 
 @app.route('/rate')
-def change_rate():
-    #return show_page('/test2.html','Testing Maps API', 'Maps API Testing')
-    return show_page('/rate-test.html','title here','h1 here')
+def rate():
+    log("inside rate")
+    food_list = f_datastore.load_foods('0', '0', 200)
+    return show_page('/rate-test.html','title here','h1 here', foods = food_list)
+
+@app.route('/changerate', methods=['POST'])
+def change_rate():  
+    name = request.form.get('name')
+    cost = request.form.get('cost')
+    available = request.form.get('available')
+    image = request.form.get('image')
+    food_type = request.form.get('food_type')
+    ingredients = request.form.get('ingredients')
+    address = request.form.get('address')
+    phone_number = request.form.get('phone_number')
+    lat = request.form.get('lat')
+    lng = request.form.get('lng')
+    sub = request.form.get('sub')
+    rate = request.form.get('rate')
+    log("received rate")
+    f_datastore.change_rate(name, cost, available, image, food_type, ingredients, address, phone_number, lat, lng, sub, rate)
+    return 'OK'
+    
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8030, debug=True) # updated port, so that when it runs locally, it runs on 8030

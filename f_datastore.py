@@ -330,7 +330,7 @@ def get_user_rating(sub, food_list):
     for x in food_list:
         food_sub = x['sub']
         if food_sub == sub:
-            ratings += x['rate']
+            ratings += float(x['rate'])
             total += 1.0
     average = ratings/total
     return average
@@ -451,13 +451,24 @@ def query_dinner(dinner):
     return list(q.fetch())[0]
 
 
-def change_rate(name, phone_number="", rate = 0.0): #Note may need to update later
+def change_rate(name, cost, available="on", image="", food_type="", ingredients="", address="", phone_number="", lat=0.00, lng=0.00, sub="", rate=0.00): #Note may need to update later
     code = get_food_code(phone_number, name)
-    log('in change_rate() have code')
+    log('in save_food() have code')
     client = _get_client()
     food = datastore.Entity(key=client.key(_FOOD_ENTITY, code),
                             exclude_from_indexes=['code'])
-    food['rate'] = rate
+    food['name'] = name
+    food['cost'] = cost
+    food['available'] = available
+    food['image'] = image
+    food['food_type'] = food_type
+    food['ingredients'] = ingredients	
+    food['address'] = address
+    food['phone_number'] = phone_number
+    food['lat'] = lat
+    food['lng'] = lng
+    food['sub'] = sub
+    food['rate'] = rate	
 
     client.put(food)
 
