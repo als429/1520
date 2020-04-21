@@ -39,7 +39,6 @@ def root():
     log('form is good')
     if request.method == 'POST' and form.validate_on_submit():
         log('form validated')
-        address = request.form.get('location')
         lat = request.form.get('clat')
         lng = request.form.get('clng')
         return redirect(url_for('eatlistll', lat=lat, lng=lng))
@@ -292,17 +291,27 @@ def eatlist():
         currentaddress = request.form.get('location')
         currentlat = request.form.get('clat')
         currentlng = request.form.get('clng')
+        allowance = .1
+        if currentlat == '': currentlat = '0'
+        if currentlng == '': currentlng = '0'
+        if currentlat == '0': allowance = 200
         log(currentlat)
         log(currentlng)
-        return eatlistll(currentlat, currentlng)
-    food_list = f_datastore.load_foods() # TODO: filter by distance
-    return show_page('/eat-list.html','Nearby Leftovers','Nearby Leftovers',foods=food_list, user=get_user()) 
+        log(type(currentlat))
+        log('got out of ifs')
+        return eatlistll(currentlat, currentlng, allowance)
+    else:
+        lat = '40.1' # for map
+        lng = '90.2' # for map
+        food_list = f_datastore.load_foods('0','0',200) # TODO: filter by distance
+        return show_page('/eat-list.html','All Leftovers','All Leftovers',foods=food_list,lat=lat,lng=lng, user=get_user()) 
+
 
 @app.route('/eat-list/<lat>-<lng>')
-def eatlistll(lat, lng):
+def eatlistll(lat, lng, allowance):
     # h1 = 'Lat: ' + lat + ' Lng: ' + lng
-    food_list = f_datastore.load_foods(lat, lng)
-    return show_page('/eat-list.html','Nearby Leftovers','Nearby Leftovers',foods=food_list,lat=lat,lng=lng) 
+    food_list = f_datastore.load_foods(lat, lng, allowance)
+    return show_page('/eat-list.html','Nearby Leftovers','Nearby Leftovers',foods=food_list,lat=lat,lng=lng, user=get_user()) 
 
 @app.route('/attend-list', methods=['GET', 'POST']) 
 def attendlist():
@@ -311,17 +320,26 @@ def attendlist():
         currentaddress = request.form.get('location')
         currentlat = request.form.get('clat')
         currentlng = request.form.get('clng')
+        allowance = .1
+        if currentlat == '': currentlat = '0'
+        if currentlng == '': currentlng = '0'
+        if currentlat == '0': allowance = 200
         log(currentlat)
         log(currentlng)
-        return attendlistll(currentlat, currentlng)
-    dinner_list = f_datastore.load_dinners() 
-    return show_page('/attend-list.html','Nearby Dinners','Nearby Dinners', dinners=dinner_list)
+        log(type(currentlat))
+        log('got out of ifs')
+        return attendlistll(currentlat, currentlng, allowance)
+    else:
+        lat = '40.1' # for map
+        lng = '90.2' # for map
+        dinner_list = f_datastore.load_dinners('0','0',200) # TODO: filter by distance
+        return show_page('/attend-list.html','All Dinners','All Dinners',dinners=dinner_list,lat=lat,lng=lng, user=get_user()) 
 
 @app.route('/attend-list/<lat>-<lng>')
-def attendlistll(lat, lng):
+def attendlistll(lat, lng, allowance):
     # h1 = 'Lat: ' + lat + ' Lng: ' + lng
-    dinner_list = f_datastore.load_dinners(lat, lng) 
-    return show_page('/attend-list.html','Attend List', 'Nearby Dinners', dinners=dinner_list,lat=lat,lng=lng)
+    dinner_list = f_datastore.load_dinners(lat, lng, allowance)
+    return show_page('/attend-list.html','Nearby Dinners','Nearby Dinners',dinners=dinner_list,lat=lat,lng=lng, user=get_user())
 
 # utility function that allows us to 
 # consolidate on the render_template function
@@ -518,6 +536,11 @@ def user_page(usercode):
     rate = f_datastore.get_user_rating(usercode, food_list)
     int_rate = int(rate)
     return show_page('user.html', user_object.fullname, h1, user=user_object, foods = food_list, dinner=rate, dinners=int_rate)
+
+@app.route('/rate')
+def change_rate():
+    #return show_page('/test2.html','Testing Maps API', 'Maps API Testing')
+    return show_page('/rate-test.html','title here','h1 here')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8030, debug=True) # updated port, so that when it runs locally, it runs on 8030
