@@ -401,15 +401,12 @@ def rate():
     return show_page('/rate-test.html','title here','h1 here')
 
 @app.route('/changerate', methods=['POST'])
-def change_rate():
-    # form = FoodRegistrationForm()
-    # if request.method == 'POST' and form.validate():
-    #     # testing with 3 properties of food
-    #     name = request.form.get('fname')    
+def change_rate():  
     name = request.form.get('name')
     phone_number = request.form.get('phone_number')
     rate = request.form.get('rate')
     log("received rate")
+    f_datastore.change_rate(name, phone_number, rate)
     return 'OK'
     
 

@@ -6,9 +6,9 @@
 <div class="row">
     <div class="column left">
         
-        <input type="hidden" name="phone_number" value="123231">
-        <input type="hidden" name="name" value="Test">
-        <input type="text" name="rate" placeholder="5.0">
+        <input type="hidden" id="phone_number" value="123231">
+        <input type="hidden" id="name" value="Test">
+        <input type="text" id="rate" placeholder="5.0">
     </div>
     <div class="column right">
 
@@ -18,12 +18,9 @@
 </div>
 <script>
 function submit() {
-	//phone_number = document.getElementById('fsub').value = id_token;
-    name = document.getElementById('name');
-    phone_number = document.getElementById('phone_number');
-    //name = "Test"
-    //phone_number = "123231"
-    rate = document.getElementById('rate');
+    var name = document.getElementById('name').value;
+    var phone_number = document.getElementById('phone_number').value;
+    var rate = document.getElementById('rate').value;
     console.log("Name: " + name + " number: " + phone_number + " rate: " + rate);
 				  
 	var xhr = new XMLHttpRequest();
