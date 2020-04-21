@@ -188,7 +188,7 @@ def eatlist():
         allowance = .1
         if currentlat == '': currentlat = '0'
         if currentlng == '': currentlng = '0'
-        if currentlat == '': allowance = 200
+        if currentlat == '0': allowance = 200
         log(currentlat)
         log(currentlng)
         log(type(currentlat))
