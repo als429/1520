@@ -180,21 +180,30 @@ def attend():
 
 @app.route('/eat-list', methods=['GET', 'POST']) 
 def eatlist():
-    if request.method =='POST' and type(request.form.get('location'))== str:
+    if request.method =='POST':
         log('posted')
         currentaddress = request.form.get('location')
         currentlat = request.form.get('clat')
         currentlng = request.form.get('clng')
+        allowance = .1
+        if currentlat == '': currentlat = '0'
+        if currentlng == '': currentlng = '0'
+        if currentlat == '0': allowance = 200
         log(currentlat)
         log(currentlng)
-        return eatlistll(currentlat, currentlng)
-    food_list = f_datastore.load_foods('0','0',200) # TODO: filter by distance
-    return show_page('/eat-list.html','Nearby Leftovers','Nearby Leftovers',foods=food_list) 
+        log(type(currentlat))
+        log('got out of ifs')
+        return eatlistll(currentlat, currentlng, allowance)
+    else:
+        lat = '40.1' # for map
+        lng = '90.2' # for map
+        food_list = f_datastore.load_foods('0','0',200) # TODO: filter by distance
+        return show_page('/eat-list.html','All Leftovers','All Leftovers',foods=food_list,lat=lat,lng=lng) 
 
 @app.route('/eat-list/<lat>-<lng>')
-def eatlistll(lat, lng):
+def eatlistll(lat, lng, allowance):
     # h1 = 'Lat: ' + lat + ' Lng: ' + lng
-    food_list = f_datastore.load_foods(lat, lng, .1)
+    food_list = f_datastore.load_foods(lat, lng, allowance)
     return show_page('/eat-list.html','Nearby Leftovers','Nearby Leftovers',foods=food_list,lat=lat,lng=lng) 
 
 @app.route('/attend-list', methods=['GET', 'POST']) 
@@ -204,17 +213,26 @@ def attendlist():
         currentaddress = request.form.get('location')
         currentlat = request.form.get('clat')
         currentlng = request.form.get('clng')
+        allowance = .1
+        if currentlat == '': currentlat = '0'
+        if currentlng == '': currentlng = '0'
+        if currentlat == '0': allowance = 200
         log(currentlat)
         log(currentlng)
-        return attendlistll(currentlat, currentlng)
-    dinner_list = f_datastore.load_dinners() 
-    return show_page('/attend-list.html','Nearby Dinners','Nearby Dinners', dinners=dinner_list)
+        log(type(currentlat))
+        log('got out of ifs')
+        return attendlistll(currentlat, currentlng, allowance)
+    else:
+        lat = '40.1' # for map
+        lng = '90.2' # for map
+        dinner_list = f_datastore.load_dinners('0','0',200) # TODO: filter by distance
+        return show_page('/attend-list.html','All Dinners','All Dinners',dinners=dinner_list,lat=lat,lng=lng) 
 
 @app.route('/attend-list/<lat>-<lng>')
-def attendlistll(lat, lng):
+def attendlistll(lat, lng, allowance):
     # h1 = 'Lat: ' + lat + ' Lng: ' + lng
-    dinner_list = f_datastore.load_dinners(lat, lng) 
-    return show_page('/attend-list.html','Attend List', 'Nearby Dinners', dinners=dinner_list,lat=lat,lng=lng)
+    dinner_list = f_datastore.load_dinners(lat, lng, allowance)
+    return show_page('/attend-list.html','Nearby Dinners','Nearby Dinners',dinners=dinner_list,lat=lat,lng=lng)
 
 # utility function that allows us to 
 # consolidate on the render_template function
