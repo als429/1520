@@ -419,7 +419,7 @@ def authtoken():
     except ValueError:
         log('ID is not valid, in Error')
         pass
-    return redirect('/')
+    return 'Ok - sign in success'
 
 
 @app.route('/activity', methods=['GET','POST'])
