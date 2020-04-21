@@ -389,7 +389,7 @@ def dinner_to_datastore():
 @app.route('/user/<usercode>')
 def user_page(usercode):
     user_object = f_datastore.load_user(usercode)
-    food_list = f_datastore.load_foods()
+    food_list = f_datastore.load_foods('0', '0', 200)
     h1 = "Chef " + user_object.fullname
     rate = f_datastore.get_user_rating(usercode, food_list)
     int_rate = int(rate)
@@ -398,15 +398,25 @@ def user_page(usercode):
 @app.route('/rate')
 def rate():
     log("inside rate")
-    return show_page('/rate-test.html','title here','h1 here')
+    food_list = f_datastore.load_foods('0', '0', 200)
+    return show_page('/rate-test.html','title here','h1 here', foods = food_list)
 
 @app.route('/changerate', methods=['POST'])
 def change_rate():  
     name = request.form.get('name')
+    cost = request.form.get('cost')
+    available = request.form.get('available')
+    image = request.form.get('image')
+    food_type = request.form.get('food_type')
+    ingredients = request.form.get('ingredients')
+    address = request.form.get('address')
     phone_number = request.form.get('phone_number')
+    lat = request.form.get('lat')
+    lng = request.form.get('lng')
+    sub = request.form.get('sub')
     rate = request.form.get('rate')
     log("received rate")
-    f_datastore.change_rate(name, phone_number, rate)
+    f_datastore.change_rate(name, cost, available, image, food_type, ingredients, address, phone_number, lat, lng, sub, rate)
     return 'OK'
     
 
