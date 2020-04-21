@@ -196,7 +196,7 @@ def eatlist():
         return eatlistll(currentlat, currentlng, allowance)
     else:
         lat = '40.1' # for map
-        lng = '90.2' # for map
+        lng = '-75.2' # for map
         food_list = f_datastore.load_foods('0','0',200) # TODO: filter by distance
         return show_page('/eat-list.html','All Leftovers','All Leftovers',foods=food_list,lat=lat,lng=lng) 
 
@@ -224,7 +224,7 @@ def attendlist():
         return attendlistll(currentlat, currentlng, allowance)
     else:
         lat = '40.1' # for map
-        lng = '90.2' # for map
+        lng = '-75.2' # for map
         dinner_list = f_datastore.load_dinners('0','0',200) # TODO: filter by distance
         return show_page('/attend-list.html','All Dinners','All Dinners',dinners=dinner_list,lat=lat,lng=lng) 
 
