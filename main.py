@@ -185,10 +185,10 @@ def eatlist():
         currentaddress = request.form.get('location')
         currentlat = request.form.get('clat')
         currentlng = request.form.get('clng')
-	allowance = .1
+        allowance = .1
         if currentlat == '': currentlat = '0'
         if currentlng == '': currentlng = '0'
-	if currentlat == '': allowance = 200
+        if currentlat == '': allowance = 200
         log(currentlat)
         log(currentlng)
         log(type(currentlat))
